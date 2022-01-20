@@ -12,5 +12,6 @@ module.exports = merge(common, {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dev_build')
-  }
+  },
+  devServer: { inline: true, host: '0.0.0.0', port: 8080 }
 })
