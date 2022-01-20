@@ -6,16 +6,14 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './build'
+    contentBase: './build',
+    inline: true,
+    host: '10.0.2.15',
+    port: 8080
   },
   watch: true,
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dev_build')
-  },
-  devServer: {
-    inline: true,
-    host: '10.0.2.15',
-    port: 8080
   }
 })
