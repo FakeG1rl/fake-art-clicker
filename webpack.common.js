@@ -15,6 +15,16 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
+        },
+      },
+      {
         test: /\.scss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
