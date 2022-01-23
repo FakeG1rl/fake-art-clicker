@@ -8,6 +8,7 @@ export default class Test extends Component {
   render() {
     return (
       <div>Yo!!!</div>
+      // 123
     )
   }
 }
