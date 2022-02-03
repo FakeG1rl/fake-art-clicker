@@ -7,8 +7,10 @@ export default class Test extends Component {
 
   render() {
     return (
-      <div>Yo!!!</div>
-      // 123
+      <div><p>1!9</p>
+      <h1>РОБОТАИТЬ</h1>
+      <p>ТОЧНО</p>
+      </div>
     )
   }
 }

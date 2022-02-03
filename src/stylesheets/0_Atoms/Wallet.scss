@@ -1,0 +1,18 @@
+.Wallet {
+  width: auto;
+  height: auto;
+  a {
+    cursor: default
+  }
+  .HSE {
+    width: 114px;
+    height: 99px;
+
+    background-image: url("../../assets/HSE.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: rotate(4.92deg);
+    margin: -16px 0 0 70px;
+  }
+}

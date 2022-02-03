@@ -1,11 +1,10 @@
 :root {
-  --blue: #005bff;
-  --grey: #777;
-  --black: #222;
-  --border: #dee2e6;
-  --red1: #ff5252;
-  --red2: #ff9c9c;
-  --superwallet: #1161fb;
+  --black: #161616;
+  --darck: #1F1F1F;
+  --darck-gray: #292929;
+  --medium-gray: #5F5F5F;
+  --gray: #C6C6C6;
+  --white: #F1F1F1;
 }
 
 * {
@@ -15,12 +14,13 @@
 html,
 body {
   width: 100%;
+  background: var(--black);
+  color: var(--white)
 }
 
 body {
   margin: 0;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
-  color: var(--black);
 }
