@@ -2,6 +2,8 @@ import { createStore } from 'redux'
 import rootReducer from '../reducers'
 
 const configureStore = (preloadedState) => {
+  console.log('We now use dev store')
+
   const store = createStore(
     rootReducer,
     preloadedState,

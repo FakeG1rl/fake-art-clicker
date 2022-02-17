@@ -35,7 +35,7 @@ class Clicker extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  general: state.general[0]
+  general: state.general
 })
 
 const mapDispatchToProps = (dispatch) => ({
