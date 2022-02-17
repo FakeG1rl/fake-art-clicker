@@ -1,3 +1,4 @@
 import * as types from '../constants/ActionTypes'
 
-export const addTodo = (text) => ({ type: types.ADD_TODO, text })
+export const paint = () => ({ type: types.PAINT })
+export const sell = () => ({ type: types.SELL })

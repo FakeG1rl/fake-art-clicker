@@ -1,21 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as GameActions from '../actions'
+// import * as GameActions from '../actions'
 import { bindActionCreators } from 'redux'
 import Clicker from '../components/2_Organisms/Clicker.jsx'
 
-// const Game = ({ test }) => (
-//   <div className="Game">
-//     {test}
-//     <Clicker />
-//   </div>
-// )
+import { paint } from '../actions/index.js'
 
 class Game extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props.general.test)
-    console.log(props.yo)
+    console.log(props)
   }
 
   render() {
@@ -32,7 +26,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(GameActions, dispatch)
+  actions: bindActionCreators({ paint }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)
