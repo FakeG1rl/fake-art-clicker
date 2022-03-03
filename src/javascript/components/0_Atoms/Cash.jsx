@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, { Component } from 'react'
 
 export default class Cash extends Component {
   constructor(props) {
@@ -7,9 +7,9 @@ export default class Cash extends Component {
 
   render() {
     return (
-      <div className='Cash'>
+      <div className="Cash">
         <h2>${this.props.cash}</h2>
-        <p>картин в секунду {this.props.cash}</p>
+        <p>картин в секунду 0</p>
       </div>
     )
   }

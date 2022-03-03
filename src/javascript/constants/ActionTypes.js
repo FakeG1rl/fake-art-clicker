@@ -1,3 +1,4 @@
-export const ADD_TODO = 'ADD_TODO'
 export const PAINT = 'PAINT'
 export const SELL = 'SELL'
+export const STUDIOUPDATE = 'STUDIOUPDATE'
+export const HIRING = 'HIRING'

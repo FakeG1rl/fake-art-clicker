@@ -12,21 +12,27 @@ class Clicker extends Component {
     super(props)
     this.state = {
       dillers: { count: 10 },
-      cash: 0,
       students: { count: 0 }
     }
   }
 
   render() {
-    console.log(this.props)
+    const students = this.props.general.units[0]
+    setInterval(() => {
+      if (students.level > 0) {
+        this.props.actions.paint()
+      }
+    }, 10000)
+
     return (
       <div className="Clicker">
-        <Header cash={this.state.cash} dillers={this.state.dillers} />
-        <h1>
-          {this.props.general.clicksDone}, {this.props.general.paintingsDone}
-        </h1>
+        <h1>{this.props.general.clicksDone}</h1>
+        <Header
+          cash={this.props.general.moneyGained}
+          dillers={this.props.general.units[1]}
+        />
         <Canvas
-          students={this.state.students.count}
+          students={this.props.general.units[0].level}
           press={this.props.actions.paint}
         />
       </div>

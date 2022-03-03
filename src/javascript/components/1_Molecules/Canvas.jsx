@@ -7,10 +7,11 @@ export default class Canvas extends Component {
   }
 
   render() {
+    const sourse = { sourse: 0 }
     return (
       <div className="CAN">
         <Students students={this.props.students} />
-        <div className="canvas" onClick={this.props.press}></div>
+        <div className="canvas" onClick={() => this.props.press()}></div>
       </div>
     )
   }

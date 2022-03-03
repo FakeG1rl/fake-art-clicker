@@ -1,21 +1,26 @@
 :root {
   --black: #161616;
-  --darck: #1F1F1F;
+  --darck: #1f1f1f;
   --darck-gray: #292929;
-  --medium-gray: #5F5F5F;
-  --gray: #C6C6C6;
-  --white: #F1F1F1;
+  --medium-gray: #5f5f5f;
+  --gray: #c6c6c6;
+  --white: #f1f1f1;
 }
 
 * {
   box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 html,
 body {
   width: 100%;
   background: var(--black);
-  color: var(--white)
+  color: var(--white);
 }
 
 body {
@@ -23,4 +28,8 @@ body {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
+}
+
+.Game {
+  display: flex;
 }

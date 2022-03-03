@@ -1,0 +1,15 @@
+.Picture {
+  width: 68px;
+  height: 86px;
+  border: 4px solid white;
+  background-color: #fe008b;
+
+  div {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+  }
+}
+.Picture + .Picture {
+  margin-left: 8px;
+}

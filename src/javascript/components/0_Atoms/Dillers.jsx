@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, { Component } from 'react'
 
 export default class Dillers extends Component {
   constructor(props) {
@@ -7,9 +7,9 @@ export default class Dillers extends Component {
 
   render() {
     return (
-      <div className='Dillers'>
+      <div className="Dillers">
         <div className="dil-pic"></div>
-        <p>x{this.props.dillers.count}</p>
+        <p>x{this.props.dillers.level}</p>
       </div>
     )
   }
