@@ -1,16 +1,33 @@
-import React, { Component } from 'react'
-import Test from '../components/Test.jsx'
+import React from 'react'
+import { connect } from 'react-redux'
+// import * as GameActions from '../actions'
+import { bindActionCreators } from 'redux'
+import Clicker from '../components/2_Organisms/Clicker.jsx'
+import Studio from '../components/2_Organisms/Studio.jsx'
 
-export default class Game extends Component {
+import { paint, sell } from '../actions/index.js'
+
+class Game extends React.Component {
   constructor(props) {
     super(props)
   }
 
   render() {
     return (
-      <div>
-        <Test />
+      <div className="Game">
+        <Clicker />
+        <Studio />
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  general: state.general
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators({ paint, sell }, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game)

@@ -10,6 +10,14 @@ module.exports = merge(common, {
     contentBase: './dev_build',
     hot: true
   },
+  cache: {
+    type: 'memory',
+  },
+  watchOptions: {
+    // aggregateTimeout: 600,
+    poll: true,
+    ignored: /node_modules/
+  },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dev_build')
