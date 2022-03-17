@@ -1,15 +1,37 @@
-.Picture {
-  width: 68px;
-  height: 86px;
-  border: 4px solid white;
-  background-color: #fe008b;
+.Picture_wrap {
+  .Picture {
+    cursor: pointer;
+    width: 68px;
+    height: 86px;
+    border: 4px solid white;
 
-  div {
-    width: 100%;
-    height: 100%;
-    background-color: black;
+    &.st_0 {
+      background-color: #fe008b;
+    }
+    &.st_10 {
+      background-color: #00bbf9;
+    }
+  }
+
+  .but {
+    margin-top: 5px;
+    padding: 2px;
+    background-color: white;
+    color: black;
+    font-size: 11px;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
   }
 }
-.Picture + .Picture {
+.Picture_wrap + .Picture_wrap {
   margin-left: 8px;
 }
+
+// div {
+//   width: 100%;
+//   height: 100%;
+//   background-color: black;
+// }

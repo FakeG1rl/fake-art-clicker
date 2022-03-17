@@ -11,7 +11,7 @@ export default class Canvas extends Component {
     return (
       <div className="CAN">
         <Students students={this.props.students} />
-        <div className="canvas" onClick={() => this.props.press()}></div>
+        <div className="canvas" onClick={() => this.props.press(0)}></div>
       </div>
     )
   }

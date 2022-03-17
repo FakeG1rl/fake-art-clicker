@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { sell, studioUpdate, hiring } from '../../actions/index.js'
+import { sell, studioUpdate, hiring, changeblock } from '../../actions/index.js'
 
 import Block from '../1_Molecules/Block.jsx'
 import StudioShop from './StudioShop.jsx'
+import GalleriesCollection from '../1_Molecules/GalleriesCollection.jsx'
 
 class Studio extends Component {
   constructor(props) {
@@ -13,19 +14,50 @@ class Studio extends Component {
   }
 
   render() {
+    const props = this.props.general
+    const actions = this.props.actions
     return (
       <div className="Studio">
         <StudioShop
-          units={this.props.general.units}
-          hiringUnit={this.props.actions.hiring}
-          update={this.props.actions.studioUpdate}
-          updates={this.props.general.studioUpdate}
+          units={props.units}
+          hiringUnit={actions.hiring}
+          update={actions.studioUpdate}
+          updates={props.studioUpdate}
+        />
+        <Block
+          title="Образцы"
+          pictures={props.paintings[1]}
+          changeblock={actions.changeblock}
+          onPress={() => console.log('click')}
         />
         <Block
           title="Продукция"
-          pictures={this.props.general.paintingsDone}
-          onPress={this.props.actions.sell}
+          pictures={props.paintings[0]}
+          changeblock={actions.changeblock}
+          onPress={actions.sell}
         />
+        <GalleriesCollection
+          title="Галереи"
+          changeblock={actions.changeblock}
+          content={props.paintings[2]}
+        />
+        <p>Всего сделано кликов: {props.statistics.totalClick}</p>
+        <p>Всего нарисованно картин: {props.statistics.totalPainting}</p>
+        <p>Всего продано картин: {props.statistics.totalSales}</p>
+        <p>
+          Всего Заработано галереей:{' '}
+          {new Intl.NumberFormat('en', {
+            style: 'decimal',
+            maximumFractionDigits: 3
+          }).format(props.statistics.totalGalleryEarned)}{' '}
+        </p>
+        <p>
+          Всего заработано:{' '}
+          {new Intl.NumberFormat('en', {
+            style: 'decimal',
+            maximumFractionDigits: 3
+          }).format(props.statistics.totalMoneys)}
+        </p>
       </div>
     )
   }
@@ -36,7 +68,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({ sell, studioUpdate, hiring }, dispatch)
+  actions: bindActionCreators(
+    { sell, studioUpdate, hiring, changeblock },
+    dispatch
+  )
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Studio)

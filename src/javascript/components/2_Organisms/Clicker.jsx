@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { paint } from '../../actions/index.js'
+import { paint, sell, autoSell, galleryWorking } from '../../actions/index.js'
 
 import Header from '../1_Molecules/Header.jsx'
 import Canvas from '../1_Molecules/Canvas.jsx'
@@ -10,25 +10,42 @@ import Canvas from '../1_Molecules/Canvas.jsx'
 class Clicker extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      dillers: { count: 10 },
-      students: { count: 0 }
-    }
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      const students = this.props.general.units[0]
+      const dillers = this.props.general.units[1]
+      if (students.level > 0) {
+        this.props.actions.paint(1)
+      }
+      if (dillers.level > 0) {
+        this.props.actions.autoSell()
+      }
+      this.pistureSell()
+      this.props.actions.galleryWorking()
+      console.log('___________')
+    }, 1000)
+  }
+
+  pistureSell = () => {
+    this.props.general.paintings[0].forEach((paint, i) => {
+      if (paint.status == 10) {
+        paint.time_to_sale -= 1
+        if (paint.time_to_sale <= 0) {
+          this.props.actions.sell(i)
+        }
+      }
+    })
   }
 
   render() {
-    const students = this.props.general.units[0]
-    setInterval(() => {
-      if (students.level > 0) {
-        this.props.actions.paint()
-      }
-    }, 10000)
-
     return (
       <div className="Clicker">
         <h1>{this.props.general.clicksDone}</h1>
         <Header
           cash={this.props.general.moneyGained}
+          clicks={this.props.general.clicksToPainting}
           dillers={this.props.general.units[1]}
         />
         <Canvas
@@ -45,7 +62,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({ paint }, dispatch)
+  actions: bindActionCreators(
+    { paint, sell, autoSell, galleryWorking },
+    dispatch
+  )
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Clicker)
