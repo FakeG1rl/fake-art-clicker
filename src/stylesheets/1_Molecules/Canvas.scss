@@ -1,0 +1,17 @@
+.CAN {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  .canvas {
+    width: 380px;
+    height: 512px;
+    background: linear-gradient(90deg, #c4c4c4 3.74%, #ffffff 67.65%);
+    filter: drop-shadow(0px 9px 7px rgba(0, 0, 0, 0.9));
+  }
+
+  .Students {
+    z-index: 2;
+    position: relative;
+  }
+}

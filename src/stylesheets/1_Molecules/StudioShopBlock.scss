@@ -1,0 +1,17 @@
+.StudioShopBlock {
+  display: inline-block;
+  background-color: #161616;
+  border: 2px solid #292929;
+  padding: 10px 20px 10px 10px;
+  width: auto;
+  &:hover {
+    color: black;
+    background-color: white;
+  }
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    width: 130px;
+  }
+}

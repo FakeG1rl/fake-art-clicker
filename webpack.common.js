@@ -6,12 +6,14 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    index: './src/bundle.js'
+    index: './src/javascript/index.jsx'
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'build'),
+    clean: true
   },
+  stats: { children: true },
   module: {
     rules: [
       {
@@ -20,13 +22,23 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            cacheDirectory: true,
-          },
-        },
+            cacheDirectory: true
+          }
+        }
       },
       {
         test: /\.scss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'resolve-url-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       },
       {
         test: /\.html$/i,
@@ -35,6 +47,14 @@ module.exports = {
       {
         resourceQuery: /raw/,
         type: 'asset/source'
+      },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: 'asset/resource'
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource'
       }
     ]
   },
