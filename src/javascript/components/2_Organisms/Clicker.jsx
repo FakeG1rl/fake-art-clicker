@@ -42,7 +42,6 @@ class Clicker extends Component {
   render() {
     return (
       <div className="Clicker">
-        <h1>{this.props.general.clicksDone}</h1>
         <Header
           cash={this.props.general.moneyGained}
           clicks={this.props.general.clicksToPainting}

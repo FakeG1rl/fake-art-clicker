@@ -12,9 +12,12 @@ export default class StudioShopBlock extends Component {
       <div className="StudioShopBlock" onClick={() => props.onPress(props.id)}>
         <div className="title">
           <p>{props.title} </p>
-          <p> ур {props.level}</p>
+          <p>
+            {' '}
+            ур <span>{props.level}</span>
+          </p>
         </div>
-        <p>Улучшить</p>
+        <h3>Улучшить</h3>
         <p>${props.cost}</p>
       </div>
     )

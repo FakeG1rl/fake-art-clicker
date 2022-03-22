@@ -34,8 +34,8 @@ export default class Students extends Component {
     const r_increase = 20
     const n = this.props.students
     const angle_per_cursor = 360.0 / max_per_circle
-    const container_width = 380
-    const container_height = 512
+    const container_width = 290
+    const container_height = 409
     const aspect = container_height / container_width
 
     let cursorItems = []

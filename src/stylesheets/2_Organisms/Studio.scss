@@ -1,6 +1,11 @@
 .Studio {
-  // display: flex;
-  width: 1254px;
-  height: 708px;
-  background-color: #151515;
+  display: flex;
+  width: 109%;
+  // height: 708px;
+
+  .StudioShop {
+    z-index: 20;
+    margin: 0;
+    margin-left: 20px;
+  }
 }

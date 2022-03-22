@@ -18,6 +18,8 @@
 
 html,
 body {
+  overflow-y: hidden;
+  overflow-x: hidden;
   width: 100%;
   background: var(--black);
   color: var(--white);
@@ -28,6 +30,10 @@ body {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
+  background-image: url('../assets/background.png');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .Game {

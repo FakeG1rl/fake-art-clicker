@@ -1,8 +1,12 @@
 .GalleriesCollection {
-  width: 845px;
+  // width: 845px;
   border: 2px solid #292929;
   // padding: 20px 0 20px 25px;
   position: relative;
+  background-image: url('../../assets/background.png');
+  background-position: center;
+  background-size: cover;
+  min-height: 170px;
 
   h1 {
     font-family: 'RoadRage';
@@ -19,6 +23,6 @@
   .Gallery {
     display: flex;
     margin: 20px 0 20px 25px;
-    width: 778px;
+    // width: 778px;
   }
 }

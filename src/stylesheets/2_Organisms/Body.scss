@@ -1,0 +1,51 @@
+.Content {
+  position: relative;
+  width: 100%;
+  background-color: #1f1f1f;
+
+  .border {
+    position: absolute;
+    background-image: url('../../assets/Cover.png');
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    // z-index: 500;
+  }
+  .GameHeader {
+    padding: 47px 0 0 70px;
+    // background-color: #1f1f1f;
+    display: flex;
+    .Character {
+      width: 115px;
+      height: 132px;
+      margin-right: 40px;
+      background-image: url('../../assets/С1.png');
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .Message {
+      h2 {
+        margin-bottom: 20px;
+        font-family: 'RoadRage';
+        font-size: 24px;
+        color: #fe008b;
+        text-shadow: 3px 0 0 #f1f1f1, -3px 0 0 #f1f1f1, 0 3px 0 #f1f1f1,
+          0 -3px 0 #f1f1f1, 1px 1px #f1f1f1, -1px -1px 0 #f1f1f1,
+          1px -1px 0 #f1f1f1, -1px 1px 0 #f1f1f1;
+      }
+      p {
+        width: 480px;
+      }
+    }
+  }
+  .Page {
+    padding: 40px 0 100px 67px;
+    height: 76vh;
+    z-index: 20;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}

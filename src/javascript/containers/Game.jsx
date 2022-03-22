@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 // import * as GameActions from '../actions'
 import { bindActionCreators } from 'redux'
 import Clicker from '../components/2_Organisms/Clicker.jsx'
-import Studio from '../components/2_Organisms/Studio.jsx'
+import Body from '../components/2_Organisms/Body.jsx'
 
 import { paint, sell } from '../actions/index.js'
 
@@ -16,7 +16,7 @@ class Game extends React.Component {
     return (
       <div className="Game">
         <Clicker />
-        <Studio />
+        <Body />
       </div>
     )
   }

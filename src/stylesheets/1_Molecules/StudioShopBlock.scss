@@ -3,15 +3,39 @@
   background-color: #161616;
   border: 2px solid #292929;
   padding: 10px 20px 10px 10px;
-  width: auto;
+  width: 230px;
+
   &:hover {
     color: black;
     background-color: white;
+  }
+  h3 {
+    font-size: 20px;
+    font-weight: 400;
+  }
+  span {
+    font-size: 14px;
+    color: #fe008b;
+    font-weight: 400;
+  }
+  p {
+    font-size: 14px;
+    font-weight: 200;
+
+    &:first-of-type {
+      margin-bottom: 5px;
+    }
+    &:last-child {
+      margin-top: 5px;
+    }
   }
 
   .title {
     display: flex;
     justify-content: space-between;
     width: 130px;
+  }
+  & + .StudioShopBlock {
+    margin-top: 4px;
   }
 }

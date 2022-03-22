@@ -53,10 +53,6 @@ export default class StudioShop extends Component {
             cost={updates[2].cost}
             onPress={update}
           />
-          {1 +
-            updates[0].level * updates[0].factor +
-            updates[1].level * updates[1].factor +
-            updates[2].level * updates[2].factor}
         </div>
       </div>
     )
