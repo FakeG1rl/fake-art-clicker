@@ -1,34 +1,59 @@
 .UnitBlock {
-  display: inline-block;
+  display: flex;
   background-color: #161616;
   border: 2px solid #292929;
-  padding: 10px 20px 10px 10px;
-  width: 230px;
+  width: 320px;
+  position: relative;
 
-  h3 {
-    font-size: 20px;
-    font-weight: 400;
+  .im {
+    width: 116px;
+    height: 78px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
-  span {
-    font-size: 14px;
-    color: #fe008b;
-    font-weight: 400;
-  }
-  p {
-    font-size: 14px;
-    font-weight: 200;
 
-    &:first-of-type {
-      margin-bottom: 5px;
+  .content {
+    padding: 10px 20px 10px;
+    h3 {
+      font-size: 20px;
+      font-weight: 400;
     }
-    &:last-child {
-      margin-top: 5px;
+    span {
+      font-size: 14px;
+      color: #fe008b;
+      font-weight: 400;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 200;
+
+      &:first-of-type {
+        margin-bottom: 5px;
+      }
+      &:last-child {
+        margin-top: 5px;
+      }
     }
   }
 
   &:hover {
     color: black;
     background-color: white;
+    .AltShopBlock {
+      display: block;
+    }
+  }
+
+  &:nth-child(1) {
+    .im {
+      background-image: url('../../assets/upg/student.png');
+    }
+  }
+  &:nth-child(2) {
+    .im {
+      background-image: url('../../assets/upg/diller.png');
+    }
   }
 
   & + .UnitBlock {

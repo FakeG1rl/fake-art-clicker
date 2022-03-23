@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { paint } from '../../actions/index.js'
+import AltPictureBlock from '../1_Molecules/AltPictureBlock.jsx'
 
 export default class Picture extends Component {
   constructor(props) {
@@ -76,19 +77,20 @@ export default class Picture extends Component {
 
   render() {
     const picture = this.props.data
-    const className = 'Picture style_' + picture.referense.style
+    const className = 'Picture style_' + picture.referense.id
     let action = null
 
     if (picture.status == 0) {
       action = () => this.props.onPress(this.props.id)
     }
 
+    // <p>style: {picture.referense.style}</p>
+    // <p>qua: {picture.quality}</p>
+    // <p>st: {picture.status}</p>
     return (
       <div className="Picture_wrap">
         <div className={className} onClick={action}>
-          <p>style: {picture.referense.style}</p>
-          <p>qua: {picture.quality}</p>
-          <p>st: {picture.status}</p>
+          <AltPictureBlock data={picture} />
         </div>
         {this.renderBut()}
       </div>

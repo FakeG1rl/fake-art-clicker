@@ -8,14 +8,18 @@
   background-size: contain;
   background-repeat: no-repeat;
 
-  display: flex;
+  position: relative;
 
   padding: 39px 0 0 67px;
 
   .logo {
     z-index: 1;
-    width: 114px;
+    width: 102px;
     height: 99px;
+
+    position: absolute;
+    top: 50px;
+    left: 50px;
 
     background-image: url('../../assets/logo.png');
     background-position: center;

@@ -9,48 +9,59 @@ import {
 } from '../constants/ActionTypes'
 
 const initialState = {
-  clicksToPainting: 2,
+  clicksToPainting: 1,
   clicksDone: 0,
   speedOfSale: 5,
+  moneyGained: 0,
   paintings: [
-    [],
     [
       {
         referense: {
           id: 1,
-          title: '111',
-          author: '111',
-          style: '222',
-          year: 111
+          title: 'Натюрморт с битой птицей, медной посудой...',
+          author: 'Жан Батист Шарден',
+          style: 'Романтизм',
+          year: 1728
         },
         status: 1,
         quality: 1
       }
     ],
+    [],
     [
       {
         size: 3,
-        pictures: [
-          {
-            referense: {
-              id: 1,
-              title: '111',
-              author: '111',
-              style: '111',
-              year: 111
-            },
-            status: 2,
-            quality: 1
-          }
-        ]
+        pictures: []
       }
     ]
   ],
-  originals: [{ title: '111', author: '111', style: '111', year: 111 }],
-  moneyGained: 100,
+  originals: [
+    { id: 0, title: '???', author: '???', style: '???', year: 2022 },
+    {
+      id: 1,
+      title: 'Натюрморт с битой птицей, медной посудой...',
+      author: 'Жан Батист Шарден',
+      style: 'Романтизм',
+      year: 1728
+    }
+  ],
   units: [
-    { level: 0, cost: 10, pps: 1 },
-    { level: 0, cost: 100, working: 0, speed: 60 }
+    {
+      level: 0,
+      text:
+        'Зачем рисовать самому, если можно свалить эту работу на подмастерье',
+      baseCost: 10,
+      cost: 10,
+      pps: 1
+    },
+    {
+      level: 0,
+      text: 'Деньги, денежки. Продавайте диллеры скорей.',
+      baseCost: 100,
+      cost: 100,
+      working: 0,
+      speed: 60
+    }
   ],
   studioUpdate: [
     {
@@ -71,8 +82,8 @@ const initialState = {
   ],
 
   statistics: {
-    totalClick: 1,
-    totalPainting: 1,
+    totalClick: 0,
+    totalPainting: 0,
     totalSales: 0,
     totalMoneys: 0,
     totalGalleryEarned: 0,
@@ -96,7 +107,25 @@ export default function general(state = initialState, action) {
   switch (action.type) {
     case PAINT: {
       const newState = Object.assign({}, state)
+      const paintings = newState.paintings[0]
+      const references = newState.paintings[1]
+
       let click = 0
+      let ref = {}
+
+      if (newState.clicksDone == 0) {
+        if (references.length == 0) {
+          ref = newState.originals[0]
+        } else {
+          const ref_id = Math.floor(Math.random() * references.length)
+          ref = references[ref_id].referense
+        }
+        paintings.push({
+          status: 11,
+          referense: ref
+        })
+      }
+
       if (action.sourse == 0) {
         newState.statistics.totalClick += 1
         click = 1
@@ -104,22 +133,28 @@ export default function general(state = initialState, action) {
         click = newState.units[0].level * newState.units[0].pps
       }
       newState.clicksDone += click
+
       if (
         newState.clicksDone >= newState.clicksToPainting &&
-        newState.paintings[0].length < 200
+        paintings.length < 200
       ) {
-        const references = newState.paintings[1]
         newState.statistics.totalPainting += 1
         newState.clicksDone = 0
+
+        const picture = paintings[paintings.length - 1]
+        let qual = 0
+        if (picture.referense.quality) {
+          qual =
+            Math.floor(Math.random() * picture.reference.quality * 100) / 100
+        } else {
+          qual = Math.floor(Math.random() * 100) / 100
+        }
+
+        picture['status'] = 0
+        picture['quality'] = qual
+        // if (picture.referense.id != '0') {
         newState.clicksToPainting += 1
-        const ref_id = Math.floor(Math.random() * references.length)
-        const qual =
-          Math.floor(Math.random() * references[ref_id].quality * 100) / 100
-        newState.paintings[0].push({
-          quality: qual,
-          status: 0,
-          referense: references[ref_id].referense
-        })
+        // }
       }
       return newState
     }
@@ -173,10 +208,10 @@ export default function general(state = initialState, action) {
       if (newState.moneyGained >= unit.cost) {
         newState.moneyGained -= unit.cost
         unit.level += 1
-        unit.cost += 50
       } else {
         console.log('error', newState.moneyGained, unit.cost)
       }
+      unit.cost = Math.floor(unit.baseCost * 1.15 ** unit.level)
       return newState
     }
 

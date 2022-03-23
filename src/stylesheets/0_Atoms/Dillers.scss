@@ -1,13 +1,16 @@
 .Dillers {
   z-index: 2;
+  position: absolute;
+  left: 307px;
+  top: 68px;
   display: flex;
   align-items: flex-end;
   margin: -17px 0 13px -30px;
 
   .dil-pic {
-    width: 122px;
-    height: 130px;
-    background-image: url("../../assets/Diller.png");
+    width: 111px;
+    height: 125px;
+    background-image: url('../../assets/Diller.png');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -16,9 +19,10 @@
   p {
     font-family: 'SprimoskFont';
     font-size: 46px;
-    margin-left: -17px;
     color: #161616;
-    text-shadow: 2px 0 0 #F1F1F1, -2px 0 0 #F1F1F1, 0 2px 0 #F1F1F1, 0 -2px 0 #F1F1F1, 1px 1px #F1F1F1, -1px -1px 0 #F1F1F1, 1px -1px 0 #F1F1F1, -1px 1px 0 #F1F1F1;
+    text-shadow: 2px 0 0 #f1f1f1, -2px 0 0 #f1f1f1, 0 2px 0 #f1f1f1,
+      0 -2px 0 #f1f1f1, 1px 1px #f1f1f1, -1px -1px 0 #f1f1f1, 1px -1px 0 #f1f1f1,
+      -1px 1px 0 #f1f1f1;
     transform: rotate(-5.54deg);
     margin: 0 0 40px -22px;
   }

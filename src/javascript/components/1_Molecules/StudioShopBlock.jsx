@@ -10,15 +10,18 @@ export default class StudioShopBlock extends Component {
     const props = this.props
     return (
       <div className="StudioShopBlock" onClick={() => props.onPress(props.id)}>
-        <div className="title">
-          <p>{props.title} </p>
-          <p>
-            {' '}
-            ур <span>{props.level}</span>
-          </p>
+        <div className="im"></div>
+        <div className="content">
+          <div className="title">
+            <p>{props.title} </p>
+            <p>
+              {' '}
+              ур <span>{props.level}</span>
+            </p>
+          </div>
+          <h3>Улучшить</h3>
+          <p>${props.cost}</p>
         </div>
-        <h3>Улучшить</h3>
-        <p>${props.cost}</p>
       </div>
     )
   }

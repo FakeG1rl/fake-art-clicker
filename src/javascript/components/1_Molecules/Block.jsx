@@ -10,15 +10,17 @@ export default class Block extends Component {
     const onPress = this.props.onPress
     let pictureItems = []
     for (var i = 0; i < pictures.length; i++) {
-      pictureItems.push(
-        <Picture
-          key={i}
-          id={i}
-          data={pictures[i]}
-          onPress={onPress}
-          changeblock={this.props.changeblock}
-        />
-      )
+      if (pictures[i].status != 11) {
+        pictureItems.push(
+          <Picture
+            key={i}
+            id={i}
+            data={pictures[i]}
+            onPress={onPress}
+            changeblock={this.props.changeblock}
+          />
+        )
+      }
     }
     return pictureItems
   }

@@ -13,23 +13,12 @@ export default class StudioShop extends Component {
     const hiring = this.props.hiringUnit
     const updates = this.props.updates
     const units = this.props.units
+
     return (
       <div className="StudioShop">
         <div className="UnitShop">
-          <UnitBlock
-            id={0}
-            title="ученик"
-            level={units[0].level}
-            cost={units[0].cost}
-            onPress={hiring}
-          />
-          <UnitBlock
-            id={1}
-            title="диллер"
-            level={units[1].level}
-            cost={units[1].cost}
-            onPress={hiring}
-          />
+          <UnitBlock id={0} title="ученик" unit={units[0]} onPress={hiring} />
+          <UnitBlock id={1} title="диллер" unit={units[1]} onPress={hiring} />
         </div>
         <div className="UpdatesShop">
           <StudioShopBlock
