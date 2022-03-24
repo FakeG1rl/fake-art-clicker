@@ -23,7 +23,7 @@ const initialState = {
           style: 'Романтизм',
           year: 1728
         },
-        status: 1,
+        status: 0,
         quality: 1
       }
     ],
