@@ -5,15 +5,29 @@ import {
   HIRING,
   AUTOSELL,
   CHANGEBLOCK,
-  GALLERYWORKING
+  GALLERYWORKING,
+  CHANGEPAGE,
+  GETORIGINAL
 } from '../constants/ActionTypes'
 
+import { pictures } from '../data/pictures.jsx'
+
 const initialState = {
+  pageid: 0,
+
   clicksToPainting: 1,
   clicksDone: 0,
   speedOfSale: 5,
-  moneyGained: 0,
+
+  study: {
+    studyCoast: 1,
+    studyCount: 0,
+    skill: 0.1
+  },
+  moneyGained: 10,
+
   paintings: [
+    [],
     [
       {
         referense: {
@@ -23,11 +37,10 @@ const initialState = {
           style: 'Романтизм',
           year: 1728
         },
-        status: 0,
+        status: 1,
         quality: 1
       }
     ],
-    [],
     [
       {
         size: 3,
@@ -35,16 +48,8 @@ const initialState = {
       }
     ]
   ],
-  originals: [
-    { id: 0, title: '???', author: '???', style: '???', year: 2022 },
-    {
-      id: 1,
-      title: 'Натюрморт с битой птицей, медной посудой...',
-      author: 'Жан Батист Шарден',
-      style: 'Романтизм',
-      year: 1728
-    }
-  ],
+  originals: pictures,
+
   units: [
     {
       level: 0,
@@ -103,6 +108,21 @@ const getPictureCost = (state, quality) => {
   return cost
 }
 
+const paint = (picture, skill) => {
+  let qual = 0
+  if (picture.referense.quality) {
+    qual = Math.random() * picture.reference.quality
+  } else {
+    qual = Math.random() / 10
+  }
+
+  qual = Math.floor((qual + skill) * 1000) / 1000
+  console.log(qual)
+
+  picture['quality'] = qual
+  return picture
+}
+
 export default function general(state = initialState, action) {
   switch (action.type) {
     case PAINT: {
@@ -116,8 +136,10 @@ export default function general(state = initialState, action) {
       if (newState.clicksDone == 0) {
         if (references.length == 0) {
           ref = newState.originals[0]
+          newState.clicksToPainting = 1
         } else {
           const ref_id = Math.floor(Math.random() * references.length)
+          newState.clicksToPainting = 1 * references[ref_id].quality * 100
           ref = references[ref_id].referense
         }
         paintings.push({
@@ -141,20 +163,9 @@ export default function general(state = initialState, action) {
         newState.statistics.totalPainting += 1
         newState.clicksDone = 0
 
-        const picture = paintings[paintings.length - 1]
-        let qual = 0
-        if (picture.referense.quality) {
-          qual =
-            Math.floor(Math.random() * picture.reference.quality * 100) / 100
-        } else {
-          qual = Math.floor(Math.random() * 100) / 100
-        }
-
+        let picture = paintings[paintings.length - 1]
+        picture = paint(picture, newState.study.skill)
         picture['status'] = 0
-        picture['quality'] = qual
-        // if (picture.referense.id != '0') {
-        newState.clicksToPainting += 1
-        // }
       }
       return newState
     }
@@ -226,8 +237,8 @@ export default function general(state = initialState, action) {
             dillers.working += 1
             pictures[i].status = 10
             pictures[i].time_to_sale = dillers.speed / dillers.level
+            break
           }
-          break
         }
       }
       return newState
@@ -252,6 +263,30 @@ export default function general(state = initialState, action) {
         newState.paintings[action.newStatus].push(picture)
       } else {
         newState.paintings[action.newStatus][0].pictures.push(picture)
+      }
+
+      return newState
+    }
+
+    case GETORIGINAL: {
+      const newState = Object.assign({}, state)
+      let study = newState.study
+
+      if (newState.moneyGained >= study.studyCoast) {
+        study.studyCount += 1
+        study.skill += 0.001
+        newState.moneyGained -= study.studyCoast
+        let picture = {}
+
+        picture = paint(
+          {
+            referense: action.id,
+            status: 1
+          },
+          study.skill
+        )
+
+        newState.paintings[1].push(picture)
       }
 
       return newState
@@ -324,6 +359,16 @@ export default function general(state = initialState, action) {
       newState.moneyGained += c
       newState.statistics.totalMoneys += c
       newState.statistics.totalGalleryEarned += c
+      return newState
+    }
+
+    case CHANGEPAGE: {
+      const newState = Object.assign({}, state)
+      if (action.page_id == newState.pageid) {
+        newState.pageid = 0
+      } else {
+        newState.pageid = action.page_id
+      }
       return newState
     }
 

@@ -13,3 +13,8 @@ export const changeblock = (id, status, newStatus) => ({
 })
 
 export const galleryWorking = () => ({ type: types.GALLERYWORKING })
+export const getOriginal = (id) => ({ type: types.GETORIGINAL, id: id })
+export const chandePage = (pageId) => ({
+  type: types.CHANGEPAGE,
+  page_id: pageId
+})

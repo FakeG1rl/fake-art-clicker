@@ -18,6 +18,8 @@ class Studio extends Component {
     const actions = this.props.actions
     return (
       <div className="Studio">
+        <p>{props.study.skill}</p>
+        <p>|||||||||||||||||||</p>
         <div className="StudioContent">
           <Block
             title="Образцы"
@@ -36,23 +38,6 @@ class Studio extends Component {
             changeblock={actions.changeblock}
             content={props.paintings[2]}
           />
-          <p>Всего сделано кликов: {props.statistics.totalClick}</p>
-          <p>Всего нарисованно картин: {props.statistics.totalPainting}</p>
-          <p>Всего продано картин: {props.statistics.totalSales}</p>
-          <p>
-            Всего Заработано галереей:{' '}
-            {new Intl.NumberFormat('en', {
-              style: 'decimal',
-              maximumFractionDigits: 3
-            }).format(props.statistics.totalGalleryEarned)}{' '}
-          </p>
-          <p>
-            Всего заработано:{' '}
-            {new Intl.NumberFormat('en', {
-              style: 'decimal',
-              maximumFractionDigits: 3
-            }).format(props.statistics.totalMoneys)}
-          </p>
         </div>
         <StudioShop
           units={props.units}

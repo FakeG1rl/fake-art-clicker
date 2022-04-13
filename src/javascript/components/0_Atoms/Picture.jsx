@@ -77,7 +77,7 @@ export default class Picture extends Component {
 
   render() {
     const picture = this.props.data
-    const className = 'Picture style_' + picture.referense.id
+    const className = 'Picture p_' + picture.referense.id
     let action = null
 
     if (picture.status == 0) {

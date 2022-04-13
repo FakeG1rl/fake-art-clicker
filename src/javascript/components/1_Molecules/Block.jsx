@@ -29,7 +29,9 @@ export default class Block extends Component {
     return (
       <div className="Block">
         <h1>{this.props.title}</h1>
-        <div className="pictures">{this.pictureRender()}</div>
+        <div className="pictures_collection">
+          <div className="pictures">{this.pictureRender()}</div>
+        </div>
       </div>
     )
   }
