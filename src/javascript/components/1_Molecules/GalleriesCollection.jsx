@@ -20,7 +20,7 @@ export default class GalleriesCollection extends Component {
 
   render() {
     return (
-      <div className="GalleriesCollection">
+      <div className={'GalleriesCollection ' + this.props.isActive}>
         <h1>{this.props.title}</h1>
         {this.renderGalleries()}
       </div>

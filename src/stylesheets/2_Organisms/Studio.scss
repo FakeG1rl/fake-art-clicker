@@ -1,10 +1,11 @@
 .Studio {
   display: flex;
   width: 109%;
+  // overflow-y: auto;
   // height: 708px;
 
   .StudioShop {
-    z-index: 20;
+    // z-index: 20;
     margin: 0;
     margin-left: 20px;
   }

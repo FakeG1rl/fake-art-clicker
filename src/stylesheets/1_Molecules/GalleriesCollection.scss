@@ -3,7 +3,6 @@
   border: 2px solid #292929;
   // padding: 20px 0 20px 25px;
   position: relative;
-  background-image: url('../../assets/background.png');
   background-position: center;
   background-size: cover;
   min-height: 170px;
@@ -18,6 +17,18 @@
     text-shadow: 3px 0 0 #f1f1f1, -3px 0 0 #f1f1f1, 0 3px 0 #f1f1f1,
       0 -3px 0 #f1f1f1, 1px 1px #f1f1f1, -1px -1px 0 #f1f1f1, 1px -1px 0 #f1f1f1,
       -1px 1px 0 #f1f1f1;
+  }
+
+  &.true {
+    background-image: url('../../assets/background.png');
+  }
+
+  &.false {
+    background-color: #1d1d1d;
+
+    h1 {
+      color: #c6c6c6;
+    }
   }
 
   .Gallery {

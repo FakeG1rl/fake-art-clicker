@@ -45,14 +45,28 @@
     }
   }
 
-  &:nth-child(1) {
-    .im {
-      background-image: url('../../assets/upg/student.png');
+  &.true {
+    &:nth-child(1) {
+      .im {
+        background-image: url('../../assets/upg/student.png');
+      }
+    }
+    &:nth-child(2) {
+      .im {
+        background-image: url('../../assets/upg/diller.png');
+      }
     }
   }
-  &:nth-child(2) {
-    .im {
-      background-image: url('../../assets/upg/diller.png');
+  &.false {
+    &:nth-child(1) {
+      .im {
+        background-image: url('../../assets/upg/student_inactive.png');
+      }
+    }
+    &:nth-child(2) {
+      .im {
+        background-image: url('../../assets/upg/diller_inactive.png');
+      }
     }
   }
 

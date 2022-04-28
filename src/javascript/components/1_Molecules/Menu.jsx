@@ -8,7 +8,12 @@ export default class Students extends Component {
   render() {
     return (
       <div className="Menu">
-        <div className={'settings p' + this.props.pageid}>Настройки</div>
+        <div
+          className={'settings p' + this.props.pageid}
+          onClick={() => this.props.onClick(4)}
+        >
+          Настройки
+        </div>
         <div
           className={'statistic p' + this.props.pageid}
           onClick={() => this.props.onClick(3)}

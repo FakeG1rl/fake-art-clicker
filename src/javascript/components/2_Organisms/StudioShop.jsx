@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import StudioShopBlock from '../1_Molecules/StudioShopBlock.jsx'
 import UnitBlock from '../1_Molecules/UnitBlock.jsx'
+import UpgradesCollection from '../1_Molecules/UpgradesCollection.jsx'
 
 export default class StudioShop extends Component {
   constructor(props) {
@@ -9,10 +10,14 @@ export default class StudioShop extends Component {
   }
 
   render() {
-    const update = this.props.update
-    const hiring = this.props.hiringUnit
-    const updates = this.props.updates
     const units = this.props.units
+    const hiring = this.props.hiringUnit
+
+    const update = this.props.update
+    const updates = this.props.updates
+
+    const upgrade = this.props.upgrade
+    const upgrades = this.props.upgrades
 
     return (
       <div className="StudioShop">
@@ -42,6 +47,7 @@ export default class StudioShop extends Component {
             cost={updates[2].cost}
             onPress={update}
           />
+          <UpgradesCollection upgrade={upgrade} onPress={upgrades} />
         </div>
       </div>
     )

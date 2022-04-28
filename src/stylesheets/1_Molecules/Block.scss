@@ -2,22 +2,22 @@
   position: relative;
 
   .pictures_collection {
-    // overflow-x: auto;
+    overflow-x: auto;
     // overflow-y: hidden;
-    width: 600px;
+    width: 640px;
     margin-bottom: 42px;
     border: 2px solid #292929;
     background-image: url('../../assets/background.png');
     background-position: center;
     background-size: cover;
-    padding: 20px 0 20px 25px;
+    padding: 20px 25px;
     min-height: 190px;
     display: flex;
     align-items: center;
 
-    &::-webkit-scrollbar {
-      width: 0 !important;
-    }
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
 
     .pictures {
       margin-right: 20px;

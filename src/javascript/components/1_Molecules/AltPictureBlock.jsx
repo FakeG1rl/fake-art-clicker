@@ -17,16 +17,18 @@ export default class AltPictureBlock extends Component {
     }
     return (
       <div className="AltPictureBlock">
-        <div className="title">
-          <span>[{status}]</span>
-          <h4>качество {data.quality}</h4>
-        </div>
-        <h3>{data.referense.title}</h3>
-        <div className="line"></div>
-        <div className="altContent">
-          <p>{data.referense.style}</p>
-          <p>{data.referense.author}</p>
-          <p>{data.referense.year}</p>
+        <div className="wrapper">
+          <div className="title">
+            <span>[{status}]</span>
+            <h4>качество {data.quality}</h4>
+          </div>
+          <h3>{data.referense.title}</h3>
+          <div className="line"></div>
+          <div className="altContent">
+            <p>{data.referense.style}</p>
+            <p>{data.referense.author}</p>
+            <p>{data.referense.year}</p>
+          </div>
         </div>
       </div>
     )

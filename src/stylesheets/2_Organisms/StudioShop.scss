@@ -4,4 +4,27 @@
   .UnitShop + .UpdatesShop {
     margin-top: 25px;
   }
+
+  .UpgradesCollection {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 320px;
+
+    .upgrade {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      justify-content: center;
+      background-color: black;
+      border: 2px solid #c6c6c6;
+
+      // & + .upgrade {
+      // margin-left: 20px;
+      // }
+    }
+  }
 }

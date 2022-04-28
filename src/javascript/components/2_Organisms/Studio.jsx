@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { sell, studioUpdate, hiring, changeblock } from '../../actions/index.js'
+import {
+  sell,
+  studioUpdate,
+  hiring,
+  buyUpgrade,
+  changeblock
+} from '../../actions/index.js'
 
 import Block from '../1_Molecules/Block.jsx'
 import StudioShop from './StudioShop.jsx'
@@ -13,13 +19,13 @@ class Studio extends Component {
     super(props)
   }
 
+  // <p>{props.study.skill}</p>
+  // <p>|||||||||||||||||||</p>
   render() {
     const props = this.props.general
     const actions = this.props.actions
     return (
       <div className="Studio">
-        <p>{props.study.skill}</p>
-        <p>|||||||||||||||||||</p>
         <div className="StudioContent">
           <Block
             title="Образцы"
@@ -35,6 +41,7 @@ class Studio extends Component {
           />
           <GalleriesCollection
             title="Галереи"
+            isActive={props.galleriesIsActive}
             changeblock={actions.changeblock}
             content={props.paintings[2]}
           />
@@ -44,6 +51,8 @@ class Studio extends Component {
           hiringUnit={actions.hiring}
           update={actions.studioUpdate}
           updates={props.studioUpdate}
+          upgrade={props.upgrade}
+          upgrades={actions.buyUpgrade}
         />
       </div>
     )
@@ -56,7 +65,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
-    { sell, studioUpdate, hiring, changeblock },
+    { sell, studioUpdate, hiring, buyUpgrade, changeblock },
     dispatch
   )
 })

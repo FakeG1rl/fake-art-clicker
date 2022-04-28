@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { getOriginal } from '../../actions/index.js'
+import { study } from '../../actions/index.js'
 
 class Study extends Component {
   constructor(props) {
@@ -33,9 +33,15 @@ class Study extends Component {
         <div>
           <div
             className={'pic p' + pic.id}
-            onClick={() => this.props.actions.getOriginal(pic)}
+            onClick={() => this.props.actions.study(pic)}
           ></div>
-          {pic.title}
+          <p>{pic.title}</p>
+          <p>
+            Стоимость обучения{' '}
+            {Math.floor(
+              (pic.cost * 1.15 ** this.props.general.study.studyCount) / 100
+            )}
+          </p>
         </div>
       )
     })
@@ -60,9 +66,10 @@ class Study extends Component {
   render() {
     const pictures = this.props.general.originals.slice(1)
 
+    // <p>Стоимость обучения {this.props.general.study.studyCoast}</p>
     return (
       <div className="Study">
-        <p>УЧителя</p>
+        <p>Мастерство {this.props.general.study.skill}</p>
         <br />
         <p>{this.renderAuthors(pictures)}</p>
       </div>
@@ -75,7 +82,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({ getOriginal }, dispatch)
+  actions: bindActionCreators({ study }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Study)

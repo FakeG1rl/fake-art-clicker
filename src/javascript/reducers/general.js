@@ -7,120 +7,75 @@ import {
   CHANGEBLOCK,
   GALLERYWORKING,
   CHANGEPAGE,
-  GETORIGINAL
+  GETORIGINAL,
+  CHANGEPHASE,
+  GETPHRASE,
+  SAVE,
+  LOAD,
+  RESET,
+  STUDY,
+  BUYUPGRADE
 } from '../constants/ActionTypes'
 
-import { pictures } from '../data/pictures.jsx'
+import { baseState } from '../data/initialState.jsx'
+import { phases, phrases } from '../data/phases.jsx'
 
-const initialState = {
-  pageid: 0,
+const initialState = Object.assign({}, baseState)
 
-  clicksToPainting: 1,
-  clicksDone: 0,
-  speedOfSale: 5,
+const randn_bm = (min, max) => {
+  let u = 0,
+    v = 0
+  while (u === 0) u = Math.random() //Converting [0,1) to (0,1)
+  while (v === 0) v = Math.random()
+  let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v)
 
-  study: {
-    studyCoast: 1,
-    studyCount: 0,
-    skill: 0.1
-  },
-  moneyGained: 10,
-
-  paintings: [
-    [],
-    [
-      {
-        referense: {
-          id: 1,
-          title: 'Натюрморт с битой птицей, медной посудой...',
-          author: 'Жан Батист Шарден',
-          style: 'Романтизм',
-          year: 1728
-        },
-        status: 1,
-        quality: 1
-      }
-    ],
-    [
-      {
-        size: 3,
-        pictures: []
-      }
-    ]
-  ],
-  originals: pictures,
-
-  units: [
-    {
-      level: 0,
-      text:
-        'Зачем рисовать самому, если можно свалить эту работу на подмастерье',
-      baseCost: 10,
-      cost: 10,
-      pps: 1
-    },
-    {
-      level: 0,
-      text: 'Деньги, денежки. Продавайте диллеры скорей.',
-      baseCost: 100,
-      cost: 100,
-      working: 0,
-      speed: 60
-    }
-  ],
-  studioUpdate: [
-    {
-      level: 0,
-      cost: 1,
-      factor: 1
-    },
-    {
-      level: 0,
-      cost: 10,
-      factor: 5
-    },
-    {
-      level: 0,
-      cost: 100,
-      factor: 10
-    }
-  ],
-
-  statistics: {
-    totalClick: 0,
-    totalPainting: 0,
-    totalSales: 0,
-    totalMoneys: 0,
-    totalGalleryEarned: 0,
-
-    totalStyles: 2,
-    totalAuthors: 10,
-    totalYears: 10
+  num = num / 10.0 + 0.5 // Translate to 0 -> 1
+  if (num > 1 || num < 0)
+    // num = randn_bm(min, max, skew) // resample between 0 and 1 if out of range
+    num = randn_bm(min, max)
+  // resample between 0 and 1 if out of range
+  else {
+    // num = Math.pow(num, skew) // Skew
+    num *= max - min // Stretch to fill range
+    num += min // offset to min
   }
+  return num
+  // return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v)
 }
 
-const getPictureCost = (state, quality) => {
+const getPictureCost = (state, quality, refCost, study) => {
   let factor = 0
   const studioUpdate = state.studioUpdate
 
   studioUpdate.forEach((i) => (factor += i.factor * i.level))
-  const cost = Math.floor((1 + factor) * quality * 1000) / 1000
+  let cost = 0
+  if (refCost == 1) {
+    cost = Math.floor((1 + factor) * quality * 1000) / 1000
+  } else {
+    cost = (refCost * study * Math.floor((1 + factor) * quality * 1000)) / 1000
+  }
   return cost
 }
 
-const paint = (picture, skill) => {
+const paint = (orig, ref, skill, luck) => {
+  const refQ = ref.quality ? ref.quality : 1
   let qual = 0
-  if (picture.referense.quality) {
-    qual = Math.random() * picture.reference.quality
+  if (orig.id == 0) {
+    qual = (Math.floor(Math.random() * refQ * 1000) / 100) * skill
   } else {
-    qual = Math.random() / 10
+    const max = 0.3 - 0.25 * luck
+    qual = randn_bm(skill, max)
+    console.log(qual)
+
+    qual = refQ * Math.abs(qual) * luck * 100
+    console.log(skill, qual)
   }
 
-  qual = Math.floor((qual + skill) * 1000) / 1000
-  console.log(qual)
-
-  picture['quality'] = qual
-  return picture
+  return {
+    status: 11,
+    quality: qual,
+    referense: orig
+  }
 }
 
 export default function general(state = initialState, action) {
@@ -129,23 +84,29 @@ export default function general(state = initialState, action) {
       const newState = Object.assign({}, state)
       const paintings = newState.paintings[0]
       const references = newState.paintings[1]
-
+      let orig = action.ref
+      let ref = action.ref
+      let picture = {}
       let click = 0
-      let ref = {}
 
       if (newState.clicksDone == 0) {
-        if (references.length == 0) {
-          ref = newState.originals[0]
-          newState.clicksToPainting = 1
+        if (!ref) {
+          if (references.length == 0) {
+            ref = newState.originals[0]
+            orig = newState.originals[0]
+            newState.clicksToPainting = 1
+          } else {
+            const ref_id = Math.floor(Math.random() * references.length)
+            ref = references[ref_id]
+            orig = references[ref_id].referense
+            newState.clicksToPainting = Math.floor(1 * ref.quality * 100)
+          }
         } else {
-          const ref_id = Math.floor(Math.random() * references.length)
-          newState.clicksToPainting = 1 * references[ref_id].quality * 100
-          ref = references[ref_id].referense
+          newState.clicksToPainting = Math.floor(100 * newState.study.skill)
         }
-        paintings.push({
-          status: 11,
-          referense: ref
-        })
+
+        picture = paint(orig, ref, newState.study.skill, newState.study.luck)
+        paintings.unshift(picture)
       }
 
       if (action.sourse == 0) {
@@ -154,6 +115,7 @@ export default function general(state = initialState, action) {
       } else {
         click = newState.units[0].level * newState.units[0].pps
       }
+
       newState.clicksDone += click
 
       if (
@@ -163,9 +125,8 @@ export default function general(state = initialState, action) {
         newState.statistics.totalPainting += 1
         newState.clicksDone = 0
 
-        let picture = paintings[paintings.length - 1]
-        picture = paint(picture, newState.study.skill)
-        picture['status'] = 0
+        picture = paintings[0]
+        picture.status = 0
       }
       return newState
     }
@@ -181,7 +142,9 @@ export default function general(state = initialState, action) {
       } else {
         newState.moneyGained += getPictureCost(
           newState,
-          state.paintings[0][action.id].quality
+          state.paintings[0][action.id].quality,
+          state.paintings[0][action.id].referense.cost,
+          newState.study.skill
         )
         if (dillers.working > 0) {
           dillers.working -= 1
@@ -196,33 +159,39 @@ export default function general(state = initialState, action) {
     case STUDIOUPDATE: {
       const newState = Object.assign({}, state)
       const studioUpdate = newState.studioUpdate[action.id]
+
       if (newState.moneyGained >= studioUpdate.cost) {
         newState.moneyGained -= studioUpdate.cost
         studioUpdate.level += 1
-        studioUpdate.cost += 1
       } else {
-        console.log(
-          'error',
-          newState.moneyGained,
-          newState.studioUpdate[action.id]
-        )
+        console.log('error', newState.moneyGained, studioUpdate.cost)
       }
+      studioUpdate.cost = Math.floor(
+        studioUpdate.baseCost * 1.15 ** studioUpdate.level
+      )
       return newState
     }
 
     case HIRING: {
       const newState = Object.assign({}, state)
       const unit = newState.units[action.id]
-      if (action.id == 0) {
-        newState.clicksToPainting = newState.clicksToPainting / 2
-      }
-      if (newState.moneyGained >= unit.cost) {
-        newState.moneyGained -= unit.cost
-        unit.level += 1
+      if (unit.isActive) {
+        if (newState.moneyGained >= unit.cost) {
+          newState.moneyGained -= unit.cost
+          unit.level += 1
+        } else {
+          console.log('error', newState.moneyGained, unit.cost)
+        }
+        unit.cost = Math.floor(unit.baseCost * 1.15 ** unit.level)
       } else {
-        console.log('error', newState.moneyGained, unit.cost)
+        console.log(unit, 'не доступен')
       }
-      unit.cost = Math.floor(unit.baseCost * 1.15 ** unit.level)
+      return newState
+    }
+
+    case BUYUPGRADE: {
+      const newState = Object.assign({}, state)
+      console.log(action)
       return newState
     }
 
@@ -233,10 +202,11 @@ export default function general(state = initialState, action) {
       let picture = {}
       if (dillers.working == 0) {
         for (let i = 0; i < pictures.length; i++) {
-          if (pictures[i].status == 0) {
+          const j = pictures.length - i - 1
+          if (pictures[j].status == 0) {
             dillers.working += 1
-            pictures[i].status = 10
-            pictures[i].time_to_sale = dillers.speed / dillers.level
+            pictures[j].status = 10
+            pictures[j].time_to_sale = dillers.speed / dillers.level
             break
           }
         }
@@ -268,27 +238,44 @@ export default function general(state = initialState, action) {
       return newState
     }
 
-    case GETORIGINAL: {
-      const newState = Object.assign({}, state)
+    case STUDY: {
+      let newState = Object.assign({}, state)
+
       let study = newState.study
+      const cost = (action.picture.cost * 1.15 ** study.studyCount) / 100
 
-      if (newState.moneyGained >= study.studyCoast) {
+      if (newState.moneyGained >= cost) {
+        newState.moneyGained -= cost
+        if (!(study.skill >= 1)) {
+          study.skill += 0.05 * 0.5 ** study.studyCount
+        }
         study.studyCount += 1
-        study.skill += 0.001
-        newState.moneyGained -= study.studyCoast
-        let picture = {}
 
-        picture = paint(
-          {
-            referense: action.id,
-            status: 1
-          },
-          study.skill
-        )
-
-        newState.paintings[1].push(picture)
+        newState.paintings[0].forEach((item, i) => {
+          if (item.status == 11) {
+            newState.paintings[0].splice(i, 1)
+          }
+        })
+        newState.clicksDone = 0
+        newState = general(newState, {
+          type: PAINT,
+          ref: action.picture,
+          sourse: 0
+        })
       }
+      return newState
+    }
 
+    case GETORIGINAL: {
+      let newState = Object.assign({}, state)
+      const original = newState.originals[action.id + 1]
+      if (newState.moneyGained >= original.cost) {
+        const picture = { status: 1, quality: 1, referense: original }
+        newState.paintings[1].unshift(picture)
+        newState.moneyGained -= original.cost
+      } else {
+        console.log('ERROR')
+      }
       return newState
     }
 
@@ -313,7 +300,12 @@ export default function general(state = initialState, action) {
         let year_entropy = 0
 
         gallery.pictures.forEach((picture, i) => {
-          galleryCost += getPictureCost(newState, picture.quality)
+          galleryCost += getPictureCost(
+            newState,
+            picture.quality,
+            picture.referense.cost,
+            newState.study.skill
+          )
 
           if (styles[picture.referense.style]) {
             styles[picture.referense.style] += 1
@@ -369,6 +361,84 @@ export default function general(state = initialState, action) {
       } else {
         newState.pageid = action.page_id
       }
+      return newState
+    }
+
+    case CHANGEPHASE: {
+      const newState = Object.assign({}, state)
+      const statistics = newState.statistics
+      const skill = newState.study.skill
+
+      if (statistics.totalMoneys < 10) {
+        newState.phase = Object.keys(phases)[0]
+      } else if (statistics.totalPainting > 20 && skill == 0.01) {
+        newState.phase = Object.keys(phases)[2]
+      } else if (
+        newState.paintings[1].length >= 1 &&
+        newState.units[0].level == 0
+      ) {
+        newState.units[0].isActive = true
+        newState.phase = Object.keys(phases)[4]
+      } else if (statistics.totalSales > 100 && newState.units[1].level == 0) {
+        newState.units[1].isActive = true
+        newState.phase = Object.keys(phases)[5]
+      } else if (statistics.totalOriginals > 0) {
+        newState.phase = Object.keys(phases)[7]
+      } else if (
+        (newState.study.studyCount > 0 && newState.paintings[1].length < 1) ||
+        (statistics.totalSales < 100 && newState.study.studyCount < 0) ||
+        (newState.units[1].level == 0 && newState.units[0].level > 0) ||
+        (newState.units[0].level > 0 && newState.units[1].level > 0)
+      ) {
+        newState.phase = Object.keys(phases)[0]
+      } else {
+        newState.phase = Object.keys(phases)[0]
+      }
+      return newState
+    }
+
+    case GETPHRASE: {
+      const newState = Object.assign({}, state)
+      if (newState.phraseCounter < 10) {
+        newState.phraseCounter += 1
+      } else {
+        newState.phrase = newState.phase
+        // newState.phrase = phases[0].key
+        // newState.phrase = phrases[Math.floor(Math.random() * phrases.length)]
+        // newState.phraseCounter = 0
+      }
+      return newState
+    }
+    case SAVE: {
+      const newState = Object.assign({}, state)
+      const f = () => {
+        newState.saveCounter = 0
+        localStorage.setItem('save', JSON.stringify(newState))
+        newState.phrase = 'Сохранение'
+        console.log('save')
+      }
+      if (action.isHandle) {
+        f()
+      } else if (newState.saveCounter == 60) {
+        f()
+      } else {
+        newState.saveCounter += 1
+        general(newState, { type: GETPHRASE })
+      }
+      return newState
+    }
+    case RESET: {
+      const newState = Object.assign({}, baseState)
+      localStorage.setItem('save', JSON.stringify(newState))
+      return newState
+    }
+    case LOAD: {
+      let newState = Object.assign({}, state)
+      if (localStorage.save) {
+        newState = JSON.parse(localStorage.save)
+      }
+      console.log('...')
+      newState.loading = false
       return newState
     }
 

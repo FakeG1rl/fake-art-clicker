@@ -4,6 +4,7 @@ import Studio from './Studio.jsx'
 import Shop from './Shop.jsx'
 import Statistic from './Statistic.jsx'
 import Study from './Study.jsx'
+import Settings from './Settings.jsx'
 
 import Menu from '../1_Molecules/Menu.jsx'
 
@@ -14,6 +15,7 @@ export default class Content extends Component {
 
   render() {
     const pageId = this.props.page
+    const phase = this.props.phase
     let page = ''
 
     if (pageId == 0) {
@@ -24,6 +26,8 @@ export default class Content extends Component {
       page = <Shop />
     } else if (pageId == 3) {
       page = <Statistic />
+    } else if (pageId == 4) {
+      page = <Settings />
     } else {
       page = <div>LOL</div>
     }
@@ -32,16 +36,34 @@ export default class Content extends Component {
     return (
       <div className="Content">
         <div className="GameHeader">
+          <div className="cover"></div>
           <div className="CharacterBlock">
             <div className="Character"></div>
             <div className="Message">
               <h2>Клякса</h2>
-              <p>Тут могла быть ваша реклама</p>
+              <p>{this.props.phrase}</p>
             </div>
           </div>
           <Menu pageid={pageId} onClick={this.props.changePage} />
         </div>
-        <div className="Page">{page}</div>
+        <div className="Page">
+          <div className="wrapper 1">
+            <div className="Cover_top"></div>
+          </div>
+          <div className="wrapper 2">
+            <div className="Cover_left_1"></div>
+          </div>
+          <div className="wrapper 3">
+            <div className="Cover_left_2"></div>
+          </div>
+          <div className="wrapper 4">
+            <div className="Cover_rigth_1"></div>
+          </div>
+          <div className="wrapper 5">
+            <div className="Cover_rigth_2"></div>
+          </div>
+          <div className="Part">{page}</div>
+        </div>
       </div>
     )
   }
