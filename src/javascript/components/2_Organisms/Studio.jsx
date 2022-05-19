@@ -7,12 +7,13 @@ import {
   studioUpdate,
   hiring,
   buyUpgrade,
-  changeblock
+  changeblock,
+  chandePage
 } from '../../actions/index.js'
 
 import Block from '../1_Molecules/Block.jsx'
 import StudioShop from './StudioShop.jsx'
-import GalleriesCollection from '../1_Molecules/GalleriesCollection.jsx'
+import GalleriesCollection from '../1,5_Collections/GalleriesCollection.jsx'
 
 class Studio extends Component {
   constructor(props) {
@@ -29,31 +30,37 @@ class Studio extends Component {
         <div className="StudioContent">
           <Block
             title="Образцы"
+            area="r"
             pictures={props.paintings[1]}
             changeblock={actions.changeblock}
             onPress={() => console.log('click')}
           />
           <Block
             title="Продукция"
+            area="s"
             pictures={props.paintings[0]}
             changeblock={actions.changeblock}
             onPress={actions.sell}
           />
           <GalleriesCollection
             title="Галереи"
+            area="g"
             isActive={props.galleriesIsActive}
             changeblock={actions.changeblock}
             content={props.paintings[2]}
+            changePage={actions.chandePage}
           />
         </div>
         <StudioShop
           units={props.units}
+          money={props.moneyGained}
           hiringUnit={actions.hiring}
           update={actions.studioUpdate}
           updates={props.studioUpdate}
           upgrade={props.upgrade}
           upgrades={actions.buyUpgrade}
         />
+        <div></div>
       </div>
     )
   }
@@ -65,7 +72,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
-    { sell, studioUpdate, hiring, buyUpgrade, changeblock },
+    { sell, studioUpdate, hiring, buyUpgrade, changeblock, chandePage },
     dispatch
   )
 })

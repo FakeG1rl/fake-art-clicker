@@ -8,15 +8,34 @@ export default class UnitBlock extends Component {
 
   render() {
     const props = this.props
-    const className = 'UnitBlock ' + this.props.unit.isActive
-    if (this.props.unit.isActive) {
+    const itIsOpen = this.props.unit.isActive
+    const className = 'UnitBlock ' + itIsOpen
+    let onClick = () => {}
+    if (itIsOpen) {
+      let isActive = 'inactive'
+      if (props.money >= props.unit.cost) {
+        isActive = props.unit.size
+          ? props.unit.size > props.unit.level
+            ? 'active'
+            : isActive
+          : 'active'
+        onClick = () => props.onPress(props.id)
+      }
+      const span =
+        props.id == 0 ? (
+          <p>
+            <span>{props.unit.level}</span>/{props.unit.size} в мастерской
+          </p>
+        ) : (
+          <p>
+            <span>{props.unit.level}</span> в мастерской
+          </p>
+        )
       return (
-        <div className={className} onClick={() => props.onPress(props.id)}>
+        <div className={className + ' ' + isActive} onClick={onClick}>
           <div className="im"></div>
           <div className="content">
-            <p>
-              <span>{props.unit.level}</span> в мастерской
-            </p>
+            {span}
             <h3>Нанять {props.title}а</h3>
             <p>${props.unit.cost}</p>
           </div>

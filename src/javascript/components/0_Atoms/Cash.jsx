@@ -9,7 +9,7 @@ export default class Cash extends Component {
     return (
       <div className="Cash">
         <h2>
-          $
+          F$
           {new Intl.NumberFormat('en', {
             style: 'decimal',
             maximumFractionDigits: 2

@@ -6,7 +6,8 @@ export const pictures = [
     author: 'Жан Батист Шарден',
     style: 'Рококо',
     year: 1728,
-    cost: 68750
+    cost: 68750,
+    position: 'vertical'
   },
   {
     id: 2,
@@ -14,7 +15,8 @@ export const pictures = [
     author: 'Дюрер',
     style: 'Возрождение',
     year: 1514,
-    cost: 10344
+    cost: 10344,
+    position: 'horizontal'
   },
   {
     id: 3,
@@ -22,7 +24,8 @@ export const pictures = [
     author: 'Питер Пауль Рубенс',
     style: 'Барокко',
     year: 1610,
-    cost: 76700000
+    cost: 76700000,
+    position: 'square'
   },
   {
     id: 4,
@@ -30,7 +33,8 @@ export const pictures = [
     author: 'Гойя',
     style: 'Романтизм',
     year: 1800,
-    cost: 82752
+    cost: 82752,
+    position: 'horizontal'
   },
   {
     id: 5,
@@ -38,6 +42,7 @@ export const pictures = [
     author: 'Жан Батист Шарден',
     style: 'Рококо',
     year: 1740,
-    cost: 400000
+    cost: 400000,
+    position: 'vertical'
   }
 ]

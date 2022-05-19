@@ -4,6 +4,7 @@
   "scripts": {
     "start": "webpack serve --open --config webpack.dev.js",
     "watch": "webpack serve --config webpack.dev.js",
+    "share": "webpack serve --host 0.0.0.0 --config webpack.dev.js",
     "watch-virtualbox": "webpack serve --config webpack.dev-virtualbox.js",
     "build": "webpack --config webpack.prod.js"
   },
@@ -33,6 +34,7 @@
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.32.12",
     "sass-loader": "^11.0.1",
+    "svg-inline-loader": "^0.8.2",
     "webpack": "^5.33.2",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2",

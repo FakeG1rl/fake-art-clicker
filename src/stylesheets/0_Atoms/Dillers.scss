@@ -20,9 +20,7 @@
     font-family: 'SprimoskFont';
     font-size: 46px;
     color: #161616;
-    text-shadow: 2px 0 0 #f1f1f1, -2px 0 0 #f1f1f1, 0 2px 0 #f1f1f1,
-      0 -2px 0 #f1f1f1, 1px 1px #f1f1f1, -1px -1px 0 #f1f1f1, 1px -1px 0 #f1f1f1,
-      -1px 1px 0 #f1f1f1;
+    text-shadow: $text-shadow;
     transform: rotate(-5.54deg);
     margin: 0 0 40px -22px;
   }

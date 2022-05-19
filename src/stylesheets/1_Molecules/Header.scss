@@ -14,17 +14,17 @@
 
   .logo {
     z-index: 1;
-    width: 102px;
+    width: 112px;
     height: 99px;
 
     position: absolute;
     top: 50px;
     left: 50px;
 
-    background-image: url('../../assets/logo.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    // background-image: url('../../assets/logo.png');
+    // background-position: center;
+    // background-size: contain;
+    // background-repeat: no-repeat;
     transform: rotate(-12.15deg);
   }
 }

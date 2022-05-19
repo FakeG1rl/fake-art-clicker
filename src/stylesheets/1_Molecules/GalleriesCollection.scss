@@ -1,11 +1,11 @@
 .GalleriesCollection {
   // width: 845px;
-  border: 2px solid #292929;
-  // padding: 20px 0 20px 25px;
+  border: 2px solid $ligth-gray;
+  margin-bottom: 20px;
+  padding: 0 20px;
   position: relative;
   background-position: center;
   background-size: cover;
-  min-height: 170px;
 
   h1 {
     font-family: 'RoadRage';
@@ -13,27 +13,36 @@
     position: absolute;
     font-size: 24px;
     transform: rotate(-3.54deg);
-    color: #fe008b;
-    text-shadow: 3px 0 0 #f1f1f1, -3px 0 0 #f1f1f1, 0 3px 0 #f1f1f1,
-      0 -3px 0 #f1f1f1, 1px 1px #f1f1f1, -1px -1px 0 #f1f1f1, 1px -1px 0 #f1f1f1,
-      -1px 1px 0 #f1f1f1;
-  }
-
-  &.true {
-    background-image: url('../../assets/background.png');
+    text-shadow: $text-shadow;
   }
 
   &.false {
-    background-color: #1d1d1d;
-
-    h1 {
-      color: #c6c6c6;
-    }
+    display: none;
   }
 
-  .Gallery {
-    display: flex;
-    margin: 20px 0 20px 25px;
+  .GalleryBlock {
+    background-image: url('../../assets/background.png');
+    background-size: cover;
+    .PicturesCollection {
+      display: flex;
+      margin: 20px 0 20px 15px;
+      border: 2px solid $gray;
+      min-height: 90px;
+      align-items: center;
+      position: relative;
+
+      .but {
+        position: static;
+        padding: 0;
+      }
+    }
     // width: 778px;
+    .but {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding: 10px;
+      background-color: $medium-gray;
+    }
   }
 }

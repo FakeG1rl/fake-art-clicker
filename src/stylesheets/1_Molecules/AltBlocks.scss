@@ -1,20 +1,15 @@
 .AltShopBlock {
   display: none;
   position: absolute;
-  left: -400px;
+  left: -405px;
   top: -2px;
   width: 395px;
   padding: 20px 20px;
-  border: 2px solid #292929;
-  background: #161616;
-  // background: radial-gradient(
-  //     67.74% 67.74% at 50% 50%,
-  //     rgba(0, 0, 0, 0) 58.09%,
-  //     rgba(0, 0, 0, 0.3) 100%
-  //   )
-  /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+  border: 2px solid $ligth-gray;
+  background: $black;
+  // background: $radial-gradient-black
 
-  color: white;
+  color: $white;
 
   .title {
     display: flex;
@@ -33,11 +28,7 @@
     margin: 13px 0;
     height: 2px;
     width: 100%;
-    background: radial-gradient(
-      50% 50% at 50% 50%,
-      #292929 68.54%,
-      rgba(41, 41, 41, 0) 100%
-    );
+    background: $radial-gradient-ligth;
   }
   .altContent {
     p {
@@ -59,16 +50,10 @@
   .wrapper {
     width: 395px;
     padding: 20px 20px;
-    border: 2px solid #292929;
-    background: #161616;
-    // background: radial-gradient(
-    //     67.74% 67.74% at 50% 50%,
-    //     rgba(0, 0, 0, 0) 58.09%,
-    //     rgba(0, 0, 0, 0.3) 100%
-    //   )
-    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+    border: 2px solid $ligth-gray;
+    background: $black;
 
-    color: white;
+    color: $white;
 
     .title {
       display: flex;
@@ -77,7 +62,6 @@
       margin-bottom: 10px;
       span {
         font-size: 14px;
-        color: #fe008b;
       }
       h4 {
         font-size: 14px;
@@ -93,11 +77,7 @@
       margin: 13px 0;
       height: 2px;
       width: 100%;
-      background: radial-gradient(
-        50% 50% at 50% 50%,
-        #292929 68.54%,
-        rgba(41, 41, 41, 0) 100%
-      );
+      background: $radial-gradient-ligth;
     }
     .altContent {
       p {

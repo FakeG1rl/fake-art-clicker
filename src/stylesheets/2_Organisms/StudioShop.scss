@@ -1,30 +1,75 @@
 .StudioShop {
   margin: 10px 10px 10px 0;
-
-  .UnitShop + .UpdatesShop {
-    margin-top: 25px;
+  .UnitShop {
+    position: sticky;
+    top: 40px;
   }
 
   .UpgradesCollection {
     margin-top: 25px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    position: sticky;
+    top: 235px;
+    // justify-content: space-between;
     width: 320px;
 
     .upgrade {
-      width: 48px;
-      height: 48px;
+      position: relative;
+      width: 52px;
+      height: 52px;
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       justify-content: center;
-      background-color: black;
-      border: 2px solid #c6c6c6;
+      background-color: $white;
+      border: 2px solid $medium-gray;
+      margin-left: 15px;
+      .img {
+        width: 100%;
+        height: 100%;
+        background-image: url('../../assets/icon.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
 
-      // & + .upgrade {
-      // margin-left: 20px;
-      // }
+      &.inactive {
+        .img {
+          opacity: 0.5;
+        }
+      }
+
+      &:nth-child(5n) {
+        .AltShopBlock {
+          left: -673px;
+        }
+      }
+      &:nth-child(5n + 1),
+      &:nth-child(1) {
+        margin-left: 0;
+        .AltShopBlock {
+          left: -405px;
+        }
+      }
+      &:nth-child(5n + 2) {
+        .AltShopBlock {
+          left: -472px;
+        }
+      }
+      &:nth-child(5n + 3) {
+        .AltShopBlock {
+          left: -539px;
+        }
+      }
+      &:nth-child(5n + 4),
+      &:nth-child(4) {
+        .AltShopBlock {
+          left: -606px;
+        }
+      }
+      &:hover .AltShopBlock {
+        display: block;
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 .UnitBlock {
   display: flex;
-  background-color: #161616;
-  border: 2px solid #292929;
+  background-color: $black;
+  border: 2px solid $ligth-gray;
   width: 320px;
   position: relative;
 
@@ -21,7 +21,6 @@
     }
     span {
       font-size: 14px;
-      color: #fe008b;
       font-weight: 400;
     }
     p {
@@ -38,8 +37,8 @@
   }
 
   &:hover {
-    color: black;
-    background-color: white;
+    color: $black;
+    background-color: $white;
     .AltShopBlock {
       display: block;
     }
@@ -67,6 +66,12 @@
       .im {
         background-image: url('../../assets/upg/diller_inactive.png');
       }
+    }
+  }
+  &.inactive {
+    .im,
+    .content {
+      opacity: 0.4;
     }
   }
 

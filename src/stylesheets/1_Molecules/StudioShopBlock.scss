@@ -1,7 +1,7 @@
 .StudioShopBlock {
   display: flex;
-  background-color: #161616;
-  border: 2px solid #292929;
+  background-color: $black;
+  border: 2px solid $ligth-gray;
   width: 320px;
   .im {
     width: 116px;
@@ -20,7 +20,6 @@
     }
     span {
       font-size: 14px;
-      color: #fe008b;
       font-weight: 400;
     }
     p {
@@ -57,8 +56,8 @@
     }
   }
   &:hover {
-    color: black;
-    background-color: white;
+    color: $black;
+    background-color: $white;
   }
   & + .StudioShopBlock {
     margin-top: 4px;

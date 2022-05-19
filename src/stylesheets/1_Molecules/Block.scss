@@ -1,17 +1,17 @@
 .Block {
   position: relative;
 
-  .pictures_collection {
+  .PicturesCollection {
     overflow-x: auto;
     // overflow-y: hidden;
     width: 640px;
     margin-bottom: 42px;
-    border: 2px solid #292929;
+    border: 2px solid $ligth-gray;
     background-image: url('../../assets/background.png');
     background-position: center;
     background-size: cover;
     padding: 20px 25px;
-    min-height: 190px;
+    min-height: 130px;
     display: flex;
     align-items: center;
 
@@ -34,9 +34,6 @@
     position: absolute;
     font-size: 24px;
     transform: rotate(-3.54deg);
-    color: #fe008b;
-    text-shadow: 3px 0 0 #f1f1f1, -3px 0 0 #f1f1f1, 0 3px 0 #f1f1f1,
-      0 -3px 0 #f1f1f1, 1px 1px #f1f1f1, -1px -1px 0 #f1f1f1, 1px -1px 0 #f1f1f1,
-      -1px 1px 0 #f1f1f1;
+    text-shadow: $text-shadow;
   }
 }

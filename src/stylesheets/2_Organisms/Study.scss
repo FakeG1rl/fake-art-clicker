@@ -10,26 +10,26 @@
       .pic {
         width: 68px;
         height: 86px;
-        border: 4px solid white;
+        border: 4px solid $white;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
 
         &:hover {
-          border: 4px solid black;
+          border: 4px solid $black;
         }
 
         &.p1 {
           background-image: url('../../assets/pictures/1.png');
         }
         &.p2 {
-          background-image: url('../../assets/pictures/2.jpg');
+          background-image: url('../../assets/pictures/2.png');
         }
         &.p3 {
           background-image: url('../../assets/pictures/3.png');
         }
         &.p4 {
-          background-image: url('../../assets/pictures/4.jpg');
+          background-image: url('../../assets/pictures/4.png');
         }
         &.p5 {
           background-image: url('../../assets/pictures/5.png');

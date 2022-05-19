@@ -2,10 +2,13 @@ import { pictures } from './pictures.jsx'
 import { phases, phrases } from './phases.jsx'
 import { upgrade } from './upgrade.jsx'
 
-const cash = 100000
+const cash = 200000
+const pcituresSallin = 200
 
 export const baseState = {
+  saveTime: new Date().getTime(),
   loading: true,
+  offlineSpeed: 0.1,
   pageid: 0,
   phase: Object.keys(phases)[1],
   phrase: Object.keys(phases)[1],
@@ -19,9 +22,10 @@ export const baseState = {
   study: {
     // studyCoast: 10,
     studyCount: 0,
-    skill: 0.01,
-    luck: 0.01
+    skill: 0.01
   },
+  luck: 0.01,
+  factor: 0,
   moneyGained: cash,
 
   paintings: [
@@ -41,6 +45,7 @@ export const baseState = {
     ]
   ],
   galleriesIsActive: false,
+  openGalleryId: null,
   originals: pictures,
 
   units: [
@@ -50,6 +55,7 @@ export const baseState = {
         'Зачем рисовать самому, если можно свалить эту работу на подмастерье',
       baseCost: 10,
       cost: 10,
+      size: 5,
       pps: 1,
       isActive: false
     },
@@ -85,15 +91,16 @@ export const baseState = {
   ],
   upgrade: upgrade,
   statistics: {
-    totalClick: 0,
-    totalPainting: 0,
+    start: new Date().getTime(),
+    totalClick: pcituresSallin,
+    totalPainting: pcituresSallin,
     totalOriginals: 0,
-    totalSales: 0,
+    totalSales: pcituresSallin,
     totalMoneys: cash,
     totalGalleryEarned: 0,
 
-    totalStyles: 2,
-    totalAuthors: 10,
-    totalYears: 10
+    totalStyles: 4,
+    totalAuthors: 4,
+    totalYears: 4
   }
 }

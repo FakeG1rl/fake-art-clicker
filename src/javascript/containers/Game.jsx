@@ -17,29 +17,40 @@ import {
   load
 } from '../actions/index.js'
 
+// ограничит перетаскивание в галерею пока та не открыта V
+// ограничить вместительность галереи V
+// выводить размер галереи
+// экран открытия галереи
+// блок увеличения вместительности галереи
+// возможность открыть еще одну галерею
+
 class Game extends React.Component {
   constructor(props) {
     super(props)
   }
 
   componentDidMount() {
+    const actions = this.props.actions
     setInterval(() => {
-      if (this.props.general.loading) {
-        this.props.actions.load()
+      const props = this.props.general
+      if (props.loading) {
+        actions.load()
       } else {
-        const students = this.props.general.units[0]
-        const dillers = this.props.general.units[1]
+        const students = props.units[0]
+        const dillers = props.units[1]
         if (students.level > 0) {
-          this.props.actions.paint(1)
+          actions.paint(1)
         }
         if (dillers.level > 0) {
-          this.props.actions.autoSell()
+          actions.autoSell()
         }
         this.pistureSell()
-        this.props.actions.galleryWorking()
-        this.props.actions.chandePhase()
-        this.props.actions.getPhrase()
-        this.props.actions.save()
+        if (props.galleriesIsActive) {
+          actions.galleryWorking()
+        }
+        actions.chandePhase()
+        actions.getPhrase()
+        actions.save()
 
         console.log('___________')
       }
@@ -49,8 +60,14 @@ class Game extends React.Component {
   pistureSell = () => {
     this.props.general.paintings[0].forEach((paint, i) => {
       if (paint.status == 10) {
-        paint.time_to_sale -= 1
-        if (paint.time_to_sale <= 0) {
+        paint.timeToSale -= 1
+        if (paint.autoSell) {
+          paint.timeFraction =
+            paint.timeToSale / this.props.general.units[1].speed
+        } else {
+          paint.timeFraction = paint.timeToSale / this.props.general.speedOfSale
+        }
+        if (paint.timeToSale <= 0) {
           this.props.actions.sell(i)
         }
       }
@@ -66,6 +83,9 @@ class Game extends React.Component {
             page={this.props.general.pageid}
             phase={this.props.general.phase}
             phrase={this.props.general.phrase}
+            gallery={
+              this.props.general.paintings[2][this.props.general.openGalleryId]
+            }
             changePage={this.props.actions.chandePage}
           />
         </div>
