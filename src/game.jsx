@@ -1,10 +1,10 @@
-import '../bundle.scss'
+import './game.scss'
 
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import Game from './containers/Game.jsx'
-import configureStore from './store/configureStore.js'
+import Game from './javascript/containers/Game.jsx'
+import configureStore from './javascript/store/configureStore.js'
 
 const store = configureStore()
 

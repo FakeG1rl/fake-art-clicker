@@ -25,12 +25,14 @@ class Shop extends Component {
               title={picture.title}
               author={picture.author}
               year={picture.year}
+              key={i}
             />
           </div>
         )
       } else {
         const inactive =
           this.props.general.moneyGained < picture.cost ? 'inactive' : ''
+
         picItems.push(
           <div
             className={'picture ' + inactive}
@@ -45,6 +47,7 @@ class Shop extends Component {
               author={picture.author}
               year={picture.year}
               cost={picture.cost}
+              key={i}
             />
           </div>
         )

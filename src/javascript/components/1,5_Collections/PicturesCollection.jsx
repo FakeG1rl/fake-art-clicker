@@ -40,7 +40,7 @@ export default class PicturesCollection extends Component {
     }
     if (size) {
       for (var i = 0; i < size - pictures.length; i++) {
-        pictureItems.push(<Picture forShadow={this.props.sourse} />)
+        pictureItems.push(<Picture forShadow={this.props.sourse} key={i} />)
       }
     }
     return pictureItems

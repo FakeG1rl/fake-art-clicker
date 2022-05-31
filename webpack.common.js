@@ -6,7 +6,7 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    index: './src/javascript/index.jsx'
+    game: './src/game.jsx'
   },
   output: {
     filename: '[name].js',
@@ -78,9 +78,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       hash: true,
       scriptLoading: 'blocking',
-      template: './src/index.html',
-      filename: './index.html',
-      chunks: ['index']
+      template: './src/game.html',
+      filename: './game.html',
+      chunks: ['game']
     })
   ],
   optimization: {
