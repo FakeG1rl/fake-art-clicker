@@ -18,6 +18,34 @@ import {
   DAD
 } from '../constants/ActionTypes'
 
+import Analytics from 'analytics'
+import googleAnalytics from '@analytics/google-analytics'
+
+const analytics = Analytics({
+  app: 'fake-art-clicker',
+  plugins: [
+    googleAnalytics({
+      trackingId: 'G-NNC7JH0EBQ'
+    })
+  ]
+})
+
+// /* Track a page view */
+// analytics.page()
+//
+// /* Track a custom event */
+// analytics.track('playedVideo', {
+//   category: 'Videos',
+//   label: 'Fall Campaign',
+//   value: 42
+// })
+
+// /* Identify a visitor */
+// analytics.identify('user-id-xyz', {
+//   firstName: 'bill',
+//   lastName: 'murray'
+// })
+
 import { baseState } from '../data/initialState.jsx'
 import { characters, phases } from '../data/phases.jsx'
 import colors from '../../stylesheets/colors.scss'
@@ -83,6 +111,14 @@ const paint = (ref, skill, luck) => {
   }
 }
 
+const track = (name, category, label, value) => {
+  analytics.track(name, {
+    category: category,
+    label: label,
+    value: value
+  })
+}
+
 export default function general(state = initialState, action) {
   switch (action.type) {
     case PAINT: {
@@ -95,7 +131,7 @@ export default function general(state = initialState, action) {
 
       if (newState.clicksDone == 0) {
         if (!ref) {
-          //картна при обычнойм рисовании
+          //картина при обычнойм рисовании
           if (references.length == 0) {
             ref = newState.originals[0]
             newState.clicksToPainting = 1
@@ -132,7 +168,14 @@ export default function general(state = initialState, action) {
 
         picture = paintings[0]
         picture.status = 0
+
+        //
+        //
+        //
+        // (name, category, label, value)
+        track('Painting created', 'game', 'game', 1)
       }
+
       return newState
     }
 
@@ -291,8 +334,6 @@ export default function general(state = initialState, action) {
 
     case STUDY: {
       let newState = Object.assign({}, state)
-      console.log('kdsflasfho')
-
       let study = newState.study
       const cost = (action.picture.cost * 1.15 ** study.studyCount) / 100
 
@@ -530,6 +571,7 @@ export default function general(state = initialState, action) {
 
     case SAVE: {
       const newState = Object.assign({}, state)
+
       const f = () => {
         newState.saveCounter = 0
         newState.saveTime = new Date().getTime()
@@ -539,6 +581,7 @@ export default function general(state = initialState, action) {
           newState.phrase = { character: characters[2], text: 'Сохранение' }
         }
       }
+
       if (action.isHandle) {
         f()
       } else if (newState.saveCounter == 60) {
@@ -547,7 +590,9 @@ export default function general(state = initialState, action) {
         newState.saveCounter += 1
         general(newState, { type: GETPHRASE })
       }
+
       const statistic = newState.statistics
+
       newState.upgrade.forEach((upg, i) => {
         if (statistic[upg.requirement[0]] >= upg.requirement[1]) {
           upg.isOpen = true
@@ -559,6 +604,7 @@ export default function general(state = initialState, action) {
 
     case LOAD: {
       let newState = Object.assign({}, state)
+
       if (localStorage.save) {
         newState = JSON.parse(localStorage.save)
       }
@@ -572,6 +618,7 @@ export default function general(state = initialState, action) {
       // const offlineSpeed = 1
 
       console.log('...')
+
       const seconds = Math.floor(
         (new Date().getTime() - newState.saveTime) * 0.001 * offlineSpeed
       )
@@ -590,22 +637,27 @@ export default function general(state = initialState, action) {
 
         let picCkick = 0
         const references = newState.paintings[1]
+
         references.map((paint) => {
           picCkick += Math.floor(1 * paint.quality * 100)
         })
+
         picCkick = picCkick / references.length //средне количество кликов на картину
 
         const painting =
           picCkick > 0 ? Math.floor((seconds * paintSpeed) / picCkick) : 0
+
         const clickNewPicture = clicks > 0 ? clicks - painting * picCkick : 0
 
         let money = 0
+
         for (let i = 0; i < paintinsSales && paintinsSales > 0; i++) {
           ref =
             references.length > 0
               ? references[Math.floor(Math.random() * references.length)]
               : ref
           const pic = paint(ref, newState.study.skill, newState.luck)
+
           money += Math.floor(
             getPictureCost(
               newState,
@@ -641,7 +693,9 @@ export default function general(state = initialState, action) {
         ) {
           newState.clicksDone = newState.clicksDone + clickNewPicture
         }
+
         let paints = []
+
         for (
           let i = 0;
           i < painting - paintinsSales &&
@@ -654,10 +708,12 @@ export default function general(state = initialState, action) {
               : ref
           paints.push(paint(ref, newState.study.skill, newState.luck))
         }
+
         paints = paints.map((p) => {
           p.status = 0
           newState.paintings[0].unshift(p)
         })
+
         //галерея
 
         if (clicks > 0 && !newState.story) {
@@ -670,6 +726,7 @@ export default function general(state = initialState, action) {
               money
           }
         }
+
         newState.phraseCounter = 5
 
         newState.moneyGained += money
@@ -678,11 +735,14 @@ export default function general(state = initialState, action) {
         newState.statistics.totalSales += paintinsSales
         newState.statistics.totalPainting += paints.length
       }
+
       if (!newState.phase) {
         newState.phase = Object.keys(phases)[0]
+
         phases[newState.phase].text.forEach((p, i) => {
           newState.phrases.push(p)
         })
+
         newState.phrase = phases[newState.phase].story[0]
         newState.story = true
         newState.phraseCounter = 0
