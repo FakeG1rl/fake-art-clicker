@@ -86,22 +86,23 @@ const paint = (ref, skill, luck) => {
 const measurement_id = 'G-NNC7JH0EBQ'
 const api_secret = 'DZwUEUINTaWU-GkAO7MgSw'
 const url = `https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}`
-// const gaUserId = document.cookie.match(/_ga=(.+?);/)[1].split('.').slice(-2).join(".")
 
-// const track = (name, category, label, value) => {
-//   fetch(url, {
-//     method: 'POST',
-//     body: JSON.stringify({
-//       client_id: 'XXXXXXXXXX.YYYYYYYYYY',
-//       events: [
-//         {
-//           name: 'tutorial_begin',
-//           params: {}
-//         }
-//       ]
-//     })
-//   })
-// }
+console.log(state.clientId)
+
+const track = (name) => {
+  fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({
+      client_id: state.clientId,
+      events: [
+        {
+          name: name,
+          params: {}
+        }
+      ]
+    })
+  })
+}
 
 export default function general(state = initialState, action) {
   switch (action.type) {
@@ -153,11 +154,7 @@ export default function general(state = initialState, action) {
         picture = paintings[0]
         picture.status = 0
 
-        //
-        //
-        //
-        // (name, category, label, value)
-        // track('painting_created', 'game', 'game', 1)
+        track('painting_created')
       }
 
       return newState
