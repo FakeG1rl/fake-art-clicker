@@ -18,12 +18,10 @@ import {
   DAD
 } from '../constants/ActionTypes'
 
-import { baseState } from '../data/initialState.jsx'
 import { characters, phases } from '../data/phases.jsx'
 import colors from '../../stylesheets/colors.scss'
 
 const studioSize = 100
-const initialState = Object.assign({}, baseState)
 
 const randn_bm = (min, max) => {
   let u = 0,
@@ -104,10 +102,13 @@ const track = (name, clientId) => {
   })
 }
 
+const initialState = {}
+
 export default function general(state = initialState, action) {
   switch (action.type) {
     case PAINT: {
       const newState = Object.assign({}, state)
+      console.log('paint', state, newState)
       const paintings = newState.paintings[0]
       const references = newState.paintings[1]
       let ref = action.ref
@@ -154,8 +155,8 @@ export default function general(state = initialState, action) {
         picture = paintings[0]
         picture.status = 0
 
-        console.log(state)
-        track('painting_created', state.clientId)
+        console.log(newState)
+        track('painting_created', newState.clientId)
       }
 
       return newState
@@ -589,6 +590,7 @@ export default function general(state = initialState, action) {
 
       if (localStorage.save) {
         newState = JSON.parse(localStorage.save)
+        newState.clientId = state.clientId
       }
 
       const colors = ['green', 'yellow', 'ping', 'blue']
