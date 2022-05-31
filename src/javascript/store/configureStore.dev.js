@@ -17,6 +17,8 @@ const configureStore = (preloadedState) => {
     })
   }
 
+  console.log('configureStore', store.getState())
+
   return store
 }
 
