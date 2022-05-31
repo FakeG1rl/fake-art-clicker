@@ -1,0 +1,111 @@
+.Statistic {
+  display: flex;
+  position: relative;
+  width: 61vw;
+  margin-top: 20px;
+  .collections {
+    width: 70%;
+    .col {
+      width: 90%;
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      h1 {
+        font-family: 'RoadRage';
+        color: $blue;
+        top: -20px;
+        left: -10px;
+        position: absolute;
+        font-size: 24px;
+        transform: rotate(-3.54deg);
+        text-shadow: $text-shadow;
+      }
+      .pic {
+        margin: 10px 10px 0 0;
+        border: 2px solid $ligth-gray;
+        width: 56px;
+        height: 56px;
+        background-color: $gray;
+        box-shadow: 4px 4px 4px 0px #00000040;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h1 {
+          font-family: 'Roadkill';
+          margin-top: 4px;
+          color: $blue;
+          font-size: 55px;
+          position: static;
+          text-shadow: none;
+        }
+        &.true {
+          background-size: cover;
+          background-repeat: no-repeat;
+          &.id_0 {
+            background-image: url('../../assets/upg/factor_0.png');
+          }
+          &.id_1 {
+            background-image: url('../../assets/upg/luck_0.png');
+          }
+          &.id_2 {
+            background-image: url('../../assets/upg/students_0.png');
+          }
+          &.id_3 {
+            background-image: url('../../assets/upg/dealer_0.png');
+          }
+          &.id_4 {
+            background-image: url('../../assets/upg/offline_0.png');
+          }
+          &.id_5 {
+            background-image: url('../../assets/upg/gallery_0.png');
+          }
+          &:hover {
+            position: relative;
+            .AltShopBlock {
+              display: block;
+              top: 65px;
+              left: -2px;
+              z-index: 30;
+            }
+          }
+        }
+      }
+      & + .col {
+        margin-top: 60px;
+      }
+    }
+  }
+  .stat {
+    padding-right: 70px;
+    display: flex;
+    right: 0;
+    position: fixed;
+
+    .line {
+      margin-right: 50px;
+      margin-top: -48px;
+      width: 2px;
+      height: 74vh;
+      background-color: $black;
+    }
+    .block {
+      position: sticky;
+      display: flex;
+      margin-bottom: 10px;
+      p {
+        width: 166px;
+        margin-right: 30px;
+        color: $white;
+        opacity: 0.4;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      span {
+        max-width: 60px;
+        font-size: 13px;
+        opacity: 1;
+      }
+    }
+  }
+}

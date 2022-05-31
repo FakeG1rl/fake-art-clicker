@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { intFormat } from '../../actions/intFormat.jsx'
 
 export default class Cash extends Component {
   constructor(props) {
@@ -6,22 +7,12 @@ export default class Cash extends Component {
   }
 
   render() {
+    const cash = intFormat(this.props.cash)
+
     return (
       <div className="Cash">
-        <h2>
-          F$
-          {new Intl.NumberFormat('en', {
-            style: 'decimal',
-            maximumFractionDigits: 2
-          }).format(this.props.cash)}
-        </h2>
-        <p>
-          {new Intl.NumberFormat('en', {
-            style: 'decimal',
-            maximumFractionDigits: 0
-          }).format(this.props.clicks)}{' '}
-          мазков для картины
-        </p>
+        <h2>${cash}</h2>
+        <p>{intFormat(this.props.clicks)} мазков для картины</p>
       </div>
     )
   }

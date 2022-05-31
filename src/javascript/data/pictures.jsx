@@ -7,6 +7,7 @@ export const pictures = [
     style: 'Рококо',
     year: 1728,
     cost: 68750,
+    isSoldOut: false,
     position: 'vertical'
   },
   {
@@ -16,6 +17,7 @@ export const pictures = [
     style: 'Возрождение',
     year: 1514,
     cost: 10344,
+    isSoldOut: false,
     position: 'horizontal'
   },
   {
@@ -25,6 +27,7 @@ export const pictures = [
     style: 'Барокко',
     year: 1610,
     cost: 76700000,
+    isSoldOut: false,
     position: 'square'
   },
   {
@@ -34,6 +37,7 @@ export const pictures = [
     style: 'Романтизм',
     year: 1800,
     cost: 82752,
+    isSoldOut: false,
     position: 'horizontal'
   },
   {
@@ -43,6 +47,7 @@ export const pictures = [
     style: 'Рококо',
     year: 1740,
     cost: 400000,
+    isSoldOut: false,
     position: 'vertical'
   }
 ]

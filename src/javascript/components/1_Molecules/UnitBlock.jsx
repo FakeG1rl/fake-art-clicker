@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import AltShopBlock from './AltShopBlock.jsx'
 
+import { intFormat } from '../../actions/intFormat.jsx'
+
 export default class UnitBlock extends Component {
   constructor(props) {
     super(props)
@@ -37,13 +39,15 @@ export default class UnitBlock extends Component {
           <div className="content">
             {span}
             <h3>Нанять {props.title}а</h3>
-            <p>${props.unit.cost}</p>
+            <p>${intFormat(props.unit.cost)}</p>
           </div>
 
           <AltShopBlock
             name={props.title.charAt(0).toUpperCase() + props.title.slice(1)}
             cost={props.unit.cost}
             content={props.unit.text}
+            function={props.function}
+            stat={{ level: props.unit.level, st: this.props.stat }}
           />
         </div>
       )

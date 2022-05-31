@@ -19,7 +19,7 @@ import {
 } from '../constants/ActionTypes'
 
 import { baseState } from '../data/initialState.jsx'
-import { phases, phrases } from '../data/phases.jsx'
+import { characters, phases } from '../data/phases.jsx'
 import colors from '../../stylesheets/colors.scss'
 
 const studioSize = 100
@@ -118,6 +118,7 @@ export default function general(state = initialState, action) {
         click = 1
       } else {
         click = newState.units[0].level * newState.units[0].pps
+        newState.statistics.totalAutoClick += click
       }
 
       newState.clicksDone += click
@@ -137,7 +138,7 @@ export default function general(state = initialState, action) {
 
     case SELL: {
       const newState = Object.assign({}, state)
-      let dillers = newState.units[1]
+      let dealers = newState.units[1]
       let paint = newState.paintings[0][action.id]
       if (paint.status == 0) {
         paint.status = 10
@@ -153,7 +154,8 @@ export default function general(state = initialState, action) {
         newState.moneyGained += money
 
         if (paint.autoSell) {
-          dillers.working -= 1
+          dealers.working -= 1
+          newState.statistics.totalAutoSales += 1
           delete paint.autoSell
         }
 
@@ -207,12 +209,12 @@ export default function general(state = initialState, action) {
       let mod = 0
       if (upg.cost <= newState.moneyGained) {
         newState.moneyGained -= upg.cost
-        newState.upgrade.splice([action.id], 1)
+        newState.upgrade[action.id].itPurchased = true
         if (upg.prop == 'luck') {
           newState.luck *= upg.modifier
         } else if (upg.prop == 'students') {
           newState.units[0].size += upg.modifier
-        } else if (upg.prop == 'diller') {
+        } else if (upg.prop == 'dealer') {
           newState.units[1].speed *= upg.modifier
         } else if (upg.prop == 'offline') {
           newState.offlineSpeed *= upg.modifier
@@ -225,17 +227,17 @@ export default function general(state = initialState, action) {
 
     case AUTOSELL: {
       const newState = Object.assign({}, state)
-      let dillers = newState.units[1]
+      let dealers = newState.units[1]
       let pictures = newState.paintings[0]
       let picture = {}
-      if (dillers.working < dillers.level) {
+      if (dealers.working < dealers.level) {
         for (let i = 0; i < pictures.length; i++) {
           const j = pictures.length - i - 1
           if (pictures[j].status == 0) {
             console.log('SELL START')
-            dillers.working += 1
+            dealers.working += 1
             pictures[j].status = 10
-            pictures[j].timeToSale = dillers.speed
+            pictures[j].timeToSale = dealers.speed
             pictures[j].autoSell = true
             break
           }
@@ -284,12 +286,12 @@ export default function general(state = initialState, action) {
         newState.paintings[2][action.newBlock.split('/')[1]].pictures = newBlock
       }
 
-      console.log(oldBlock, newBlock)
       return newState
     }
 
     case STUDY: {
       let newState = Object.assign({}, state)
+      console.log('kdsflasfho')
 
       let study = newState.study
       const cost = (action.picture.cost * 1.15 ** study.studyCount) / 100
@@ -322,6 +324,7 @@ export default function general(state = initialState, action) {
       if (newState.moneyGained >= original.cost) {
         const picture = { status: 1, quality: 1, referense: original }
         newState.paintings[1].unshift(picture)
+        newState.originals[action.id + 1].isSoldOut = true
         newState.moneyGained -= original.cost
         newState.statistics.totalOriginals += 1
       } else {
@@ -392,11 +395,13 @@ export default function general(state = initialState, action) {
         author_entropy = 1 + author_entropy / 2 / Math.log(totalAuthors)
         year_entropy = 1 + year_entropy / 2 / Math.log(totalY)
 
-        c +=
+        const m =
           ((0.01 *
             (0.6 * style_entropy + 0.3 * author_entropy + 0.1 * year_entropy)) /
             60) *
           galleryCost
+        gallery.money = gallery.money == m ? gallery.money : m
+        c += m
       })
 
       newState.moneyGained += c
@@ -411,57 +416,115 @@ export default function general(state = initialState, action) {
         newState.pageid = 0
       } else {
         newState.pageid = action.page_id
-        console.log(newState.openGalleryId)
         newState.openGalleryId = action.page_id ? action.galleryId : null
-        console.log(newState.openGalleryId)
       }
       return newState
     }
 
     case CHANGEPHASE: {
       const newState = Object.assign({}, state)
+      const phase = newState.phase
       const statistics = newState.statistics
       const skill = newState.study.skill
 
-      if (statistics.totalMoneys < 10) {
-        newState.phase = Object.keys(phases)[0]
-      } else if (statistics.totalPainting > 20 && skill == 0.01) {
-        newState.phase = Object.keys(phases)[2]
+      if (statistics.totalPainting > 20 && skill == 0.01 && phase == 'start') {
+        newState.phase = Object.keys(phases)[1]
+        phases[newState.phase].text.forEach((p, i) => {
+          newState.phrases.push(p)
+        })
+        if (phases[newState.phase].story) {
+          newState.story = true
+          newState.phrase = phases[newState.phase].story[0]
+        }
       } else if (
         newState.paintings[1].length >= 1 &&
-        newState.units[0].level == 0
+        newState.units[0].level == 0 &&
+        phase == 'study'
       ) {
         newState.units[0].isActive = true
-        newState.phase = Object.keys(phases)[4]
-      } else if (statistics.totalSales > 100 && newState.units[1].level == 0) {
-        newState.units[1].isActive = true
-        newState.phase = Object.keys(phases)[5]
-      } else if (statistics.totalOriginals > 0) {
-        newState.phase = Object.keys(phases)[7]
-        newState.galleriesIsActive = true
+        newState.phase = Object.keys(phases)[2]
+        phases[newState.phase].text.forEach((p, i) => {
+          newState.phrases.push(p)
+        })
+        if (phases[newState.phase].story) {
+          newState.story = true
+          newState.phrase = phases[newState.phase].story[0]
+        }
       } else if (
-        (newState.study.studyCount > 0 && newState.paintings[1].length < 1) ||
-        (statistics.totalSales < 100 && newState.study.studyCount < 0) ||
-        (newState.units[1].level == 0 && newState.units[0].level > 0) ||
-        (newState.units[0].level > 0 && newState.units[1].level > 0)
+        statistics.totalSales > 500 &&
+        newState.units[1].level == 0 &&
+        phase == 'students'
       ) {
-        newState.phase = Object.keys(phases)[0]
-      } else {
-        newState.phase = Object.keys(phases)[0]
+        newState.units[1].isActive = true
+        newState.phase = Object.keys(phases)[3]
+        phases[newState.phase].text.forEach((p, i) => {
+          newState.phrases.push(p)
+        })
+        if (phases[newState.phase].story) {
+          newState.story = true
+          newState.phrase = phases[newState.phase].story[0]
+        }
+      } else if (newState.units[1].level > 0 && phase == 'dealers') {
+        newState.phase = Object.keys(phases)[4]
+        phases[newState.phase].text.forEach((p, i) => {
+          newState.phrases.push(p)
+        })
+        if (phases[newState.phase].story) {
+          newState.story = true
+          newState.phrase = phases[newState.phase].story[0]
+        }
+      } else if (
+        statistics.totalOriginals > 0 &&
+        !newState.galleriesIsActive &&
+        phase == 'predG'
+      ) {
+        newState.galleriesIsActive = true
+        newState.phase = Object.keys(phases)[5]
+        phases[newState.phase].text.forEach((p, i) => {
+          newState.phrases.push(p)
+        })
+        if (phases[newState.phase].story) {
+          newState.story = true
+          newState.phrase = phases[newState.phase].story[0]
+        }
       }
       return newState
     }
 
     case GETPHRASE: {
       const newState = Object.assign({}, state)
-      if (newState.phraseCounter < 10) {
+      const st = phases[newState.phase].story
+      if (newState.story && st) {
+        if (action.sourse) {
+          if (st) {
+            for (let i = 0; st.length > i; i++) {
+              if (newState.phrase == st[i]) {
+                if (st[i + 1]) {
+                  newState.phrase = st[i + 1]
+                } else {
+                  newState.story = false
+                  newState.phrase =
+                    newState.phrases[
+                      Math.floor(Math.random() * newState.phrases.length)
+                    ]
+                  newState.phraseCounter = 0
+                }
+
+                break
+              }
+            }
+          }
+        }
+      } else if (newState.phraseCounter < 10 && !action.sourse) {
         newState.phraseCounter += 1
+        newState.story = false
       } else {
-        newState.phrase = newState.phase
-        // newState.phrase = phases[0].key
-        // newState.phrase = phrases[Math.floor(Math.random() * phrases.length)]
-        // newState.phraseCounter = 0
+        newState.phrase =
+          newState.phrases[Math.floor(Math.random() * newState.phrases.length)]
+        newState.phraseCounter = 0
+        newState.story = false
       }
+
       return newState
     }
 
@@ -471,8 +534,10 @@ export default function general(state = initialState, action) {
         newState.saveCounter = 0
         newState.saveTime = new Date().getTime()
         localStorage.setItem('save', JSON.stringify(newState))
-        newState.phrase = 'Сохранение'
-        console.log('save')
+        newState.phraseCounter = 8
+        if (!newState.story) {
+          newState.phrase = { character: characters[2], text: 'Сохранение' }
+        }
       }
       if (action.isHandle) {
         f()
@@ -482,6 +547,13 @@ export default function general(state = initialState, action) {
         newState.saveCounter += 1
         general(newState, { type: GETPHRASE })
       }
+      const statistic = newState.statistics
+      newState.upgrade.forEach((upg, i) => {
+        if (statistic[upg.requirement[0]] >= upg.requirement[1]) {
+          upg.isOpen = true
+        }
+      })
+
       return newState
     }
 
@@ -503,9 +575,6 @@ export default function general(state = initialState, action) {
       const seconds = Math.floor(
         (new Date().getTime() - newState.saveTime) * 0.001 * offlineSpeed
       )
-      console.log('денег до симуляии', newState.moneyGained)
-      console.log('картин до симуляии', newState.paintings[0].length)
-      console.log('секунд прошло', seconds / offlineSpeed)
 
       if (seconds > 0) {
         let ref = newState.originals[0]
@@ -551,7 +620,6 @@ export default function general(state = initialState, action) {
           newState.clicksDone + clickNewPicture >= newState.clicksToPainting &&
           newState.paintings[0].length < studioSize
         ) {
-          console.log('LOLOLOLOLOL')
           for (let i = 0; newState.paintings[0][i].status == 11; i++) {
             newState.paintings[0][i].status = 0
           }
@@ -590,20 +658,34 @@ export default function general(state = initialState, action) {
           p.status = 0
           newState.paintings[0].unshift(p)
         })
-        //из остатоков кликов и секунд продажи дорисовать и допродовать картины + галерея
+        //галерея
 
-        console.log(
-          'пока вас не было ученики нариосвали',
-          painting,
-          'картин, а диллеры заработали $',
-          money
-        )
+        if (clicks > 0 && !newState.story) {
+          newState.phrase = {
+            character: characters[2],
+            text:
+              'Пока вас не было ученики нариосвали ' +
+              painting +
+              ' картин, а диллеры заработали F$' +
+              money
+          }
+        }
+        newState.phraseCounter = 5
 
         newState.moneyGained += money
         newState.statistics.totalClick += clicks
         newState.statistics.totalMoneys += money
         newState.statistics.totalSales += paintinsSales
         newState.statistics.totalPainting += paints.length
+      }
+      if (!newState.phase) {
+        newState.phase = Object.keys(phases)[0]
+        phases[newState.phase].text.forEach((p, i) => {
+          newState.phrases.push(p)
+        })
+        newState.phrase = phases[newState.phase].story[0]
+        newState.story = true
+        newState.phraseCounter = 0
       }
 
       newState.loading = false

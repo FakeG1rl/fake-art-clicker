@@ -2,32 +2,66 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { intFormat } from '../../actions/intFormat.jsx'
+
+import AltShopBlock from '../1_Molecules/AltShopBlock.jsx'
+
 class Statistic extends Component {
   constructor(props) {
     super(props)
+  }
+
+  renderUpg = () => {
+    const upg = this.props.general.upgrade
+    let upgItems = []
+    upg.forEach((up, i) => {
+      const className = up.itPurchased ? 'pic true' : 'pic'
+      upgItems.push(
+        <div className={className + ' id_' + i}>
+          {up.itPurchased ? '' : <h1>?</h1>}
+          <AltShopBlock name={up.title} cost={up.cost} content={up.text} />
+        </div>
+      )
+    })
+    return upgItems
   }
 
   render() {
     let props = this.props.general
     return (
       <div className="Statistic">
-        <p>Всего сделано кликов: {props.statistics.totalClick}</p>
-        <p>Всего нарисованно картин: {props.statistics.totalPainting}</p>
-        <p>Всего продано картин: {props.statistics.totalSales}</p>
-        <p>
-          Всего Заработано галереей:{' '}
-          {new Intl.NumberFormat('en', {
-            style: 'decimal',
-            maximumFractionDigits: 3
-          }).format(props.statistics.totalGalleryEarned)}{' '}
-        </p>
-        <p>
-          Всего заработано:{' '}
-          {new Intl.NumberFormat('en', {
-            style: 'decimal',
-            maximumFractionDigits: 3
-          }).format(props.statistics.totalMoneys)}
-        </p>
+        <div className="collections">
+          <div className="col">
+            <h1>Улучшенеия</h1>
+            {this.renderUpg()}
+          </div>
+          <div className="col"></div>
+        </div>
+        <div className="stat">
+          <div className="line"></div>
+          <div>
+            <div className="block">
+              <p>Всего сделано кликов:</p>
+              <span>{intFormat(props.statistics.totalClick)}</span>
+            </div>
+            <div className="block">
+              <p>Всего нарисованно картин:</p>
+              <span>{intFormat(props.statistics.totalPainting)}</span>
+            </div>
+            <div className="block">
+              <p>Всего продано картин:</p>
+              <span>{intFormat(props.statistics.totalSales)}</span>
+            </div>
+            <div className="block">
+              <p>Всего заработано галереей:</p>
+              <span>${intFormat(props.statistics.totalGalleryEarned)}</span>
+            </div>
+            <div className="block">
+              <p>Всего заработано:</p>
+              <span>${intFormat(props.statistics.totalMoneys)}</span>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

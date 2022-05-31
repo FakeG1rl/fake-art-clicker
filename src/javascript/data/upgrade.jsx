@@ -5,15 +5,19 @@ export const upgrade = [
     modifier: 0.1,
     prop: 'factor',
     text: 'Увеличивает стоимость продажи копий на 10%',
-    isOpen: true
+    requirement: ['totalMoneys', 30],
+    isOpen: false,
+    itPurchased: false
   },
   {
     title: 'Счастливый четвертак',
-    cost: 500,
+    cost: 100,
     modifier: 2,
     prop: 'luck',
     text: 'Увеличивает удачу',
-    isOpen: true
+    requirement: ['totalPainting', 100],
+    isOpen: false,
+    itPurchased: false
   },
   {
     title: 'title2',
@@ -21,32 +25,40 @@ export const upgrade = [
     modifier: 10,
     prop: 'students',
     text: 'Увеличивает вместительность студии',
-    isOpen: true
+    requirement: ['totalPainting', 10000],
+    isOpen: false,
+    itPurchased: false
   },
   {
     title: 'title3',
-    cost: 600,
+    cost: 1000,
     modifier: 0.5,
-    prop: 'diller',
+    prop: 'dealer',
     text: 'Уменьшает скорость продажи диллеров',
-    isOpen: true
+    requirement: ['totalSales', 5000],
+    isOpen: false,
+    itPurchased: false
   },
   {
     title: 'Автоматический кнут',
-    cost: 600,
+    cost: 1000,
     modifier: 2,
     prop: 'offline',
     text:
       'Ваши работники меньше леняться и пока вас нет скорость продажи и рисования увеличивается вдвое',
-    isOpen: true
+    requirement: ['totalSales', 10000],
+    isOpen: false,
+    itPurchased: false
   },
   {
     title: 'Пустая комната',
-    cost: 600,
+    cost: 1500000,
     modifier: 1,
     prop: 'gallery',
     text: 'Дает возможность открыть еще одну экспозицию',
-    isOpen: true
+    requirement: ['totalMoneys', 1000000],
+    isOpen: false,
+    itPurchased: false
   }
 ]
 //при 30$ появление улучшения увеличивающего фактор прожажи на 10%

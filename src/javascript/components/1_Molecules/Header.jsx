@@ -17,7 +17,7 @@ export default class Header extends Component {
           <span dangerouslySetInnerHTML={{ __html: Logo }} />
         </div>
         <Wallet cash={this.props.cash} clicks={this.props.clicks} />
-        <Dillers dillers={this.props.dillers} />
+        <Dillers dealers={this.props.dealers} />
       </div>
     )
   }

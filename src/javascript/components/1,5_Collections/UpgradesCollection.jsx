@@ -11,7 +11,7 @@ export default class UpgradesCollection extends Component {
     const money = this.props.money
     let upgradesItems = []
     upgrades.forEach((upgrade, i) => {
-      if (upgrade.isOpen) {
+      if (upgrade.isOpen && !upgrade.itPurchased) {
         let onClick = () => {}
         let isActive = 'inactive'
         if (money >= upgrade.cost) {
@@ -24,7 +24,7 @@ export default class UpgradesCollection extends Component {
             onClick={() => onClick(i)}
             key={i}
           >
-            <div className="img"></div>
+            <div className={'img id_' + i}></div>
             <AltShopBlock
               name={upgrade.title}
               cost={upgrade.cost}

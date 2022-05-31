@@ -2,7 +2,7 @@
   margin: 10px 10px 10px 0;
   .UnitShop {
     position: sticky;
-    top: 40px;
+    top: 60px;
   }
 
   .UpgradesCollection {
@@ -10,7 +10,7 @@
     display: flex;
     flex-wrap: wrap;
     position: sticky;
-    top: 235px;
+    top: 255px;
     // justify-content: space-between;
     width: 320px;
 
@@ -22,15 +22,34 @@
       align-items: center;
       margin-bottom: 15px;
       justify-content: center;
-      background-color: $white;
-      border: 2px solid $medium-gray;
+      background-color: $ligth-gray;
+      border: 2px solid $ligth-gray;
       margin-left: 15px;
       .img {
         width: 100%;
         height: 100%;
-        background-image: url('../../assets/icon.png');
         background-size: cover;
+        background-position: center;
         background-repeat: no-repeat;
+        background-image: url('../../assets/icon.png');
+        &.id_0 {
+          background-image: url('../../assets/upg/factor_0.png');
+        }
+        &.id_1 {
+          background-image: url('../../assets/upg/luck_0.png');
+        }
+        &.id_2 {
+          background-image: url('../../assets/upg/students_0.png');
+        }
+        &.id_3 {
+          background-image: url('../../assets/upg/dealer_0.png');
+        }
+        &.id_4 {
+          background-image: url('../../assets/upg/offline_0.png');
+        }
+        &.id_5 {
+          background-image: url('../../assets/upg/gallery_0.png');
+        }
       }
 
       &.inactive {

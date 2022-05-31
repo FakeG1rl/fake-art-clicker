@@ -26,11 +26,16 @@ export default class Students extends Component {
         >
           Аукцион
         </div>
-        <div className={'character p' + this.props.pageid}>Персонаж</div>
         <div
           className={'artists p' + this.props.pageid}
           onClick={() => this.props.onClick(1)}
         ></div>
+        <div
+          onClick={() => this.props.onClick(6)}
+          className={'info p' + this.props.pageid}
+        >
+          Об игре
+        </div>
       </div>
     )
   }

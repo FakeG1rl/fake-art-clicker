@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Clicker from '../components/2_Organisms/Clicker.jsx'
 import Body from '../components/2_Organisms/Body.jsx'
+import Banner from '../components/1_Molecules/Banner.jsx'
 
 import {
   paint,
@@ -17,12 +18,7 @@ import {
   load
 } from '../actions/index.js'
 
-// ограничит перетаскивание в галерею пока та не открыта V
-// ограничить вместительность галереи V
 // выводить размер галереи
-// экран открытия галереи
-// блок увеличения вместительности галереи
-// возможность открыть еще одну галерею
 
 class Game extends React.Component {
   constructor(props) {
@@ -37,11 +33,11 @@ class Game extends React.Component {
         actions.load()
       } else {
         const students = props.units[0]
-        const dillers = props.units[1]
+        const dealers = props.units[1]
         if (students.level > 0) {
           actions.paint(1)
         }
-        if (dillers.level > 0) {
+        if (dealers.level > 0) {
           actions.autoSell()
         }
         this.pistureSell()
@@ -75,18 +71,22 @@ class Game extends React.Component {
   }
 
   render() {
+    const props = this.props.general
+    const actions = this.props.actions
+    const banner = props.moneyGained == 0 ? <Banner /> : null
     if (!this.props.general.loading) {
       return (
         <div className="Game">
+          {banner}
           <Clicker />
           <Body
-            page={this.props.general.pageid}
-            phase={this.props.general.phase}
-            phrase={this.props.general.phrase}
-            gallery={
-              this.props.general.paintings[2][this.props.general.openGalleryId]
-            }
-            changePage={this.props.actions.chandePage}
+            page={props.pageid}
+            phase={props.phase}
+            phrase={props.phrase}
+            story={props.story}
+            gallery={props.paintings[2][props.openGalleryId]}
+            changePage={actions.chandePage}
+            changePrathe={actions.getPhrase}
           />
         </div>
       )

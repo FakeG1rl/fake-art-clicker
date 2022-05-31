@@ -8,17 +8,6 @@ export default class Picture extends Component {
     super(props)
   }
 
-  renderBut = () => {
-    const data = this.props.data
-
-    let butItems = []
-    let action = this.props.changeblock
-    let text1 = ''
-    let text2 = ''
-
-    return butItems
-  }
-
   dragStart = (e) => {
     const target = e.target
     const id = this.props.sourse + '/' + this.props.id
@@ -44,38 +33,45 @@ export default class Picture extends Component {
 
   render() {
     const picture = this.props.data
-    const opacity = picture.timeFraction ? picture.timeFraction : 1
+    if (picture) {
+      const opacity = picture.timeFraction ? picture.timeFraction : 1
 
-    const quo =
-      picture.quality == 1
-        ? '0'
-        : picture.quality > 0.7
-        ? '1'
-        : picture.quality > 0.3
-        ? '2'
-        : '3'
-    const className = 'Picture p_' + picture.referense.id + ' quo_' + quo
-    let action = null
+      const quo =
+        picture.quality == 1
+          ? '0'
+          : picture.quality > 0.7
+          ? '1'
+          : picture.quality > 0.3
+          ? '2'
+          : '3'
+      const className = 'Picture p_' + picture.referense.id + ' quo_' + quo
+      let action = null
 
-    if (picture.status == 0) {
-      action = () => this.props.onPress(this.props.id)
-    }
-    // id={}
-    return (
-      <div
-        id={this.props.sourse + '/' + this.props.id}
-        className="Picture_wrap"
-        draggable="true"
-        onDragStart={this.dragStart}
-        onDragEnd={this.dragEnd}
-        onDragOver={this.dragOver}
-        style={{ opacity: opacity }}
-      >
-        <div className={className} onClick={action}>
-          <AltPictureBlock data={picture} draggable="false" />
+      if (picture.status == 0) {
+        action = this.props.onPress
+          ? () => {
+              this.props.onPress(this.props.id)
+            }
+          : null
+      }
+      // id={}
+      return (
+        <div
+          id={this.props.sourse + '/' + this.props.id}
+          className="Picture_wrap"
+          draggable="true"
+          onDragStart={this.dragStart}
+          onDragEnd={this.dragEnd}
+          onDragOver={this.dragOver}
+          style={{ opacity: opacity }}
+        >
+          <div className={className} onClick={action}>
+            <AltPictureBlock data={picture} draggable="false" />
+          </div>
         </div>
-        {this.renderBut()}
-      </div>
-    )
+      )
+    } else {
+      return <div id={this.props.forShadow} className="Picture shaddow"></div>
+    }
   }
 }

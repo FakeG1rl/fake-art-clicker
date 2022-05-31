@@ -13,11 +13,17 @@ class Settings extends Component {
     let actions = this.props.actions
     return (
       <div className="Settings">
-        <div className="but" onClick={() => actions.save(true)}>
-          Сохранить
+        <div className="setBlock">
+          <p>Сохранить игру</p>
+          <div className="but" onClick={() => actions.save(true)}>
+            <p>Сохранить</p>
+          </div>
         </div>
-        <div className="but" onClick={actions.reset}>
-          Сбросить сохранение
+        <div className="setBlock">
+          <p>Сбросить текущее сохранение</p>
+          <div className="but" onClick={actions.reset}>
+            <p>Сбросить</p>
+          </div>
         </div>
       </div>
     )

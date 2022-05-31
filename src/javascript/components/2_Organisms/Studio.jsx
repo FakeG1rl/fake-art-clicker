@@ -53,6 +53,7 @@ class Studio extends Component {
         </div>
         <StudioShop
           units={props.units}
+          stat={props.statistics}
           money={props.moneyGained}
           hiringUnit={actions.hiring}
           update={actions.studioUpdate}

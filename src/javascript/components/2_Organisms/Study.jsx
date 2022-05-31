@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 
 import { study } from '../../actions/index.js'
 
+import PictureCard from '../1_Molecules/PictureCard.jsx'
+
 class Study extends Component {
   constructor(props) {
     super(props)
@@ -29,19 +31,26 @@ class Study extends Component {
     })
 
     autPictures.forEach((pic, i) => {
+      const cost =
+        (pic.cost * 1.15 ** this.props.general.study.studyCount) / 100
+      console.log()
+      const inactive = cost <= this.props.general.moneyGained ? '' : 'inactive'
       pictureItems.push(
-        <div>
-          <div
-            className={'pic p' + pic.id}
-            onClick={() => this.props.actions.study(pic)}
-          ></div>
-          <p>{pic.title}</p>
-          <p>
-            Стоимость обучения{' '}
-            {Math.floor(
-              (pic.cost * 1.15 ** this.props.general.study.studyCount) / 100
-            )}
-          </p>
+        <div
+          className={'picture ' + inactive}
+          onClick={() => this.props.actions.study(pic)}
+        >
+          <div className={'img s_' + (pic.id - 1) + ' ' + pic.position}>
+            <div className="ligth"></div>
+            <div className={'border'}></div>
+          </div>
+          <PictureCard
+            title={pic.title}
+            author={pic.author}
+            year={pic.year}
+            cost={cost}
+            copy={true}
+          />
         </div>
       )
     })
@@ -53,9 +62,8 @@ class Study extends Component {
     this.getAuthors(pictures).forEach((author, i) => {
       authorItems.push(
         <div className="authorBlock">
-          <p>{author}</p>
+          <h1>{author}</h1>
           {this.renderPictures(pictures, author)}
-          <br />
         </div>
       )
     })
@@ -67,11 +75,11 @@ class Study extends Component {
     const pictures = this.props.general.originals.slice(1)
 
     // <p>Стоимость обучения {this.props.general.study.studyCoast}</p>
+    // <p>Мастерство {this.props.general.study.skill}</p>
     return (
       <div className="Study">
-        <p>Мастерство {this.props.general.study.skill}</p>
-        <br />
-        <p>{this.renderAuthors(pictures)}</p>
+        {this.renderAuthors(pictures)}
+        <div className="null"></div>
       </div>
     )
   }

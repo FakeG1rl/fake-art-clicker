@@ -16,7 +16,7 @@ export const changeblock = (id, newBlock) => ({
 })
 
 export const galleryWorking = () => ({ type: types.GALLERYWORKING })
-export const study = (id) => ({ type: types.STUDY, picture: id })
+export const study = (picture) => ({ type: types.STUDY, picture: picture })
 export const getOriginal = (id) => ({ type: types.GETORIGINAL, id: id })
 export const buyUpgrade = (id) => ({ type: types.BUYUPGRADE, id: id })
 export const chandePage = (pageId, gId = null) => ({
@@ -27,8 +27,9 @@ export const chandePage = (pageId, gId = null) => ({
 export const chandePhase = () => ({
   type: types.CHANGEPHASE
 })
-export const getPhrase = () => ({
-  type: types.GETPHRASE
+export const getPhrase = (sourse = null) => ({
+  type: types.GETPHRASE,
+  sourse: sourse
 })
 export const save = (isHandle = false) => ({
   type: types.SAVE,

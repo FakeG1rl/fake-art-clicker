@@ -1,17 +1,17 @@
 import { pictures } from './pictures.jsx'
-import { phases, phrases } from './phases.jsx'
+import { phases } from './phases.jsx'
 import { upgrade } from './upgrade.jsx'
 
-const cash = 200000
-const pcituresSallin = 200
+const cash = 2000
+const pcituresSallin = cash
 
 export const baseState = {
   saveTime: new Date().getTime(),
   loading: true,
   offlineSpeed: 0.1,
   pageid: 0,
-  phase: Object.keys(phases)[1],
-  phrase: Object.keys(phases)[1],
+  phase: null,
+  phrase: null,
   phraseCounter: 0,
   saveCounter: 0,
 
@@ -40,6 +40,7 @@ export const baseState = {
     [
       {
         size: 3,
+        money: null,
         pictures: []
       }
     ]
@@ -90,12 +91,15 @@ export const baseState = {
     }
   ],
   upgrade: upgrade,
+  phrases: [],
   statistics: {
     start: new Date().getTime(),
     totalClick: pcituresSallin,
+    totalAutoClick: pcituresSallin,
     totalPainting: pcituresSallin,
     totalOriginals: 0,
     totalSales: pcituresSallin,
+    totalAutoSales: pcituresSallin,
     totalMoneys: cash,
     totalGalleryEarned: 0,
 

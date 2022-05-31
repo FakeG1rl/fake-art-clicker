@@ -1,65 +1,30 @@
 .Shop {
   .picturesCollection {
+    padding: 40px 0 40px 40px;
     display: flex;
     align-items: center;
     .picture {
-      .img {
-        background-size: cover;
-        background-repeat: no-repeat;
-
-        &.horizontal {
-          width: 338px;
-          height: 197px;
-        }
-        &.vertical {
-          height: 353px;
-          width: 269px;
-        }
-        &.square {
-          height: 300px;
-          width: 300px;
-        }
-        &.s_0 {
-          background-image: url('../../assets/pictures/1.png');
-        }
-        &.s_1 {
-          background-image: url('../../assets/pictures/2.png');
-        }
-        &.s_2 {
-          background-image: url('../../assets/pictures/3.png');
-        }
-        &.s_3 {
-          background-image: url('../../assets/pictures/4.png');
-        }
-        &.s_4 {
-          background-image: url('../../assets/pictures/5.png');
+      &.inactive .content {
+        background-color: $medium-gray;
+      }
+      &.soldOut {
+        .img {
+          filter: grayscale(100%);
+          .back {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+          }
         }
       }
-      .content {
-        background-color: $white;
-        margin-top: 28px;
-        padding: 13px;
-        color: $black;
-        min-width: 152px;
-        max-width: 244px;
-        h3 {
-          font-weight: bold;
-          font-size: 17px;
-        }
-        p {
-          font-size: 15px;
-          margin-bottom: 12px;
-        }
-      }
-      & + .picture {
-        margin-left: 80px;
-      }
-      &:hover {
-        .content {
-          background-color: $medium-gray;
-          filter: $drop-shadow;
-        }
-      }
+    }
+    .null {
+      min-width: 90px;
+      height: 20px;
     }
   }
 }

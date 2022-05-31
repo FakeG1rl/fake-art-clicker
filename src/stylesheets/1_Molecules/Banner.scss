@@ -1,0 +1,47 @@
+.Banner {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.3);
+  .content {
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    background-color: $black;
+    width: 790px;
+    height: 430px;
+    filter: $drop-shadow;
+    position: relative;
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      &:active svg path {
+        filter: $drop-shadow;
+      }
+    }
+    .characters {
+      width: 40%;
+    }
+    .text {
+      margin-top: -50px;
+      margin-left: 40px;
+      width: 50%;
+      p {
+        margin-top: 35px;
+        line-height: 17px;
+        & + p {
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+}
+.Banner.hidden {
+  display: none;
+}

@@ -6,10 +6,13 @@ import Statistic from './Statistic.jsx'
 import Study from './Study.jsx'
 import Settings from './Settings.jsx'
 import Gallery from './Gallery.jsx'
+import Info from './Info.jsx'
 
 import Menu from '../1_Molecules/Menu.jsx'
 
 import Back from '../../../assets/back.svg'
+
+import Character from '../../../assets/Character_1.svg'
 
 export default class Content extends Component {
   constructor(props) {
@@ -33,11 +36,21 @@ export default class Content extends Component {
       page = <Settings />
     } else if (pageId == 5) {
       page = <Gallery data={this.props.gallery} />
+    } else if (pageId == 6) {
+      page = <Info />
     } else {
       page = <div>LOL</div>
     }
 
     // <div className="border"></div>
+    const character = this.props.phrase.character
+    const story = this.props.story ? 'story' : ''
+    const characterId =
+      this.props.phrase.character == 'Клякса'
+        ? 2
+        : this.props.phrase.character == 'Краска'
+        ? 1
+        : 0
     return (
       <div className="Content">
         <div className="GameHeader">
@@ -48,12 +61,19 @@ export default class Content extends Component {
             <span dangerouslySetInnerHTML={{ __html: Back }} />
           </div>
 
-          <div className="cover"></div>
-          <div className="CharacterBlock">
-            <div className="Character"></div>
-            <div className="Message">
-              <h2>Клякса</h2>
-              <p>{this.props.phrase}</p>
+          <div
+            className="cover"
+            onClick={() => this.props.changePrathe(true)}
+          ></div>
+          <div className={'CharacterBlock c_' + characterId}>
+            <span
+              className="Character"
+              dangerouslySetInnerHTML={{ __html: Character }}
+            />
+
+            <div className={'Message ' + story}>
+              <h2>{character}</h2>
+              <p>{this.props.phrase.text}</p>
             </div>
           </div>
           <Menu pageid={pageId} onClick={this.props.changePage} />

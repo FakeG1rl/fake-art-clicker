@@ -27,7 +27,7 @@ class Clicker extends Component {
         <Header
           cash={this.props.general.moneyGained}
           clicks={this.props.general.clicksToPainting}
-          dillers={this.props.general.units[1]}
+          dealers={this.props.general.units[1]}
         />
         <Canvas
           students={this.props.general.units[0].level}

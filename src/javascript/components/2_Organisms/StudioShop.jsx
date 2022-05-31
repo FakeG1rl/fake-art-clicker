@@ -27,13 +27,17 @@ export default class StudioShop extends Component {
             title="ученик"
             unit={units[0]}
             money={this.props.money}
+            stat={this.props.stat.totalAutoClick}
+            function="Делает мазок кистью в секунду"
             onPress={hiring}
           />
           <UnitBlock
             id={1}
             title="диллер"
             unit={units[1]}
+            stat={this.props.stat.totalAutoSales}
             money={this.props.money}
+            function="Автоматически реализует продукцию"
             onPress={hiring}
           />
         </div>

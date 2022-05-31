@@ -9,7 +9,7 @@ export default class Dillers extends Component {
     return (
       <div className="Dillers">
         <div className="dil-pic"></div>
-        <p>x{this.props.dillers.level}</p>
+        <p>x{this.props.dealers.level}</p>
       </div>
     )
   }

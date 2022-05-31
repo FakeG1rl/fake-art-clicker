@@ -21,6 +21,7 @@ export default class PicturesCollection extends Component {
   pictureRender = () => {
     const pictures = this.props.pictures
     const onPress = this.props.onPress
+    const size = this.props.size
     let pictureItems = []
     for (var i = 0; i < pictures.length; i++) {
       if (pictures[i].status != 11) {
@@ -35,6 +36,11 @@ export default class PicturesCollection extends Component {
             opacity={pictures[i].timeToSale}
           />
         )
+      }
+    }
+    if (size) {
+      for (var i = 0; i < size - pictures.length; i++) {
+        pictureItems.push(<Picture forShadow={this.props.sourse} />)
       }
     }
     return pictureItems
