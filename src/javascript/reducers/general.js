@@ -154,6 +154,7 @@ export default function general(state = initialState, action) {
         picture = paintings[0]
         picture.status = 0
 
+        console.log(state)
         track('painting_created', state.clientId)
       }
 
