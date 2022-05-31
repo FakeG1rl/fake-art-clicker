@@ -10,8 +10,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'build'),
-    clean: true
+    path: path.resolve(__dirname, 'docs')
   },
   stats: { children: true },
   module: {
@@ -50,15 +49,24 @@ module.exports = {
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[hash][ext][query]'
+        }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[hash][ext][query]'
+        }
       },
       {
         test: /\.svg$/,
-        loader: 'svg-inline-loader'
+        loader: 'svg-inline-loader',
+        generator: {
+          filename: 'images/[hash][ext][query]'
+        }
       }
     ]
   },

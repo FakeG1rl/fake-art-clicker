@@ -1,24 +1,22 @@
 {
   "name": "fake-art-clicker",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "webpack serve --open --config webpack.dev.js",
-    "watch": "webpack serve --config webpack.dev.js",
-    "share": "webpack serve --host 0.0.0.0 --config webpack.dev.js",
-    "watch-virtualbox": "webpack serve --config webpack.dev-virtualbox.js",
+    "watch": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/*/fake-art-clicker"
+    "url": "git+https://github.com/HSEADC/fake-art-clicker"
   },
   "keywords": [],
-  "author": "*",
+  "author": "Lera Insafutdinova",
   "license": "",
   "bugs": {
-    "url": "https://github.com/*/fake-art-clicker/issues"
+    "url": "https://github.com/HSEADC/fake-art-clicker/issues"
   },
-  "homepage": "https://github.com/*/fake-art-clicker#readme",
+  "homepage": "https://github.com/HSEADC/fake-art-clicker#readme",
   "devDependencies": {
     "@babel/core": "^7.16.10",
     "@babel/preset-env": "^7.16.11",
@@ -44,6 +42,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "redux": "^4.1.2"
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1"
   }
 }

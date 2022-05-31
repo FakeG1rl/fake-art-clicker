@@ -10,11 +10,8 @@ module.exports = merge(common, {
     contentBase: './dev_build',
     hot: true
   },
-  cache: {
-    type: 'memory',
-  },
+  watch: true,
   watchOptions: {
-    // aggregateTimeout: 600,
     poll: true,
     ignored: /node_modules/
   },
@@ -22,7 +19,5 @@ module.exports = merge(common, {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dev_build')
   },
-  plugins: [
-    new ReactRefreshWebpackPlugin()
-  ]
+  plugins: [new ReactRefreshWebpackPlugin()]
 })
