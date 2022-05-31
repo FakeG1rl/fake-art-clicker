@@ -457,21 +457,21 @@ var paint = function paint(ref, skill, luck) {
 
 var measurement_id = 'G-NNC7JH0EBQ';
 var api_secret = 'DZwUEUINTaWU-GkAO7MgSw';
-var url = "https://www.google-analytics.com/mp/collect?measurement_id=".concat(measurement_id, "&api_secret=").concat(api_secret); // const gaUserId = document.cookie.match(/_ga=(.+?);/)[1].split('.').slice(-2).join(".")
-// const track = (name, category, label, value) => {
-//   fetch(url, {
-//     method: 'POST',
-//     body: JSON.stringify({
-//       client_id: 'XXXXXXXXXX.YYYYYYYYYY',
-//       events: [
-//         {
-//           name: 'tutorial_begin',
-//           params: {}
-//         }
-//       ]
-//     })
-//   })
-// }
+var url = "https://www.google-analytics.com/mp/collect?measurement_id=".concat(measurement_id, "&api_secret=").concat(api_secret);
+console.log(state.clientId);
+
+var track = function track(name) {
+  fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({
+      client_id: state.clientId,
+      events: [{
+        name: name,
+        params: {}
+      }]
+    })
+  });
+};
 
 function general() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -521,11 +521,8 @@ function general() {
           newState.statistics.totalPainting += 1;
           newState.clicksDone = 0;
           picture = paintings[0];
-          picture.status = 0; //
-          //
-          //
-          // (name, category, label, value)
-          // track('painting_created', 'game', 'game', 1)
+          picture.status = 0;
+          track('painting_created');
         }
 
         return newState;
@@ -6762,10 +6759,13 @@ var configureStore = __webpack_require__(925);
 
 
 
+ // prettier-ignore
 
-var store = (0,configureStore["default"])();
+var clientId = document.cookie.match(/_ga=(.+?);/)[1].split('.').slice(-2).join('.');
+var store = (0,configureStore["default"])({
+  clientId: clientId
+});
 console.log('STORE', store);
-console.log(document.cookie.match(/_ga=(.+?);/));
 document.addEventListener('DOMContentLoaded', function () {
   (0,react_dom.render)( /*#__PURE__*/react.createElement(components_Provider, {
     store: store
