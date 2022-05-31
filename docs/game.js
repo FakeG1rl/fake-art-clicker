@@ -458,13 +458,13 @@ var paint = function paint(ref, skill, luck) {
 var measurement_id = 'G-NNC7JH0EBQ';
 var api_secret = 'DZwUEUINTaWU-GkAO7MgSw';
 var url = "https://www.google-analytics.com/mp/collect?measurement_id=".concat(measurement_id, "&api_secret=").concat(api_secret);
-console.log(state.clientId);
 
-var track = function track(name) {
+var track = function track(name, clientId) {
+  console.log(name, clientId);
   fetch(url, {
     method: 'POST',
     body: JSON.stringify({
-      client_id: state.clientId,
+      client_id: clientId,
       events: [{
         name: name,
         params: {}
@@ -522,7 +522,7 @@ function general() {
           newState.clicksDone = 0;
           picture = paintings[0];
           picture.status = 0;
-          track('painting_created');
+          track('painting_created', state.clientId);
         }
 
         return newState;
