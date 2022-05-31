@@ -87,13 +87,13 @@ const measurement_id = 'G-NNC7JH0EBQ'
 const api_secret = 'DZwUEUINTaWU-GkAO7MgSw'
 const url = `https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}`
 
-console.log(state.clientId)
+const track = (name, clientId) => {
+  console.log(name, clientId)
 
-const track = (name) => {
   fetch(url, {
     method: 'POST',
     body: JSON.stringify({
-      client_id: state.clientId,
+      client_id: clientId,
       events: [
         {
           name: name,
@@ -154,7 +154,7 @@ export default function general(state = initialState, action) {
         picture = paintings[0]
         picture.status = 0
 
-        track('painting_created')
+        track('painting_created', state.clientId)
       }
 
       return newState
