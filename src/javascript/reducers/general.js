@@ -18,34 +18,6 @@ import {
   DAD
 } from '../constants/ActionTypes'
 
-import Analytics from 'analytics'
-import googleAnalytics from '@analytics/google-analytics'
-
-const analytics = Analytics({
-  app: 'fake-art-clicker',
-  plugins: [
-    googleAnalytics({
-      trackingId: 'G-NNC7JH0EBQ'
-    })
-  ]
-})
-
-// /* Track a page view */
-// analytics.page()
-//
-// /* Track a custom event */
-// analytics.track('playedVideo', {
-//   category: 'Videos',
-//   label: 'Fall Campaign',
-//   value: 42
-// })
-
-// /* Identify a visitor */
-// analytics.identify('user-id-xyz', {
-//   firstName: 'bill',
-//   lastName: 'murray'
-// })
-
 import { baseState } from '../data/initialState.jsx'
 import { characters, phases } from '../data/phases.jsx'
 import colors from '../../stylesheets/colors.scss'
@@ -111,13 +83,25 @@ const paint = (ref, skill, luck) => {
   }
 }
 
-const track = (name, category, label, value) => {
-  analytics.track(name, {
-    category: category,
-    label: label,
-    value: value
-  })
-}
+const measurement_id = 'G-NNC7JH0EBQ'
+const api_secret = 'DZwUEUINTaWU-GkAO7MgSw'
+const url = `https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}`
+// const gaUserId = document.cookie.match(/_ga=(.+?);/)[1].split('.').slice(-2).join(".")
+
+// const track = (name, category, label, value) => {
+//   fetch(url, {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       client_id: 'XXXXXXXXXX.YYYYYYYYYY',
+//       events: [
+//         {
+//           name: 'tutorial_begin',
+//           params: {}
+//         }
+//       ]
+//     })
+//   })
+// }
 
 export default function general(state = initialState, action) {
   switch (action.type) {
@@ -173,7 +157,7 @@ export default function general(state = initialState, action) {
         //
         //
         // (name, category, label, value)
-        track('Painting created', 'game', 'game', 1)
+        // track('painting_created', 'game', 'game', 1)
       }
 
       return newState

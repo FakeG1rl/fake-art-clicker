@@ -9,6 +9,7 @@ import configureStore from './javascript/store/configureStore.js'
 const store = configureStore()
 
 console.log('STORE', store)
+console.log(document.cookie.match(/_ga=(.+?);/))
 
 document.addEventListener('DOMContentLoaded', () => {
   render(
