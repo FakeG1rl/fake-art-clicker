@@ -6,6 +6,7 @@ const path = require('path')
 
 module.exports = {
   entry: {
+    index: './src/index.js',
     game: './src/game.jsx'
   },
   output: {
@@ -74,6 +75,13 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
+    }),
+    new HtmlWebpackPlugin({
+      hash: true,
+      scriptLoading: 'blocking',
+      template: './src/index.html',
+      filename: './index.html',
+      chunks: ['index']
     }),
     new HtmlWebpackPlugin({
       hash: true,
