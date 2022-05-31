@@ -1,8 +1,15 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
+
+const desc = '...'
+const keywords =
+  'FAC, fake, art, clicker, кликер, инкрементная игра, симулятор художника'
+const url = '...'
+const image = '...'
 
 module.exports = {
   entry: {
@@ -76,19 +83,43 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css'
     }),
-    new HtmlWebpackPlugin({
-      hash: true,
-      scriptLoading: 'blocking',
-      template: './src/index.html',
-      filename: './index.html',
-      chunks: ['index']
+    new CopyPlugin({
+      patterns: [
+        {
+          from: './src/assets/landing/share.jpg',
+          to: './images/share.jpg'
+        }
+      ]
     }),
     new HtmlWebpackPlugin({
-      hash: true,
-      scriptLoading: 'blocking',
+      template: './src/index.html',
+      filename: './index.html',
+      chunks: ['index'],
+      // prettier-ignore
+      meta: {
+        'description': { name: 'description', content: desc },
+        'keyword': { name: 'keywords', content: keywords },
+        'og:title': { property: 'og:title', content: 'Fake Art Clicker' },
+        'og:description': { property: 'og:description', content: desc },
+        'og:type': { property: 'og:type', content: 'website' },
+        'og:url': { property: 'og:url', content: url },
+        'og:image': { property: 'og:image', content: image }
+      }
+    }),
+    new HtmlWebpackPlugin({
       template: './src/game.html',
       filename: './game.html',
-      chunks: ['game']
+      chunks: ['game'],
+      // prettier-ignore
+      meta: {
+        'description': { name: 'description', content: desc },
+        'keyword': { name: 'keywords', content: keywords },
+        'og:title': { property: 'og:title', content: 'Fake Art Clicker' },
+        'og:description': { property: 'og:description', content: desc },
+        'og:type': { property: 'og:type', content: 'website' },
+        'og:url': { property: 'og:url', content: url },
+        'og:image': { property: 'og:image', content: image }
+      }
     })
   ],
   optimization: {
