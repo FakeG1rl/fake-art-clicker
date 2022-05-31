@@ -522,6 +522,7 @@ function general() {
           newState.clicksDone = 0;
           picture = paintings[0];
           picture.status = 0;
+          console.log(state);
           track('painting_created', state.clientId);
         }
 
