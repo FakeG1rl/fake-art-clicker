@@ -44,84 +44,14 @@ var DAD = 'DAD';
 
 /***/ }),
 
-/***/ 925:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-if (true) {
-  module.exports = __webpack_require__(42);
-} else {}
-
-/***/ }),
-
-/***/ 42:
+/***/ 834:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ configureStore_prod)
-});
-
-// EXTERNAL MODULE: ./node_modules/redux/es/redux.js
-var redux = __webpack_require__(890);
-// EXTERNAL MODULE: ./src/javascript/constants/ActionTypes.js
-var ActionTypes = __webpack_require__(9);
-;// CONCATENATED MODULE: ./src/javascript/data/pictures.jsx
-var pictures = [{
-  id: 0,
-  title: '???',
-  author: '???',
-  style: '???',
-  year: 2022,
-  cost: 1
-}, {
-  id: 1,
-  title: 'Натюрморт с битой птицей, медной посудой...',
-  author: 'Жан Батист Шарден',
-  style: 'Рококо',
-  year: 1728,
-  cost: 68750,
-  isSoldOut: false,
-  position: 'vertical'
-}, {
-  id: 2,
-  title: 'Святой Иероним в своей келье',
-  author: 'Дюрер',
-  style: 'Возрождение',
-  year: 1514,
-  cost: 10344,
-  isSoldOut: false,
-  position: 'horizontal'
-}, {
-  id: 3,
-  title: 'Избиение младенцев',
-  author: 'Питер Пауль Рубенс',
-  style: 'Барокко',
-  year: 1610,
-  cost: 76700000,
-  isSoldOut: false,
-  position: 'square'
-}, {
-  id: 4,
-  title: 'Маха одетая',
-  author: 'Гойя',
-  style: 'Романтизм',
-  year: 1800,
-  cost: 82752,
-  isSoldOut: false,
-  position: 'horizontal'
-}, {
-  id: 5,
-  title: 'Обезьяна-художник',
-  author: 'Жан Батист Шарден',
-  style: 'Рококо',
-  year: 1740,
-  cost: 400000,
-  isSoldOut: false,
-  position: 'vertical'
-}];
-;// CONCATENATED MODULE: ./src/javascript/data/phases.jsx
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "R": () => (/* binding */ characters),
+/* harmony export */   "k": () => (/* binding */ phases)
+/* harmony export */ });
 var characters = ['Блик', 'Краска', 'Клякса'];
 var phrases = [{
   character: characters[0],
@@ -238,158 +168,39 @@ var phases = {
     }]
   }
 };
-;// CONCATENATED MODULE: ./src/javascript/data/upgrade.jsx
-var upgrade = [{
-  title: 'Titile',
-  cost: 50,
-  modifier: 0.1,
-  prop: 'factor',
-  text: 'Увеличивает стоимость продажи копий на 10%',
-  requirement: ['totalMoneys', 30],
-  isOpen: false,
-  itPurchased: false
-}, {
-  title: 'Счастливый четвертак',
-  cost: 100,
-  modifier: 2,
-  prop: 'luck',
-  text: 'Увеличивает удачу',
-  requirement: ['totalPainting', 100],
-  isOpen: false,
-  itPurchased: false
-}, {
-  title: 'title2',
-  cost: 600,
-  modifier: 10,
-  prop: 'students',
-  text: 'Увеличивает вместительность студии',
-  requirement: ['totalPainting', 10000],
-  isOpen: false,
-  itPurchased: false
-}, {
-  title: 'title3',
-  cost: 1000,
-  modifier: 0.5,
-  prop: 'dealer',
-  text: 'Уменьшает скорость продажи диллеров',
-  requirement: ['totalSales', 5000],
-  isOpen: false,
-  itPurchased: false
-}, {
-  title: 'Автоматический кнут',
-  cost: 1000,
-  modifier: 2,
-  prop: 'offline',
-  text: 'Ваши работники меньше леняться и пока вас нет скорость продажи и рисования увеличивается вдвое',
-  requirement: ['totalSales', 10000],
-  isOpen: false,
-  itPurchased: false
-}, {
-  title: 'Пустая комната',
-  cost: 1500000,
-  modifier: 1,
-  prop: 'gallery',
-  text: 'Дает возможность открыть еще одну экспозицию',
-  requirement: ['totalMoneys', 1000000],
-  isOpen: false,
-  itPurchased: false
-}]; //при 30$ появление улучшения увеличивающего фактор прожажи на 10%
-;// CONCATENATED MODULE: ./src/javascript/data/initialState.jsx
 
+/***/ }),
 
+/***/ 925:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var cash = 2000;
-var pcituresSallin = cash;
-var baseState = {
-  saveTime: new Date().getTime(),
-  loading: true,
-  offlineSpeed: 0.1,
-  pageid: 0,
-  phase: null,
-  phrase: null,
-  phraseCounter: 0,
-  saveCounter: 0,
-  clicksToPainting: 1,
-  clicksDone: 0,
-  speedOfSale: 5,
-  study: {
-    // studyCoast: 10,
-    studyCount: 0,
-    skill: 0.01
-  },
-  luck: 0.01,
-  factor: 0,
-  moneyGained: cash,
-  paintings: [[], [// {
-    //   referense: pictures[1],
-    //   status: 1,
-    //   quality: 1
-    // }
-  ], [{
-    size: 3,
-    money: null,
-    pictures: []
-  }]],
-  galleriesIsActive: false,
-  openGalleryId: null,
-  originals: pictures,
-  units: [{
-    level: 0,
-    text: 'Зачем рисовать самому, если можно свалить эту работу на подмастерье',
-    baseCost: 10,
-    cost: 10,
-    size: 5,
-    pps: 1,
-    isActive: false
-  }, {
-    level: 0,
-    text: 'Деньги, денежки. Продавайте диллеры скорей.',
-    baseCost: 100,
-    cost: 100,
-    working: 0,
-    speed: 60,
-    isActive: false
-  }],
-  studioUpdate: [{
-    level: 0,
-    cost: 5,
-    baseCost: 5,
-    factor: 1
-  }, {
-    level: 0,
-    cost: 100,
-    baseCost: 100,
-    factor: 10
-  }, {
-    level: 0,
-    cost: 300,
-    baseCost: 300,
-    factor: 100
-  }],
-  upgrade: upgrade,
-  phrases: [],
-  statistics: {
-    start: new Date().getTime(),
-    totalClick: pcituresSallin,
-    totalAutoClick: pcituresSallin,
-    totalPainting: pcituresSallin,
-    totalOriginals: 0,
-    totalSales: pcituresSallin,
-    totalAutoSales: pcituresSallin,
-    totalMoneys: cash,
-    totalGalleryEarned: 0,
-    totalStyles: 4,
-    totalAuthors: 4,
-    totalYears: 4
-  }
-};
+if (true) {
+  module.exports = __webpack_require__(517);
+} else {}
+
+/***/ }),
+
+/***/ 517:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ configureStore_prod)
+});
+
+// EXTERNAL MODULE: ./node_modules/redux/es/redux.js
+var redux = __webpack_require__(890);
+// EXTERNAL MODULE: ./src/javascript/constants/ActionTypes.js
+var ActionTypes = __webpack_require__(9);
+// EXTERNAL MODULE: ./src/javascript/data/phases.jsx
+var phases = __webpack_require__(834);
 ;// CONCATENATED MODULE: ./src/javascript/reducers/general.js
 
 
 
-
 var studioSize = 100;
-var initialState = Object.assign({}, baseState);
 
 var randn_bm = function randn_bm(min, max) {
   var u = 0,
@@ -473,6 +284,7 @@ var track = function track(name, clientId) {
   });
 };
 
+var initialState = {};
 function general() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -481,6 +293,7 @@ function general() {
     case ActionTypes/* PAINT */.yw:
       {
         var newState = Object.assign({}, state);
+        console.log('paint', state, newState);
         var paintings = newState.paintings[0];
         var references = newState.paintings[1];
         var ref = action.ref;
@@ -522,8 +335,8 @@ function general() {
           newState.clicksDone = 0;
           picture = paintings[0];
           picture.status = 0;
-          console.log(state);
-          track('painting_created', state.clientId);
+          console.log(newState);
+          track('painting_created', newState.clientId);
         }
 
         return newState;
@@ -850,62 +663,62 @@ function general() {
         var skill = _newState11.study.skill;
 
         if (statistics.totalPainting > 20 && skill == 0.01 && phase == 'start') {
-          _newState11.phase = Object.keys(phases)[1];
+          _newState11.phase = Object.keys(phases/* phases */.k)[1];
 
-          phases[_newState11.phase].text.forEach(function (p, i) {
+          phases/* phases */.k[_newState11.phase].text.forEach(function (p, i) {
             _newState11.phrases.push(p);
           });
 
-          if (phases[_newState11.phase].story) {
+          if (phases/* phases */.k[_newState11.phase].story) {
             _newState11.story = true;
-            _newState11.phrase = phases[_newState11.phase].story[0];
+            _newState11.phrase = phases/* phases */.k[_newState11.phase].story[0];
           }
         } else if (_newState11.paintings[1].length >= 1 && _newState11.units[0].level == 0 && phase == 'study') {
           _newState11.units[0].isActive = true;
-          _newState11.phase = Object.keys(phases)[2];
+          _newState11.phase = Object.keys(phases/* phases */.k)[2];
 
-          phases[_newState11.phase].text.forEach(function (p, i) {
+          phases/* phases */.k[_newState11.phase].text.forEach(function (p, i) {
             _newState11.phrases.push(p);
           });
 
-          if (phases[_newState11.phase].story) {
+          if (phases/* phases */.k[_newState11.phase].story) {
             _newState11.story = true;
-            _newState11.phrase = phases[_newState11.phase].story[0];
+            _newState11.phrase = phases/* phases */.k[_newState11.phase].story[0];
           }
         } else if (statistics.totalSales > 500 && _newState11.units[1].level == 0 && phase == 'students') {
           _newState11.units[1].isActive = true;
-          _newState11.phase = Object.keys(phases)[3];
+          _newState11.phase = Object.keys(phases/* phases */.k)[3];
 
-          phases[_newState11.phase].text.forEach(function (p, i) {
+          phases/* phases */.k[_newState11.phase].text.forEach(function (p, i) {
             _newState11.phrases.push(p);
           });
 
-          if (phases[_newState11.phase].story) {
+          if (phases/* phases */.k[_newState11.phase].story) {
             _newState11.story = true;
-            _newState11.phrase = phases[_newState11.phase].story[0];
+            _newState11.phrase = phases/* phases */.k[_newState11.phase].story[0];
           }
         } else if (_newState11.units[1].level > 0 && phase == 'dealers') {
-          _newState11.phase = Object.keys(phases)[4];
+          _newState11.phase = Object.keys(phases/* phases */.k)[4];
 
-          phases[_newState11.phase].text.forEach(function (p, i) {
+          phases/* phases */.k[_newState11.phase].text.forEach(function (p, i) {
             _newState11.phrases.push(p);
           });
 
-          if (phases[_newState11.phase].story) {
+          if (phases/* phases */.k[_newState11.phase].story) {
             _newState11.story = true;
-            _newState11.phrase = phases[_newState11.phase].story[0];
+            _newState11.phrase = phases/* phases */.k[_newState11.phase].story[0];
           }
         } else if (statistics.totalOriginals > 0 && !_newState11.galleriesIsActive && phase == 'predG') {
           _newState11.galleriesIsActive = true;
-          _newState11.phase = Object.keys(phases)[5];
+          _newState11.phase = Object.keys(phases/* phases */.k)[5];
 
-          phases[_newState11.phase].text.forEach(function (p, i) {
+          phases/* phases */.k[_newState11.phase].text.forEach(function (p, i) {
             _newState11.phrases.push(p);
           });
 
-          if (phases[_newState11.phase].story) {
+          if (phases/* phases */.k[_newState11.phase].story) {
             _newState11.story = true;
-            _newState11.phrase = phases[_newState11.phase].story[0];
+            _newState11.phrase = phases/* phases */.k[_newState11.phase].story[0];
           }
         }
 
@@ -916,7 +729,7 @@ function general() {
       {
         var _newState12 = Object.assign({}, state);
 
-        var st = phases[_newState12.phase].story;
+        var st = phases/* phases */.k[_newState12.phase].story;
 
         if (_newState12.story && st) {
           if (action.sourse) {
@@ -960,7 +773,7 @@ function general() {
 
           if (!_newState13.story) {
             _newState13.phrase = {
-              character: characters[2],
+              character: phases/* characters.2 */.R[2],
               text: 'Сохранение'
             };
           }
@@ -994,6 +807,7 @@ function general() {
 
         if (localStorage.save) {
           _newState14 = JSON.parse(localStorage.save);
+          _newState14.clientId = state.clientId;
         }
 
         var _colors = ['green', 'yellow', 'ping', 'blue'];
@@ -1065,7 +879,7 @@ function general() {
 
           if (clicks > 0 && !_newState14.story) {
             _newState14.phrase = {
-              character: characters[2],
+              character: phases/* characters.2 */.R[2],
               text: 'Пока вас не было ученики нариосвали ' + painting + ' картин, а диллеры заработали F$' + _money
             };
           }
@@ -1079,13 +893,13 @@ function general() {
         }
 
         if (!_newState14.phase) {
-          _newState14.phase = Object.keys(phases)[0];
+          _newState14.phase = Object.keys(phases/* phases */.k)[0];
 
-          phases[_newState14.phase].text.forEach(function (p, i) {
+          phases/* phases */.k[_newState14.phase].text.forEach(function (p, i) {
             _newState14.phrases.push(p);
           });
 
-          _newState14.phrase = phases[_newState14.phase].story[0];
+          _newState14.phrase = phases/* phases */.k[_newState14.phase].story[0];
           _newState14.story = true;
           _newState14.phraseCounter = 0;
         }
@@ -3868,6 +3682,209 @@ var useSelector = /*#__PURE__*/(/* unused pure expression or super */ null && (c
 
 setBatch(react_dom.unstable_batchedUpdates);
 
+// EXTERNAL MODULE: ./src/javascript/store/configureStore.js
+var configureStore = __webpack_require__(925);
+;// CONCATENATED MODULE: ./src/javascript/data/pictures.jsx
+var pictures = [{
+  id: 0,
+  title: '???',
+  author: '???',
+  style: '???',
+  year: 2022,
+  cost: 1
+}, {
+  id: 1,
+  title: 'Натюрморт с битой птицей, медной посудой...',
+  author: 'Жан Батист Шарден',
+  style: 'Рококо',
+  year: 1728,
+  cost: 68750,
+  isSoldOut: false,
+  position: 'vertical'
+}, {
+  id: 2,
+  title: 'Святой Иероним в своей келье',
+  author: 'Дюрер',
+  style: 'Возрождение',
+  year: 1514,
+  cost: 10344,
+  isSoldOut: false,
+  position: 'horizontal'
+}, {
+  id: 3,
+  title: 'Избиение младенцев',
+  author: 'Питер Пауль Рубенс',
+  style: 'Барокко',
+  year: 1610,
+  cost: 76700000,
+  isSoldOut: false,
+  position: 'square'
+}, {
+  id: 4,
+  title: 'Маха одетая',
+  author: 'Гойя',
+  style: 'Романтизм',
+  year: 1800,
+  cost: 82752,
+  isSoldOut: false,
+  position: 'horizontal'
+}, {
+  id: 5,
+  title: 'Обезьяна-художник',
+  author: 'Жан Батист Шарден',
+  style: 'Рококо',
+  year: 1740,
+  cost: 400000,
+  isSoldOut: false,
+  position: 'vertical'
+}];
+// EXTERNAL MODULE: ./src/javascript/data/phases.jsx
+var phases = __webpack_require__(834);
+;// CONCATENATED MODULE: ./src/javascript/data/upgrade.jsx
+var upgrade = [{
+  title: 'Titile',
+  cost: 50,
+  modifier: 0.1,
+  prop: 'factor',
+  text: 'Увеличивает стоимость продажи копий на 10%',
+  requirement: ['totalMoneys', 30],
+  isOpen: false,
+  itPurchased: false
+}, {
+  title: 'Счастливый четвертак',
+  cost: 100,
+  modifier: 2,
+  prop: 'luck',
+  text: 'Увеличивает удачу',
+  requirement: ['totalPainting', 100],
+  isOpen: false,
+  itPurchased: false
+}, {
+  title: 'title2',
+  cost: 600,
+  modifier: 10,
+  prop: 'students',
+  text: 'Увеличивает вместительность студии',
+  requirement: ['totalPainting', 10000],
+  isOpen: false,
+  itPurchased: false
+}, {
+  title: 'title3',
+  cost: 1000,
+  modifier: 0.5,
+  prop: 'dealer',
+  text: 'Уменьшает скорость продажи диллеров',
+  requirement: ['totalSales', 5000],
+  isOpen: false,
+  itPurchased: false
+}, {
+  title: 'Автоматический кнут',
+  cost: 1000,
+  modifier: 2,
+  prop: 'offline',
+  text: 'Ваши работники меньше леняться и пока вас нет скорость продажи и рисования увеличивается вдвое',
+  requirement: ['totalSales', 10000],
+  isOpen: false,
+  itPurchased: false
+}, {
+  title: 'Пустая комната',
+  cost: 1500000,
+  modifier: 1,
+  prop: 'gallery',
+  text: 'Дает возможность открыть еще одну экспозицию',
+  requirement: ['totalMoneys', 1000000],
+  isOpen: false,
+  itPurchased: false
+}]; //при 30$ появление улучшения увеличивающего фактор прожажи на 10%
+;// CONCATENATED MODULE: ./src/javascript/data/initialState.jsx
+
+
+
+var cash = 2000;
+var pcituresSallin = cash;
+var baseState = {
+  saveTime: new Date().getTime(),
+  loading: true,
+  offlineSpeed: 0.1,
+  pageid: 0,
+  phase: null,
+  phrase: null,
+  phraseCounter: 0,
+  saveCounter: 0,
+  clicksToPainting: 1,
+  clicksDone: 0,
+  speedOfSale: 5,
+  study: {
+    // studyCoast: 10,
+    studyCount: 0,
+    skill: 0.01
+  },
+  luck: 0.01,
+  factor: 0,
+  moneyGained: cash,
+  paintings: [[], [// {
+    //   referense: pictures[1],
+    //   status: 1,
+    //   quality: 1
+    // }
+  ], [{
+    size: 3,
+    money: null,
+    pictures: []
+  }]],
+  galleriesIsActive: false,
+  openGalleryId: null,
+  originals: pictures,
+  units: [{
+    level: 0,
+    text: 'Зачем рисовать самому, если можно свалить эту работу на подмастерье',
+    baseCost: 10,
+    cost: 10,
+    size: 5,
+    pps: 1,
+    isActive: false
+  }, {
+    level: 0,
+    text: 'Деньги, денежки. Продавайте диллеры скорей.',
+    baseCost: 100,
+    cost: 100,
+    working: 0,
+    speed: 60,
+    isActive: false
+  }],
+  studioUpdate: [{
+    level: 0,
+    cost: 5,
+    baseCost: 5,
+    factor: 1
+  }, {
+    level: 0,
+    cost: 100,
+    baseCost: 100,
+    factor: 10
+  }, {
+    level: 0,
+    cost: 300,
+    baseCost: 300,
+    factor: 100
+  }],
+  upgrade: upgrade,
+  phrases: [],
+  statistics: {
+    start: new Date().getTime(),
+    totalClick: pcituresSallin,
+    totalAutoClick: pcituresSallin,
+    totalPainting: pcituresSallin,
+    totalOriginals: 0,
+    totalSales: pcituresSallin,
+    totalAutoSales: pcituresSallin,
+    totalMoneys: cash,
+    totalGalleryEarned: 0,
+    totalStyles: 4,
+    totalAuthors: 4,
+    totalYears: 4
+  }
+};
 // EXTERNAL MODULE: ./node_modules/redux/es/redux.js
 var redux = __webpack_require__(890);
 // EXTERNAL MODULE: ./src/javascript/constants/ActionTypes.js
@@ -6752,9 +6769,8 @@ var Game_mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ const containers_Game = (connect(Game_mapStateToProps, Game_mapDispatchToProps)(Game));
-// EXTERNAL MODULE: ./src/javascript/store/configureStore.js
-var configureStore = __webpack_require__(925);
 ;// CONCATENATED MODULE: ./src/game.jsx
+
 
 
 
@@ -6763,10 +6779,13 @@ var configureStore = __webpack_require__(925);
  // prettier-ignore
 
 var clientId = document.cookie.match(/_ga=(.+?);/)[1].split('.').slice(-2).join('.');
-var store = (0,configureStore["default"])({
+var initialState = Object.assign({}, baseState, {
   clientId: clientId
 });
-console.log('STORE', store);
+var store = (0,configureStore["default"])({
+  general: initialState
+});
+console.log('STORE', store.getState());
 document.addEventListener('DOMContentLoaded', function () {
   (0,react_dom.render)( /*#__PURE__*/react.createElement(components_Provider, {
     store: store
