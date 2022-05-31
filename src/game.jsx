@@ -6,10 +6,11 @@ import { Provider } from 'react-redux'
 import Game from './javascript/containers/Game.jsx'
 import configureStore from './javascript/store/configureStore.js'
 
-const store = configureStore()
+// prettier-ignore
+const clientId = document.cookie.match(/_ga=(.+?);/)[1].split('.').slice(-2).join('.')
+const store = configureStore({ clientId: clientId })
 
 console.log('STORE', store)
-console.log(document.cookie.match(/_ga=(.+?);/))
 
 document.addEventListener('DOMContentLoaded', () => {
   render(
