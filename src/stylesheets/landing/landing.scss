@@ -87,14 +87,7 @@ p {
 }
 
 .but {
-  cursor: pointer;
-}
-
-.but:hover {
-  filter: drop-shadow(6px 6px 6px black);
-}
-
-.but span {
+  display: block;
   margin: 0 auto;
   font-size: 1.5vw;
   font-weight: 700;
@@ -102,6 +95,11 @@ p {
   background-color: #f0a202;
   border-radius: 0.9vw;
   color: #161616;
+  text-decoration: none;
+
+  &:hover {
+    filter: drop-shadow(6px 6px 6px black);
+  }
 }
 
 .second {
