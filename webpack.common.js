@@ -5,11 +5,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
 
+const url = 'https://fakeartclicker.adc.ac'
+const image = 'https://fakeartclicker.adc.ac/images/share.jpg'
+
 const desc = '...'
+
 const keywords =
   'FAC, fake, art, clicker, кликер, инкрементная игра, симулятор художника'
-const url = '...'
-const image = '...'
 
 module.exports = {
   entry: {
