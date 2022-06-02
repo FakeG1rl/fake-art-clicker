@@ -2,7 +2,7 @@ import { pictures } from './pictures.jsx'
 import { phases } from './phases.jsx'
 import { upgrade } from './upgrade.jsx'
 
-const cash = 2000
+const cash = 0
 const pcituresSallin = cash
 
 export const baseState = {

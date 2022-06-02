@@ -735,6 +735,7 @@ export default function general(state = initialState, action) {
 
     case RESET: {
       const newState = Object.assign({}, baseState)
+      localStorage.clear()
       localStorage.setItem('save', JSON.stringify(newState))
       return newState
     }
