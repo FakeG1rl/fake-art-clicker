@@ -44,6 +44,220 @@ var DAD = 'DAD';
 
 /***/ }),
 
+/***/ 995:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "a": () => (/* binding */ baseState)
+});
+
+;// CONCATENATED MODULE: ./src/javascript/data/pictures.jsx
+var pictures = [{
+  id: 0,
+  title: '???',
+  author: '???',
+  style: '???',
+  year: 2022,
+  cost: 1
+}, {
+  id: 1,
+  title: 'Натюрморт с битой птицей, медной посудой...',
+  author: 'Жан Батист Шарден',
+  style: 'Рококо',
+  year: 1728,
+  cost: 68750,
+  isSoldOut: false,
+  position: 'vertical'
+}, {
+  id: 2,
+  title: 'Святой Иероним в своей келье',
+  author: 'Дюрер',
+  style: 'Возрождение',
+  year: 1514,
+  cost: 10344,
+  isSoldOut: false,
+  position: 'horizontal'
+}, {
+  id: 3,
+  title: 'Избиение младенцев',
+  author: 'Питер Пауль Рубенс',
+  style: 'Барокко',
+  year: 1610,
+  cost: 76700000,
+  isSoldOut: false,
+  position: 'square'
+}, {
+  id: 4,
+  title: 'Маха одетая',
+  author: 'Гойя',
+  style: 'Романтизм',
+  year: 1800,
+  cost: 82752,
+  isSoldOut: false,
+  position: 'horizontal'
+}, {
+  id: 5,
+  title: 'Обезьяна-художник',
+  author: 'Жан Батист Шарден',
+  style: 'Рококо',
+  year: 1740,
+  cost: 400000,
+  isSoldOut: false,
+  position: 'vertical'
+}];
+// EXTERNAL MODULE: ./src/javascript/data/phases.jsx
+var phases = __webpack_require__(834);
+;// CONCATENATED MODULE: ./src/javascript/data/upgrade.jsx
+var upgrade = [{
+  title: 'Titile',
+  cost: 50,
+  modifier: 0.1,
+  prop: 'factor',
+  text: 'Увеличивает стоимость продажи копий на 10%',
+  requirement: ['totalMoneys', 30],
+  isOpen: false,
+  itPurchased: false
+}, {
+  title: 'Счастливый четвертак',
+  cost: 100,
+  modifier: 2,
+  prop: 'luck',
+  text: 'Увеличивает удачу',
+  requirement: ['totalPainting', 100],
+  isOpen: false,
+  itPurchased: false
+}, {
+  title: 'title2',
+  cost: 600,
+  modifier: 10,
+  prop: 'students',
+  text: 'Увеличивает вместительность студии',
+  requirement: ['totalPainting', 10000],
+  isOpen: false,
+  itPurchased: false
+}, {
+  title: 'title3',
+  cost: 1000,
+  modifier: 0.5,
+  prop: 'dealer',
+  text: 'Уменьшает скорость продажи диллеров',
+  requirement: ['totalSales', 5000],
+  isOpen: false,
+  itPurchased: false
+}, {
+  title: 'Автоматический кнут',
+  cost: 1000,
+  modifier: 2,
+  prop: 'offline',
+  text: 'Ваши работники меньше леняться и пока вас нет скорость продажи и рисования увеличивается вдвое',
+  requirement: ['totalSales', 10000],
+  isOpen: false,
+  itPurchased: false
+}, {
+  title: 'Пустая комната',
+  cost: 1500000,
+  modifier: 1,
+  prop: 'gallery',
+  text: 'Дает возможность открыть еще одну экспозицию',
+  requirement: ['totalMoneys', 1000000],
+  isOpen: false,
+  itPurchased: false
+}];
+;// CONCATENATED MODULE: ./src/javascript/data/initialState.jsx
+
+
+
+var cash = 2000;
+var pcituresSallin = cash;
+var baseState = {
+  saveTime: new Date().getTime(),
+  loading: true,
+  offlineSpeed: 0.1,
+  pageid: 0,
+  phase: null,
+  phrase: null,
+  phraseCounter: 0,
+  saveCounter: 0,
+  clicksToPainting: 1,
+  clicksDone: 0,
+  speedOfSale: 5,
+  study: {
+    // studyCoast: 10,
+    studyCount: 0,
+    skill: 0.01
+  },
+  luck: 0.01,
+  factor: 0,
+  moneyGained: cash,
+  paintings: [[], [// {
+    //   referense: pictures[1],
+    //   status: 1,
+    //   quality: 1
+    // }
+  ], [{
+    size: 3,
+    money: null,
+    pictures: []
+  }]],
+  galleriesIsActive: false,
+  openGalleryId: null,
+  originals: pictures,
+  units: [{
+    level: 0,
+    text: 'Зачем рисовать самому, если можно свалить эту работу на подмастерье',
+    baseCost: 10,
+    cost: 10,
+    size: 5,
+    pps: 1,
+    isActive: false
+  }, {
+    level: 0,
+    text: 'Деньги, денежки. Продавайте диллеры скорей.',
+    baseCost: 100,
+    cost: 100,
+    working: 0,
+    speed: 60,
+    isActive: false
+  }],
+  studioUpdate: [{
+    level: 0,
+    cost: 5,
+    baseCost: 5,
+    factor: 1
+  }, {
+    level: 0,
+    cost: 100,
+    baseCost: 100,
+    factor: 10
+  }, {
+    level: 0,
+    cost: 300,
+    baseCost: 300,
+    factor: 100
+  }],
+  upgrade: upgrade,
+  phrases: [],
+  statistics: {
+    start: new Date().getTime(),
+    totalClick: pcituresSallin,
+    totalAutoClick: pcituresSallin,
+    totalPainting: pcituresSallin,
+    totalOriginals: 0,
+    totalSales: pcituresSallin,
+    totalAutoSales: pcituresSallin,
+    totalMoneys: cash,
+    totalGalleryEarned: 0,
+    totalStyles: 4,
+    totalAuthors: 4,
+    totalYears: 4
+  }
+};
+
+/***/ }),
+
 /***/ 834:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -196,7 +410,10 @@ var redux = __webpack_require__(890);
 var ActionTypes = __webpack_require__(9);
 // EXTERNAL MODULE: ./src/javascript/data/phases.jsx
 var phases = __webpack_require__(834);
+// EXTERNAL MODULE: ./src/javascript/data/initialState.jsx + 2 modules
+var initialState = __webpack_require__(995);
 ;// CONCATENATED MODULE: ./src/javascript/reducers/general.js
+
 
 
 
@@ -271,7 +488,6 @@ var api_secret = 'DZwUEUINTaWU-GkAO7MgSw';
 var url = "https://www.google-analytics.com/mp/collect?measurement_id=".concat(measurement_id, "&api_secret=").concat(api_secret);
 
 var track = function track(name, clientId) {
-  console.log(name, clientId);
   fetch(url, {
     method: 'POST',
     body: JSON.stringify({
@@ -284,16 +500,15 @@ var track = function track(name, clientId) {
   });
 };
 
-var initialState = {};
+var general_initialState = {};
 function general() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : general_initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case ActionTypes/* PAINT */.yw:
       {
         var newState = Object.assign({}, state);
-        console.log('paint', state, newState);
         var paintings = newState.paintings[0];
         var references = newState.paintings[1];
         var ref = action.ref;
@@ -335,7 +550,6 @@ function general() {
           newState.clicksDone = 0;
           picture = paintings[0];
           picture.status = 0;
-          console.log(newState);
           track('painting_created', newState.clientId);
         }
 
@@ -910,7 +1124,7 @@ function general() {
 
     case ActionTypes/* RESET */.td:
       {
-        var _newState15 = Object.assign({}, baseState);
+        var _newState15 = Object.assign({}, initialState/* baseState */.a);
 
         localStorage.setItem('save', JSON.stringify(_newState15));
         return _newState15;
@@ -3684,207 +3898,8 @@ setBatch(react_dom.unstable_batchedUpdates);
 
 // EXTERNAL MODULE: ./src/javascript/store/configureStore.js
 var configureStore = __webpack_require__(925);
-;// CONCATENATED MODULE: ./src/javascript/data/pictures.jsx
-var pictures = [{
-  id: 0,
-  title: '???',
-  author: '???',
-  style: '???',
-  year: 2022,
-  cost: 1
-}, {
-  id: 1,
-  title: 'Натюрморт с битой птицей, медной посудой...',
-  author: 'Жан Батист Шарден',
-  style: 'Рококо',
-  year: 1728,
-  cost: 68750,
-  isSoldOut: false,
-  position: 'vertical'
-}, {
-  id: 2,
-  title: 'Святой Иероним в своей келье',
-  author: 'Дюрер',
-  style: 'Возрождение',
-  year: 1514,
-  cost: 10344,
-  isSoldOut: false,
-  position: 'horizontal'
-}, {
-  id: 3,
-  title: 'Избиение младенцев',
-  author: 'Питер Пауль Рубенс',
-  style: 'Барокко',
-  year: 1610,
-  cost: 76700000,
-  isSoldOut: false,
-  position: 'square'
-}, {
-  id: 4,
-  title: 'Маха одетая',
-  author: 'Гойя',
-  style: 'Романтизм',
-  year: 1800,
-  cost: 82752,
-  isSoldOut: false,
-  position: 'horizontal'
-}, {
-  id: 5,
-  title: 'Обезьяна-художник',
-  author: 'Жан Батист Шарден',
-  style: 'Рококо',
-  year: 1740,
-  cost: 400000,
-  isSoldOut: false,
-  position: 'vertical'
-}];
-// EXTERNAL MODULE: ./src/javascript/data/phases.jsx
-var phases = __webpack_require__(834);
-;// CONCATENATED MODULE: ./src/javascript/data/upgrade.jsx
-var upgrade = [{
-  title: 'Titile',
-  cost: 50,
-  modifier: 0.1,
-  prop: 'factor',
-  text: 'Увеличивает стоимость продажи копий на 10%',
-  requirement: ['totalMoneys', 30],
-  isOpen: false,
-  itPurchased: false
-}, {
-  title: 'Счастливый четвертак',
-  cost: 100,
-  modifier: 2,
-  prop: 'luck',
-  text: 'Увеличивает удачу',
-  requirement: ['totalPainting', 100],
-  isOpen: false,
-  itPurchased: false
-}, {
-  title: 'title2',
-  cost: 600,
-  modifier: 10,
-  prop: 'students',
-  text: 'Увеличивает вместительность студии',
-  requirement: ['totalPainting', 10000],
-  isOpen: false,
-  itPurchased: false
-}, {
-  title: 'title3',
-  cost: 1000,
-  modifier: 0.5,
-  prop: 'dealer',
-  text: 'Уменьшает скорость продажи диллеров',
-  requirement: ['totalSales', 5000],
-  isOpen: false,
-  itPurchased: false
-}, {
-  title: 'Автоматический кнут',
-  cost: 1000,
-  modifier: 2,
-  prop: 'offline',
-  text: 'Ваши работники меньше леняться и пока вас нет скорость продажи и рисования увеличивается вдвое',
-  requirement: ['totalSales', 10000],
-  isOpen: false,
-  itPurchased: false
-}, {
-  title: 'Пустая комната',
-  cost: 1500000,
-  modifier: 1,
-  prop: 'gallery',
-  text: 'Дает возможность открыть еще одну экспозицию',
-  requirement: ['totalMoneys', 1000000],
-  isOpen: false,
-  itPurchased: false
-}]; //при 30$ появление улучшения увеличивающего фактор прожажи на 10%
-;// CONCATENATED MODULE: ./src/javascript/data/initialState.jsx
-
-
-
-var cash = 2000;
-var pcituresSallin = cash;
-var baseState = {
-  saveTime: new Date().getTime(),
-  loading: true,
-  offlineSpeed: 0.1,
-  pageid: 0,
-  phase: null,
-  phrase: null,
-  phraseCounter: 0,
-  saveCounter: 0,
-  clicksToPainting: 1,
-  clicksDone: 0,
-  speedOfSale: 5,
-  study: {
-    // studyCoast: 10,
-    studyCount: 0,
-    skill: 0.01
-  },
-  luck: 0.01,
-  factor: 0,
-  moneyGained: cash,
-  paintings: [[], [// {
-    //   referense: pictures[1],
-    //   status: 1,
-    //   quality: 1
-    // }
-  ], [{
-    size: 3,
-    money: null,
-    pictures: []
-  }]],
-  galleriesIsActive: false,
-  openGalleryId: null,
-  originals: pictures,
-  units: [{
-    level: 0,
-    text: 'Зачем рисовать самому, если можно свалить эту работу на подмастерье',
-    baseCost: 10,
-    cost: 10,
-    size: 5,
-    pps: 1,
-    isActive: false
-  }, {
-    level: 0,
-    text: 'Деньги, денежки. Продавайте диллеры скорей.',
-    baseCost: 100,
-    cost: 100,
-    working: 0,
-    speed: 60,
-    isActive: false
-  }],
-  studioUpdate: [{
-    level: 0,
-    cost: 5,
-    baseCost: 5,
-    factor: 1
-  }, {
-    level: 0,
-    cost: 100,
-    baseCost: 100,
-    factor: 10
-  }, {
-    level: 0,
-    cost: 300,
-    baseCost: 300,
-    factor: 100
-  }],
-  upgrade: upgrade,
-  phrases: [],
-  statistics: {
-    start: new Date().getTime(),
-    totalClick: pcituresSallin,
-    totalAutoClick: pcituresSallin,
-    totalPainting: pcituresSallin,
-    totalOriginals: 0,
-    totalSales: pcituresSallin,
-    totalAutoSales: pcituresSallin,
-    totalMoneys: cash,
-    totalGalleryEarned: 0,
-    totalStyles: 4,
-    totalAuthors: 4,
-    totalYears: 4
-  }
-};
+// EXTERNAL MODULE: ./src/javascript/data/initialState.jsx + 2 modules
+var initialState = __webpack_require__(995);
 // EXTERNAL MODULE: ./node_modules/redux/es/redux.js
 var redux = __webpack_require__(890);
 // EXTERNAL MODULE: ./src/javascript/constants/ActionTypes.js
@@ -4349,41 +4364,49 @@ var Students = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(Students_assertThisInitialized(_this), "renderStudents", function () {
-      var max_per_circle = 25;
-      var cursor_width = 49;
-      var cursor_height = 83;
-      var r_increase = 30;
-      var n = _this.props.students;
-      var angle_per_cursor = 360.0 / max_per_circle;
-      var container_width = 290;
-      var container_height = 409;
-      var aspect = container_height / container_width;
+      // console.log()
+      // width: 3vw;
+      // height: 11vh;
       var cursorItems = [];
-      var basic_r = Math.min(container_width, container_height) / 2.0;
-      var cur_r = basic_r;
+      var container = document.getElementsByClassName('canvas')[0];
 
-      for (var i = 0; i != n; ++i) {
-        var cur_circle = Math.floor(i / max_per_circle);
+      if (container) {
+        var body = document.body.getBoundingClientRect();
+        var max_per_circle = 25;
+        var cursor_width = body.width * 0.03;
+        var cursor_height = body.height * 0.11;
+        var r_increase = 30;
+        var n = _this.props.students;
+        var angle_per_cursor = 360.0 / max_per_circle;
+        var container_width = container.getBoundingClientRect().width;
+        var container_height = container.getBoundingClientRect().height;
+        var aspect = container_height / container_width;
+        var basic_r = Math.min(container_width, container_height) / 2.0;
+        var cur_r = basic_r;
 
-        var _cur_r = basic_r + r_increase * cur_circle;
+        for (var i = 0; i != n; ++i) {
+          var cur_circle = Math.floor(i / max_per_circle);
 
-        var i_per_circle = i % max_per_circle;
-        var cur_angle = angle_per_cursor * i_per_circle + 270 + angle_per_cursor * 0.5 * (cur_circle % 2);
-        var studentPosition = {};
-        studentPosition.left = _cur_r * Math.cos(cur_angle * Math.PI / 180.0) + basic_r;
-        studentPosition.top = (_cur_r * Math.sin(cur_angle * Math.PI / 180.0) + basic_r) * aspect;
-        studentPosition.width = cursor_width;
-        studentPosition.height = cursor_height;
-        studentPosition.transform = 'rotate(' + (cur_angle + 90) + 'deg)';
-        studentPosition.margin = '-' + cursor_height / 2.0 + 'px -' + cursor_width / 2 + 'px'; // this.genAnimation(div, i, cur_angle + 90, 10)
-        // studentPosition.style.animation = 'wiggle' + i + ' 1s ease infinite'
-        // studentPosition.style.animationDelay = Math.random() + 's'
+          var _cur_r = basic_r + r_increase * cur_circle;
 
-        cursorItems.push( /*#__PURE__*/react.createElement(Student, {
-          number: i,
-          key: i,
-          style: studentPosition
-        }));
+          var i_per_circle = i % max_per_circle;
+          var cur_angle = angle_per_cursor * i_per_circle + 270 + angle_per_cursor * 0.5 * (cur_circle % 2);
+          var studentPosition = {};
+          studentPosition.left = _cur_r * Math.cos(cur_angle * Math.PI / 180.0) + basic_r;
+          studentPosition.top = (_cur_r * Math.sin(cur_angle * Math.PI / 180.0) + basic_r) * aspect;
+          studentPosition.width = cursor_width;
+          studentPosition.height = cursor_height;
+          studentPosition.transform = 'rotate(' + (cur_angle + 90) + 'deg)';
+          studentPosition.margin = '-' + cursor_height / 2.0 + 'px -' + cursor_width / 2 + 'px'; // this.genAnimation(div, i, cur_angle + 90, 10)
+          // studentPosition.style.animation = 'wiggle' + i + ' 1s ease infinite'
+          // studentPosition.style.animationDelay = Math.random() + 's'
+
+          cursorItems.push( /*#__PURE__*/react.createElement(Student, {
+            number: i,
+            key: i,
+            style: studentPosition
+          }));
+        }
       }
 
       return cursorItems;
@@ -6483,7 +6506,11 @@ var Content = /*#__PURE__*/function (_Component) {
         onClick: function onClick() {
           return _this.props.changePrathe(true);
         }
+      }, /*#__PURE__*/react.createElement("div", {
+        className: "h_l"
       }), /*#__PURE__*/react.createElement("div", {
+        className: "h_r"
+      })), /*#__PURE__*/react.createElement("div", {
         className: 'CharacterBlock c_' + characterId
       }, /*#__PURE__*/react.createElement("span", {
         className: "Character",
@@ -6498,23 +6525,11 @@ var Content = /*#__PURE__*/function (_Component) {
       })), /*#__PURE__*/react.createElement("div", {
         className: "Page"
       }, /*#__PURE__*/react.createElement("div", {
-        className: "wrapper 1"
-      }, /*#__PURE__*/react.createElement("div", {
-        className: "Cover_top"
-      })), /*#__PURE__*/react.createElement("div", {
-        className: "wrapper 2"
-      }, /*#__PURE__*/react.createElement("div", {
-        className: "Cover_left_1"
-      })), /*#__PURE__*/react.createElement("div", {
-        className: "wrapper 3"
-      }, /*#__PURE__*/react.createElement("div", {
-        className: "Cover_left_2"
-      })), /*#__PURE__*/react.createElement("div", {
-        className: "wrapper 4"
+        className: "wrapper n4"
       }, /*#__PURE__*/react.createElement("div", {
         className: "Cover_rigth_1"
       })), /*#__PURE__*/react.createElement("div", {
-        className: "wrapper 5"
+        className: "wrapper n5"
       }, /*#__PURE__*/react.createElement("div", {
         className: "Cover_rigth_2"
       })), /*#__PURE__*/react.createElement("div", {
@@ -6779,13 +6794,13 @@ var Game_mapDispatchToProps = function mapDispatchToProps(dispatch) {
  // prettier-ignore
 
 var clientId = document.cookie.match(/_ga=(.+?);/)[1].split('.').slice(-2).join('.');
-var initialState = Object.assign({}, baseState, {
+var game_initialState = Object.assign({}, initialState/* baseState */.a, {
   clientId: clientId
 });
 var store = (0,configureStore["default"])({
-  general: initialState
-});
-console.log('STORE', store.getState());
+  general: game_initialState
+}); // console.log('STORE', store.getState())
+
 document.addEventListener('DOMContentLoaded', function () {
   (0,react_dom.render)( /*#__PURE__*/react.createElement(components_Provider, {
     store: store
