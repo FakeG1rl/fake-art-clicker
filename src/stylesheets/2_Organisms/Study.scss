@@ -4,15 +4,13 @@
   display: flex;
   .authorBlock {
     position: relative;
-    margin: 8px 50px 0 50px;
+    margin: 0 1.7vw;
     h1 {
       color: $ping;
-      top: -20px;
-      left: -10px;
       position: absolute;
     }
     .picturesCollection {
-      padding: 40px 0 40px 40px;
+      padding: 5vh 0 0 3vw;
       display: flex;
       align-items: center;
     }

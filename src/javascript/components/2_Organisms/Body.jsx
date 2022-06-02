@@ -61,10 +61,10 @@ export default class Content extends Component {
             <span dangerouslySetInnerHTML={{ __html: Back }} />
           </div>
 
-          <div
-            className="cover"
-            onClick={() => this.props.changePrathe(true)}
-          ></div>
+          <div className="cover" onClick={() => this.props.changePrathe(true)}>
+            <div className="h_l"></div>
+            <div className="h_r"></div>
+          </div>
           <div className={'CharacterBlock c_' + characterId}>
             <span
               className="Character"
@@ -79,19 +79,10 @@ export default class Content extends Component {
           <Menu pageid={pageId} onClick={this.props.changePage} />
         </div>
         <div className="Page">
-          <div className="wrapper 1">
-            <div className="Cover_top"></div>
-          </div>
-          <div className="wrapper 2">
-            <div className="Cover_left_1"></div>
-          </div>
-          <div className="wrapper 3">
-            <div className="Cover_left_2"></div>
-          </div>
-          <div className="wrapper 4">
+          <div className="wrapper n4">
             <div className="Cover_rigth_1"></div>
           </div>
-          <div className="wrapper 5">
+          <div className="wrapper n5">
             <div className="Cover_rigth_2"></div>
           </div>
           <div className="Part">{page}</div>

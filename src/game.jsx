@@ -12,7 +12,7 @@ const clientId = document.cookie.match(/_ga=(.+?);/)[1].split('.').slice(-2).joi
 const initialState = Object.assign({}, baseState, { clientId: clientId })
 const store = configureStore({ general: initialState })
 
-console.log('STORE', store.getState())
+// console.log('STORE', store.getState())
 
 document.addEventListener('DOMContentLoaded', () => {
   render(

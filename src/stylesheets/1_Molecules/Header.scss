@@ -1,7 +1,7 @@
 .Header {
-  width: 473px;
-  height: 198px;
-  margin-bottom: 45px;
+  margin-bottom: 6vh;
+  width: 29vw;
+  height: 22vh;
 
   background-image: url('../../assets/headerWall.png');
   background-position: center;
@@ -10,16 +10,14 @@
 
   position: relative;
 
-  padding: 39px 0 0 67px;
-
   .logo {
     z-index: 1;
-    width: 112px;
-    height: 99px;
+    width: 7vw;
+    height: 0;
 
     position: absolute;
-    top: 50px;
-    left: 50px;
+    top: 5vh;
+    left: 3vw;
 
     // background-image: url('../../assets/logo.png');
     // background-position: center;

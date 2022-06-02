@@ -3,15 +3,15 @@
 
   .PicturesCollection {
     overflow-x: auto;
-    // overflow-y: hidden;
-    width: 640px;
-    margin-bottom: 42px;
-    border: 2px solid $ligth-gray;
+    overflow-y: hidden;
+    width: 42vw;
+    margin-bottom: 5vh;
+    border: $border;
     background-image: url('../../assets/background.png');
     background-position: center;
     background-size: cover;
-    padding: 20px 25px;
-    min-height: 130px;
+    padding: 2.5vh 1.7vw;
+    height: 16vh;
     display: flex;
     align-items: center;
 
@@ -29,10 +29,10 @@
 
   h1 {
     font-family: 'RoadRage';
-    top: -20px;
-    left: -10px;
+    top: -2vh;
+    left: -1vw;
     position: absolute;
-    font-size: 24px;
+    font-size: 3.2vh;
     transform: rotate(-3.54deg);
     text-shadow: $text-shadow;
   }

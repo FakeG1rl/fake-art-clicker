@@ -19,6 +19,7 @@ import {
 } from '../constants/ActionTypes'
 
 import { characters, phases } from '../data/phases.jsx'
+import { baseState } from '../data/initialState.jsx'
 import colors from '../../stylesheets/colors.scss'
 
 const studioSize = 100
@@ -86,8 +87,6 @@ const api_secret = 'DZwUEUINTaWU-GkAO7MgSw'
 const url = `https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}`
 
 const track = (name, clientId) => {
-  console.log(name, clientId)
-
   fetch(url, {
     method: 'POST',
     body: JSON.stringify({
@@ -108,7 +107,6 @@ export default function general(state = initialState, action) {
   switch (action.type) {
     case PAINT: {
       const newState = Object.assign({}, state)
-      console.log('paint', state, newState)
       const paintings = newState.paintings[0]
       const references = newState.paintings[1]
       let ref = action.ref
@@ -155,7 +153,6 @@ export default function general(state = initialState, action) {
         picture = paintings[0]
         picture.status = 0
 
-        console.log(newState)
         track('painting_created', newState.clientId)
       }
 

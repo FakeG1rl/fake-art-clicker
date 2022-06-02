@@ -1,39 +1,39 @@
 .PictureCard {
   position: absolute;
   background-color: $white;
-  margin: 23px auto 0;
+  margin: 3vh auto 0;
   right: 0;
   left: 0;
-  padding: 13px;
+  padding: 1.4vh;
   color: $black;
-  min-width: 160px;
-  max-width: 230px;
+  min-width: 14vw;
+  max-width: 15vw;
   span {
     color: $ping;
-    font-size: 13px;
+    font-size: 1.8vh;
     font-weight: bold;
     & + h3 {
-      margin-top: 8px;
+      margin-top: 1vh;
     }
   }
   h3 {
     font-weight: bold;
-    font-size: 15px;
+    font-size: 2vh;
     &:first-of-type {
-      margin-bottom: 10px;
+      margin-bottom: 1.3vh;
     }
   }
   .info {
     display: flex;
     justify-content: space-between;
     p {
-      font-size: 12px;
+      font-size: 1.6vh;
       &:last-of-type {
-        margin-left: 20px;
+        margin-left: 2vw;
       }
     }
     & + h3 {
-      margin-top: 15px;
+      margin-top: 2vh;
     }
   }
   &:hover {
