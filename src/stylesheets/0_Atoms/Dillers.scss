@@ -1,15 +1,14 @@
 .Dillers {
   z-index: 2;
   position: absolute;
-  left: 307px;
-  top: 68px;
+  right: 2vw;
+  top: 6vh;
   display: flex;
   align-items: flex-end;
-  margin: -17px 0 13px -30px;
 
   .dil-pic {
-    width: 111px;
-    height: 125px;
+    width: 7vw;
+    height: 15vh;
     background-image: url('../../assets/Diller.png');
     background-position: center;
     background-size: contain;
@@ -18,10 +17,10 @@
 
   p {
     font-family: 'SprimoskFont';
-    font-size: 46px;
+    font-size: 6vh;
     color: #161616;
     text-shadow: $text-shadow;
     transform: rotate(-5.54deg);
-    margin: 0 0 40px -22px;
+    margin: 0 0 5vh -1vw;
   }
 }

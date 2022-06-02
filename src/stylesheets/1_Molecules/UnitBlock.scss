@@ -1,37 +1,37 @@
 .UnitBlock {
   display: flex;
   background-color: $black;
-  border: 2px solid $ligth-gray;
-  width: 320px;
+  border: 0.15vw solid $ligth-gray;
+  width: 21vw;
+  height: 11.5vh;
+
   position: relative;
 
   .im {
-    width: 116px;
-    height: 78px;
+    width: 8vw;
+    height: 11vh;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
   }
 
   .content {
-    padding: 10px 20px 10px;
+    padding: 0.5vw 2.5vh;
     h3 {
-      font-size: 20px;
+      font-size: 1.3vw;
       font-weight: 400;
     }
     span {
-      font-size: 14px;
       font-weight: 400;
     }
     p {
-      font-size: 14px;
       font-weight: 200;
 
       &:first-of-type {
-        margin-bottom: 5px;
+        margin-bottom: 0.9vh;
       }
       &:last-child {
-        margin-top: 5px;
+        margin-top: 0.9vh;
       }
     }
   }
@@ -76,6 +76,6 @@
   }
 
   & + .UnitBlock {
-    margin-top: 4px;
+    margin-top: 0.9vh;
   }
 }

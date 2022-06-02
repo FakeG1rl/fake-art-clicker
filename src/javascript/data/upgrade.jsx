@@ -61,4 +61,3 @@ export const upgrade = [
     itPurchased: false
   }
 ]
-//при 30$ появление улучшения увеличивающего фактор прожажи на 10%
