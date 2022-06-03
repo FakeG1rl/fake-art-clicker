@@ -1,6 +1,6 @@
 export const upgrade = [
   {
-    title: 'Titile',
+    title: 'Статья по истории искусств',
     cost: 50,
     modifier: 0.1,
     prop: 'factor',
@@ -20,7 +20,7 @@ export const upgrade = [
     itPurchased: false
   },
   {
-    title: 'title2',
+    title: 'Аренда соседней комнаты',
     cost: 600,
     modifier: 10,
     prop: 'students',
@@ -30,12 +30,12 @@ export const upgrade = [
     itPurchased: false
   },
   {
-    title: 'title3',
-    cost: 1000,
+    title: 'Курсы по продажам',
+    cost: 10000,
     modifier: 0.5,
     prop: 'dealer',
-    text: 'Уменьшает скорость продажи диллеров',
-    requirement: ['totalSales', 5000],
+    text: 'Уменьшает скорость продажи дилеров',
+    requirement: ['totalAutoSales', 10],
     isOpen: false,
     itPurchased: false
   },
@@ -45,13 +45,13 @@ export const upgrade = [
     modifier: 2,
     prop: 'offline',
     text:
-      'Ваши работники меньше леняться и пока вас нет скорость продажи и рисования увеличивается вдвое',
+      'Ваши работники меньше ленятся и пока вас нет скорость продажи и рисования увеличивается вдвое',
     requirement: ['totalSales', 10000],
     isOpen: false,
     itPurchased: false
   },
   {
-    title: 'Пустая комната',
+    title: 'Пустой ангар',
     cost: 1500000,
     modifier: 1,
     prop: 'gallery',

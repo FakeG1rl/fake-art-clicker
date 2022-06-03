@@ -19,6 +19,10 @@ h1 {
   font-family: 'RoadRage';
   font-size: 4vw;
   margin: 0 auto 4vw;
+  text-shadow: 0.2vw 0 0 #f1f1f1, -0.2vw 0 0 #f1f1f1, 0 0.2vw 0 #f1f1f1,
+    0 -0.2vw 0 #f1f1f1, 0.1vw 0.1vw #f1f1f1, -0.1vw -0.1vw 0 #f1f1f1,
+    0.1vw -0.1vw 0 #f1f1f1, -0.1vw 0.1vw 0 #f1f1f1;
+  color: #f0a202;
 }
 
 h1,
@@ -164,7 +168,7 @@ p {
 }
 
 #fin {
-  margin: 48vw auto 9vw;
+  margin: 48vw auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -228,10 +232,9 @@ p {
   background-repeat: no-repeat;
   width: 5vw;
   height: 5vw;
-}
-
-.dis:hover {
-  filter: drop-shadow(6px 6px 6px black);
+  &:hover {
+    filter: drop-shadow(6px 6px 6px black);
+  }
 }
 
 .tw {
@@ -241,10 +244,9 @@ p {
   margin-left: 1vw;
   width: 5vw;
   height: 5vw;
-}
-
-.tw:hover {
-  filter: drop-shadow(6px 6px 6px black);
+  &:hover {
+    filter: drop-shadow(6px 6px 6px black);
+  }
 }
 
 .foo {

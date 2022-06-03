@@ -23,6 +23,7 @@ export default class Content extends Component {
     const pageId = this.props.page
     const phase = this.props.phase
     let page = ''
+    let partClassName = 'Part '
 
     if (pageId == 0) {
       page = <Studio />
@@ -38,6 +39,7 @@ export default class Content extends Component {
       page = <Gallery data={this.props.gallery} />
     } else if (pageId == 6) {
       page = <Info />
+      partClassName += 'noscrolling'
     } else {
       page = <div>LOL</div>
     }
@@ -85,7 +87,7 @@ export default class Content extends Component {
           <div className="wrapper n5">
             <div className="Cover_rigth_2"></div>
           </div>
-          <div className="Part">{page}</div>
+          <div className={partClassName}>{page}</div>
         </div>
       </div>
     )

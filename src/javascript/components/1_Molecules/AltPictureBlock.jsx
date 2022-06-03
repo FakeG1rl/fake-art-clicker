@@ -20,7 +20,13 @@ export default class AltPictureBlock extends Component {
         <div className="wrapper">
           <div className="title">
             <span>[{status}]</span>
-            <h4>качество {data.quality}</h4>
+            <h4>
+              качество{' '}
+              {new Intl.NumberFormat('en', {
+                style: 'decimal',
+                maximumFractionDigits: 3
+              }).format(data.quality)}
+            </h4>
           </div>
           <h3>{data.referense.title}</h3>
           <div className="line"></div>

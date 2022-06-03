@@ -2,6 +2,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  cursor: pointer;
 
   .canvas {
     width: 19vw;
@@ -11,6 +12,11 @@
     background-position: center;
     background-repeat: no-repeat;
     filter: $drop-shadow;
+    // filter: $drop-shadow;
+    &:active {
+      width: 19.5vw;
+      height: 54.5vh;
+    }
 
     &.pc_0 {
       background-image: url('../../assets/pictures/0.jpg');

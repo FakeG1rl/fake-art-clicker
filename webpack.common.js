@@ -8,7 +8,8 @@ const path = require('path')
 const url = 'https://fakeartclicker.adc.ac'
 const image = 'https://fakeartclicker.adc.ac/images/share.jpg'
 
-const desc = '...'
+const desc =
+  'Инкрементная игра, в которой вы почувствуете себя художником-фальсификатором! Копируйте чужие работы и скупайте оригиналы на пути к становлению главным игроком арт-рынка.'
 
 const keywords =
   'FAC, fake, art, clicker, кликер, инкрементная игра, симулятор художника'
@@ -94,13 +95,14 @@ module.exports = {
       ]
     }),
     new HtmlWebpackPlugin({
+      title: 'My App',
       template: './src/index.html',
       filename: './index.html',
       chunks: ['index'],
       // prettier-ignore
       meta: {
-        'description': { name: 'description', content: desc },
-        'keyword': { name: 'keywords', content: keywords },
+        description: { name: 'description', content: desc },
+        keyword: { name: 'keywords', content: keywords },
         'og:title': { property: 'og:title', content: 'Fake Art Clicker' },
         'og:description': { property: 'og:description', content: desc },
         'og:type': { property: 'og:type', content: 'website' },

@@ -208,13 +208,15 @@ p {
   &.yellow {
     .Content .GameHeader .back span:hover path,
     .Banner .content .close:hover svg path,
-    .Header .logo path.cls-1 {
+    .Header .logo path.cls-1,
+    .Info .sn:hover path {
       fill: $yellow;
     }
     .AltPictureBlock .wrapper .title span,
     h1,
     .UnitBlock .content span,
-    .AltShopBlock .title span {
+    .AltShopBlock .title span,
+    a {
       color: $yellow;
     }
     .GalleryBlock .but:hover {
@@ -224,13 +226,15 @@ p {
   &.ping {
     .Content .GameHeader .back span:hover path,
     .Banner .content .close:hover svg path,
-    .Header .logo path.cls-1 {
+    .Header .logo path.cls-1,
+    .Info .sn:hover path {
       fill: $ping;
     }
     .AltPictureBlock .wrapper .title span,
     h1,
     .UnitBlock .content span,
-    .AltShopBlock .title span {
+    .AltShopBlock .title span,
+    a {
       color: $ping;
     }
     .GalleryBlock .but:hover {
@@ -240,13 +244,15 @@ p {
   &.blue {
     .Content .GameHeader .back span:hover path,
     .Banner .content .close:hover svg path,
-    .Header .logo path.cls-1 {
+    .Header .logo path.cls-1,
+    .Info .sn:hover path {
       fill: $blue;
     }
     .AltPictureBlock .wrapper .title span,
     h1,
     .UnitBlock .content span,
-    .AltShopBlock .title span {
+    .AltShopBlock .title span,
+    a {
       color: $blue;
     }
     .GalleryBlock .but:hover {
@@ -256,13 +262,15 @@ p {
   &.green {
     .Content .GameHeader .back span:hover path,
     .Banner .content .close:hover svg path,
-    .Header .logo path.cls-1 {
+    .Header .logo path.cls-1,
+    .Info .sn:hover path {
       fill: $green;
     }
     .AltPictureBlock .wrapper .title span,
     h1,
     .UnitBlock .content span,
-    .AltShopBlock .title span {
+    .AltShopBlock .title span,
+    a {
       color: $green;
     }
     .GalleryBlock .but:hover {

@@ -266,6 +266,11 @@
     .Part {
       width: 0;
       padding: 6vh 0 5vh 3.5vw;
+      &.noscrolling {
+        overflow-x: hidden;
+        width: 69.6vw;
+        padding: 0;
+      }
 
       .Settings {
         display: flex;
