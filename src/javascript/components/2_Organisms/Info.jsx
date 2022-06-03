@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import Character from '../../../assets/Character_1.svg'
 
+import Discord from '../../../assets/discord.svg'
+import Telegram from '../../../assets/telegram.svg'
+import Twitch from '../../../assets/twitch.svg'
+
 export default class Info extends Component {
   constructor(props) {
     super(props)
@@ -66,16 +70,32 @@ export default class Info extends Component {
         </div>
         <div className="credits">
           <h1>Авторы</h1>
-
           <div className="authors">
             <div className="author">
               <p>Идея, раработка, дизайн и тд и тп </p>
               <div className="l">
                 <p>Инсафутдинова Валерия</p>
                 <div className="links">
-                  <a>Sosial</a>
-                  <a>Sosial</a>
-                  <a>Sosial</a>
+                  <div className="link">
+                    <p>Telegram</p>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://t.me/ALeo75C"
+                    >
+                      @ALeo75C
+                    </a>
+                  </div>
+                  <div className="link">
+                    <p>e-mail</p>
+
+                    <a
+                      target="_blank"
+                      href="mailto:za.iz.pr@yandex.kz?subject=FakeArtClicker"
+                    >
+                      za.iz.pr@yandex.kz
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -91,29 +111,62 @@ export default class Info extends Component {
               </div>
             </div>
           </div>
-          <p>
-            Проект выполнен в качестве дипломой работы в университете
-            <a> НИУ ВШЭ</a>, <a>Школа дизайна</a>
-          </p>
+
           <div className="links">
             <div className="block">
               <p>Связанные ссылки</p>
               <div className="l">
-                <a>Sosial</a>
-                <a>Sosial</a>
-                <a>Sosial</a>
+                <div className="link">
+                  <a
+                    target="_blank"
+                    href="https://ru.calameo.com/read/0069584285808aefc9398"
+                  >
+                    Визуальное исследование
+                  </a>
+                </div>
+                <div className="link">
+                  <a target="_blank" href=" ">
+                    Презентация проекта
+                  </a>
+                </div>
               </div>
             </div>
             <div className="block">
               <p>Социальные сети</p>
               <div className="l">
-                <a>Sosial</a>
-                <a>Sosial</a>
-                <a>Sosial</a>
+                <div className="link">
+                  <a
+                    className="sn"
+                    target="_blank"
+                    href="https://t.me/+DeB5Ajqj9aljYjli"
+                  >
+                    <span dangerouslySetInnerHTML={{ __html: Telegram }} />
+                  </a>
+                  <a
+                    target="_blank"
+                    className="sn"
+                    href="https://www.twitch.tv/fakeg1rl"
+                  >
+                    <span dangerouslySetInnerHTML={{ __html: Twitch }} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-          <span> Москва, 2022 год</span>
+          <div className="footer">
+            <span> Москва</span>
+            <span>
+              <a target="_blank" href="https://www.hse.ru/">
+                НИУ ВШЭ
+              </a>
+            </span>
+            <span>
+              <a target="_blank" href="https://design.hse.ru/">
+                Школа дизайна
+              </a>
+            </span>
+            <span> 2022 год</span>
+          </div>
         </div>
         <div className="col"></div>
         <div className="col"></div>

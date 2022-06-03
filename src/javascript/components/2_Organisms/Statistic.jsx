@@ -32,7 +32,7 @@ class Statistic extends Component {
       <div className="Statistic">
         <div className="collections">
           <div className="col">
-            <h1>Улучшенеия</h1>
+            <h1>Улучшения</h1>
             {this.renderUpg()}
           </div>
           <div className="col"></div>
@@ -45,7 +45,7 @@ class Statistic extends Component {
               <span>{intFormat(props.statistics.totalClick)}</span>
             </div>
             <div className="block">
-              <p>Всего нарисованно картин:</p>
+              <p>Всего нарисовано картин:</p>
               <span>{intFormat(props.statistics.totalPainting)}</span>
             </div>
             <div className="block">

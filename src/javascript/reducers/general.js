@@ -53,7 +53,7 @@ const getPictureCost = (state, quality, refCost, study) => {
   if (refCost == 1) {
     cost = (1 + factor) * quality
   } else {
-    cost = refCost * study * (1 + factor) * quality
+    cost = Math.max(refCost * study * (1 + factor) * quality * 0.1, 1)
   }
   cost *= state.factor + cost
   return cost
@@ -71,7 +71,7 @@ const paint = (ref, skill, luck) => {
     // // console.log(qual)
     //
     // qual = refQ * Math.abs(qual)
-    qual = Math.min(1, Math.random() * skill * refQ)
+    qual = Math.min(refQ - 0.001, Math.random() * refQ + skill / 10)
     // console.log(refQ, skill, qual)
   }
 
@@ -126,7 +126,7 @@ export default function general(state = initialState, action) {
           }
         } else {
           //картина при обучении
-          newState.clicksToPainting = Math.floor(100 * newState.study.skill)
+          newState.clicksToPainting = Math.floor(500 * newState.study.skill)
         }
 
         picture = paint(ref, newState.study.skill, newState.luck)
@@ -330,9 +330,15 @@ export default function general(state = initialState, action) {
           }
         })
         newState.clicksDone = 0
+        console.log(study.skill)
+        const ref = {
+          status: 11,
+          quality: Math.min(1, Math.random() * study.skill),
+          referense: action.picture
+        }
         newState = general(newState, {
           type: PAINT,
-          ref: action.picture,
+          ref: ref,
           sourse: 0
         })
       }
@@ -419,7 +425,7 @@ export default function general(state = initialState, action) {
         const m =
           ((0.01 *
             (0.6 * style_entropy + 0.3 * author_entropy + 0.1 * year_entropy)) /
-            60) *
+            360) *
           galleryCost
         gallery.money = gallery.money == m ? gallery.money : m
         c += m
@@ -472,7 +478,7 @@ export default function general(state = initialState, action) {
           newState.phrase = phases[newState.phase].story[0]
         }
       } else if (
-        statistics.totalSales > 500 &&
+        statistics.totalSales > 450 &&
         newState.units[1].level == 0 &&
         phase == 'students'
       ) {
@@ -701,7 +707,9 @@ export default function general(state = initialState, action) {
           newState.phrase = {
             character: characters[2],
             text:
-              'Пока вас не было ученики нариосвали ' +
+              'Вы отсудствовали ' +
+              seconds / offlineSpeed +
+              'мин. Пока вас не было ученики нариосвали ' +
               painting +
               ' картин, а диллеры заработали F$' +
               money
@@ -719,6 +727,7 @@ export default function general(state = initialState, action) {
 
       if (!newState.phase) {
         newState.phase = Object.keys(phases)[0]
+        console.log('...')
 
         phases[newState.phase].text.forEach((p, i) => {
           newState.phrases.push(p)
@@ -728,7 +737,6 @@ export default function general(state = initialState, action) {
         newState.story = true
         newState.phraseCounter = 0
       }
-
       newState.loading = false
       return newState
     }

@@ -92,6 +92,11 @@
       display: block;
     }
   }
+  &:active {
+    .AltPictureBlock {
+      display: none;
+    }
+  }
   &.shaddow {
     margin-left: 0.5vw;
     border: none;
