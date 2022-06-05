@@ -219,8 +219,10 @@ p {
     a {
       color: $yellow;
     }
-    .GalleryBlock .but:hover {
+    .GalleryBlock .but:hover,
+    .Block .but:hover {
       background-color: $yellow;
+      opacity: 1;
     }
   }
   &.ping {
@@ -237,8 +239,10 @@ p {
     a {
       color: $ping;
     }
-    .GalleryBlock .but:hover {
+    .GalleryBlock .but:hover,
+    .Block .but:hover {
       background-color: $ping;
+      opacity: 1;
     }
   }
   &.blue {
@@ -255,8 +259,10 @@ p {
     a {
       color: $blue;
     }
-    .GalleryBlock .but:hover {
+    .GalleryBlock .but:hover,
+    .Block .but:hover {
       background-color: $blue;
+      opacity: 1;
     }
   }
   &.green {
@@ -273,8 +279,10 @@ p {
     a {
       color: $green;
     }
-    .GalleryBlock .but:hover {
+    .GalleryBlock .but:hover,
+    .Block .but:hover {
       background-color: $green;
+      opacity: 1;
     }
   }
 }

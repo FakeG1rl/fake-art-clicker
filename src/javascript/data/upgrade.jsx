@@ -4,7 +4,7 @@ export const upgrade = [
     cost: 50,
     modifier: 0.1,
     prop: 'factor',
-    text: 'Увеличивает стоимость продажи копий на 10%',
+    text: 'Увеличивает стоимость копий на 10%',
     requirement: ['totalMoneys', 30],
     isOpen: false,
     itPurchased: false

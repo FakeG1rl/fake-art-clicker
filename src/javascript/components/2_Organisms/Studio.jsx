@@ -8,7 +8,8 @@ import {
   hiring,
   buyUpgrade,
   changeblock,
-  chandePage
+  chandePage,
+  autoSalesSwitch
 } from '../../actions/index.js'
 
 import Block from '../1_Molecules/Block.jsx'
@@ -39,6 +40,9 @@ class Studio extends Component {
             title="Продукция"
             area="s"
             pictures={props.paintings[0]}
+            isOpen={props.units[1].level != 0}
+            autoSell={props.autoSale}
+            autoSalesSwitch={actions.autoSalesSwitch}
             changeblock={actions.changeblock}
             onPress={actions.sell}
           />
@@ -73,7 +77,15 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
-    { sell, studioUpdate, hiring, buyUpgrade, changeblock, chandePage },
+    {
+      sell,
+      studioUpdate,
+      hiring,
+      buyUpgrade,
+      changeblock,
+      chandePage,
+      autoSalesSwitch
+    },
     dispatch
   )
 })

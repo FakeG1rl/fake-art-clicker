@@ -37,7 +37,7 @@ class Game extends React.Component {
         if (students.level > 0) {
           actions.paint(1)
         }
-        if (dealers.level > 0) {
+        if (dealers.level > 0 && props.autoSale) {
           actions.autoSell()
         }
         this.pistureSell()
