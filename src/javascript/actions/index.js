@@ -24,6 +24,9 @@ export const chandePage = (pageId, gId = null) => ({
   page_id: pageId,
   galleryId: gId
 })
+export const autoSalesSwitch = () => ({
+  type: types.AUTOSALESSWITCH
+})
 export const chandePhase = () => ({
   type: types.CHANGEPHASE
 })

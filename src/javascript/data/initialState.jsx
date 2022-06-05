@@ -45,6 +45,7 @@ export const baseState = {
       }
     ]
   ],
+  autoSale: true,
   galleriesIsActive: false,
   openGalleryId: null,
   originals: pictures,

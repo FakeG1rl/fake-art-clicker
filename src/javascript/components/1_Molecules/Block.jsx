@@ -23,9 +23,21 @@ export default class Block extends Component {
   // }
 
   render() {
+    let autoSell = ''
+    if (this.props.area == 's' && this.props.isOpen) {
+      autoSell = (
+        <div
+          className={'but ' + this.props.autoSell}
+          onClick={this.props.autoSalesSwitch}
+        >
+          Авто
+        </div>
+      )
+    }
     return (
       <div id={this.props.area} className="Block">
         <h1>{this.props.title}</h1>
+        {autoSell}
         <PicturesCollection
           pictures={this.props.pictures}
           changeblock={this.props.changeblock}

@@ -15,7 +15,7 @@ import {
   RESET,
   STUDY,
   BUYUPGRADE,
-  DAD
+  AUTOSALESSWITCH
 } from '../constants/ActionTypes'
 
 import { characters, phases } from '../data/phases.jsx'
@@ -122,7 +122,7 @@ export default function general(state = initialState, action) {
           } else {
             const ref_id = Math.floor(Math.random() * references.length)
             ref = references[ref_id]
-            newState.clicksToPainting = Math.floor(ref.quality * 100)
+            newState.clicksToPainting = Math.floor(ref.quality * 1000)
           }
         } else {
           //картина при обучении
@@ -266,6 +266,20 @@ export default function general(state = initialState, action) {
           }
         }
       }
+      return newState
+    }
+
+    case AUTOSALESSWITCH: {
+      const newState = Object.assign({}, state)
+      newState.autoSale = !newState.autoSale
+      newState.paintings[0].forEach((paint, i) => {
+        if (paint.autoSell) {
+          newState.units[1].working -= 1
+          paint.status = 0
+          delete paint.autoSell
+          delete paint.timeFraction
+        }
+      })
       return newState
     }
 
