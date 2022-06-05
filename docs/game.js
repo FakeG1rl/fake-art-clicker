@@ -21,9 +21,9 @@
 /* harmony export */   "VX": () => (/* binding */ LOAD),
 /* harmony export */   "td": () => (/* binding */ RESET),
 /* harmony export */   "Si": () => (/* binding */ STUDY),
-/* harmony export */   "o2": () => (/* binding */ BUYUPGRADE)
+/* harmony export */   "o2": () => (/* binding */ BUYUPGRADE),
+/* harmony export */   "QT": () => (/* binding */ AUTOSALESSWITCH)
 /* harmony export */ });
-/* unused harmony export DAD */
 var PAINT = 'PAINT';
 var SELL = 'SELL';
 var STUDIOUPDATE = 'STUDIOUPDATE';
@@ -40,7 +40,7 @@ var LOAD = 'LOAD';
 var RESET = 'RESET';
 var STUDY = 'STUDY';
 var BUYUPGRADE = 'BUYUPGRADE';
-var DAD = 'DAD';
+var AUTOSALESSWITCH = 'AUTOSALESSWITCH';
 
 /***/ }),
 
@@ -116,7 +116,7 @@ var upgrade = [{
   cost: 50,
   modifier: 0.1,
   prop: 'factor',
-  text: 'Увеличивает стоимость продажи копий на 10%',
+  text: 'Увеличивает стоимость копий на 10%',
   requirement: ['totalMoneys', 30],
   isOpen: false,
   itPurchased: false
@@ -202,6 +202,7 @@ var baseState = {
     money: null,
     pictures: []
   }]],
+  autoSale: true,
   galleriesIsActive: false,
   openGalleryId: null,
   originals: pictures,
@@ -312,7 +313,7 @@ var phases = {
       text: 'Поздравляю! Теперь ты можешь продавать свои каракули!'
     }, {
       character: characters[1],
-      text: 'Кстати, заметил бок «Образцы»? Перетащив туда картину ты будешь ее копировать. Количество мазков на копию зависит от качества оригинала'
+      text: 'Кстати, заметил блок «Образцы»? Перетащив туда картину, ты будешь ее копировать. Количество мазков для создания копии зависит от качества оригинала'
     }, {
       character: characters[2],
       text: 'Если картины нет, но ты уверен, что на должна быть, переключись на любой пункт меню и вернись обратно'
@@ -324,7 +325,7 @@ var phases = {
       text: 'У тебя мог возникнуть вопрос, как получить что-то кроме каракуль. Нажми на Диего Веласкеса, выглядывающего из списков меню.'
     }, {
       character: characters[1],
-      text: 'Ту ты сможешь научиться рисовать одну из картин знаменитых художников. Не бесплатно конечно.'
+      text: 'Тут ты сможешь научиться рисовать одну из картин знаменитых художников. Не бесплатно конечно.'
     }, {
       character: characters[1],
       text: 'На этом пока все, развлекайся!'
@@ -520,7 +521,7 @@ function general() {
             } else {
               var ref_id = Math.floor(Math.random() * references.length);
               ref = references[ref_id];
-              newState.clicksToPainting = Math.floor(ref.quality * 100);
+              newState.clicksToPainting = Math.floor(ref.quality * 1000);
             }
           } else {
             //картина при обучении
@@ -681,9 +682,27 @@ function general() {
         return _newState5;
       }
 
-    case ActionTypes/* CHANGEBLOCK */.Re:
+    case ActionTypes/* AUTOSALESSWITCH */.QT:
       {
         var _newState6 = Object.assign({}, state);
+
+        _newState6.autoSale = !_newState6.autoSale;
+
+        _newState6.paintings[0].forEach(function (paint, i) {
+          if (paint.autoSell) {
+            _newState6.units[1].working -= 1;
+            paint.status = 0;
+            delete paint.autoSell;
+            delete paint.timeFraction;
+          }
+        });
+
+        return _newState6;
+      }
+
+    case ActionTypes/* CHANGEBLOCK */.Re:
+      {
+        var _newState7 = Object.assign({}, state);
 
         var fullId = action.id.split('/');
         var id = Number(fullId[fullId.length - 1]);
@@ -693,44 +712,44 @@ function general() {
         var newBlock = {};
 
         if (oldBlockId != 2) {
-          oldBlock = _newState6.paintings[oldBlockId];
+          oldBlock = _newState7.paintings[oldBlockId];
         } else {
-          oldBlock = _newState6.paintings[oldBlockId][action.id.split('/')[1]].pictures;
+          oldBlock = _newState7.paintings[oldBlockId][action.id.split('/')[1]].pictures;
         }
 
         if (newBlockId != 2) {
-          newBlock = _newState6.paintings[newBlockId];
+          newBlock = _newState7.paintings[newBlockId];
         } else {
-          newBlock = _newState6.paintings[2][action.newBlock.split('/')[1]].pictures;
+          newBlock = _newState7.paintings[2][action.newBlock.split('/')[1]].pictures;
         }
 
         newBlock.unshift(oldBlock[id]);
         oldBlock.splice(id, 1);
 
         if (oldBlockId != 2) {
-          _newState6.paintings[oldBlockId] = oldBlock;
+          _newState7.paintings[oldBlockId] = oldBlock;
         } else {
-          _newState6.paintings[oldBlockId][action.id.split('/')[1]].pictures = oldBlock;
+          _newState7.paintings[oldBlockId][action.id.split('/')[1]].pictures = oldBlock;
         }
 
         if (newBlockId != 2) {
-          _newState6.paintings[newBlockId] = newBlock;
+          _newState7.paintings[newBlockId] = newBlock;
         } else {
-          _newState6.paintings[2][action.newBlock.split('/')[1]].pictures = newBlock;
+          _newState7.paintings[2][action.newBlock.split('/')[1]].pictures = newBlock;
         }
 
-        return _newState6;
+        return _newState7;
       }
 
     case ActionTypes/* STUDY */.Si:
       {
-        var _newState7 = Object.assign({}, state);
+        var _newState8 = Object.assign({}, state);
 
-        var study = _newState7.study;
+        var study = _newState8.study;
         var cost = action.picture.cost * Math.pow(1.15, study.studyCount) / 100;
 
-        if (_newState7.moneyGained >= cost) {
-          _newState7.moneyGained -= cost;
+        if (_newState8.moneyGained >= cost) {
+          _newState8.moneyGained -= cost;
 
           if (!(study.skill >= 1)) {
             study.skill += 0.05 * Math.pow(0.5, study.studyCount);
@@ -738,62 +757,62 @@ function general() {
 
           study.studyCount += 1;
 
-          _newState7.paintings[0].forEach(function (item, i) {
+          _newState8.paintings[0].forEach(function (item, i) {
             if (item.status == 11) {
-              _newState7.paintings[0].splice(i, 1);
+              _newState8.paintings[0].splice(i, 1);
             }
           });
 
-          _newState7.clicksDone = 0;
+          _newState8.clicksDone = 0;
           console.log(study.skill);
           var _ref = {
             status: 11,
             quality: Math.min(1, Math.random() * study.skill),
             referense: action.picture
           };
-          _newState7 = general(_newState7, {
+          _newState8 = general(_newState8, {
             type: ActionTypes/* PAINT */.yw,
             ref: _ref,
             sourse: 0
           });
         }
 
-        return _newState7;
+        return _newState8;
       }
 
     case ActionTypes/* GETORIGINAL */.g2:
       {
-        var _newState8 = Object.assign({}, state);
+        var _newState9 = Object.assign({}, state);
 
-        var original = _newState8.originals[action.id + 1];
+        var original = _newState9.originals[action.id + 1];
 
-        if (_newState8.moneyGained >= original.cost) {
+        if (_newState9.moneyGained >= original.cost) {
           var _picture2 = {
             status: 1,
             quality: 1,
             referense: original
           };
 
-          _newState8.paintings[1].unshift(_picture2);
+          _newState9.paintings[1].unshift(_picture2);
 
-          _newState8.originals[action.id + 1].isSoldOut = true;
-          _newState8.moneyGained -= original.cost;
-          _newState8.statistics.totalOriginals += 1;
+          _newState9.originals[action.id + 1].isSoldOut = true;
+          _newState9.moneyGained -= original.cost;
+          _newState9.statistics.totalOriginals += 1;
         } else {
           console.log('ERROR');
         }
 
-        return _newState8;
+        return _newState9;
       }
 
     case ActionTypes/* GALLERYWORKING */.Ze:
       {
-        var _newState9 = Object.assign({}, state);
+        var _newState10 = Object.assign({}, state);
 
-        var galleries = _newState9.paintings[2];
-        var totalStyles = _newState9.statistics.totalStyles;
-        var totalAuthors = _newState9.statistics.totalAuthors;
-        var totalY = _newState9.statistics.totalYears;
+        var galleries = _newState10.paintings[2];
+        var totalStyles = _newState10.statistics.totalStyles;
+        var totalAuthors = _newState10.statistics.totalAuthors;
+        var totalY = _newState10.statistics.totalYears;
         var c = 0;
         galleries.forEach(function (gallery, i) {
           var picturesInGallery = gallery.pictures.length;
@@ -805,7 +824,7 @@ function general() {
           var years = {};
           var year_entropy = 0;
           gallery.pictures.forEach(function (picture, i) {
-            galleryCost += getPictureCost(_newState9, picture.quality, picture.referense.cost, _newState9.study.skill);
+            galleryCost += getPictureCost(_newState10, picture.quality, picture.referense.cost, _newState10.study.skill);
 
             if (styles[picture.referense.style]) {
               styles[picture.referense.style] += 1;
@@ -850,114 +869,114 @@ function general() {
           gallery.money = gallery.money == m ? gallery.money : m;
           c += m;
         });
-        _newState9.moneyGained += c;
-        _newState9.statistics.totalMoneys += c;
-        _newState9.statistics.totalGalleryEarned += c;
-        return _newState9;
+        _newState10.moneyGained += c;
+        _newState10.statistics.totalMoneys += c;
+        _newState10.statistics.totalGalleryEarned += c;
+        return _newState10;
       }
 
     case ActionTypes/* CHANGEPAGE */.Dp:
       {
-        var _newState10 = Object.assign({}, state);
-
-        if (action.page_id == _newState10.pageid) {
-          _newState10.pageid = 0;
-        } else {
-          _newState10.pageid = action.page_id;
-          _newState10.openGalleryId = action.page_id ? action.galleryId : null;
-        }
-
-        return _newState10;
-      }
-
-    case ActionTypes/* CHANGEPHASE */.Bb:
-      {
         var _newState11 = Object.assign({}, state);
 
-        var phase = _newState11.phase;
-        var statistics = _newState11.statistics;
-        var skill = _newState11.study.skill;
-
-        if (statistics.totalPainting > 20 && skill == 0.01 && phase == 'start') {
-          _newState11.phase = Object.keys(phases/* phases */.k)[1];
-
-          phases/* phases */.k[_newState11.phase].text.forEach(function (p, i) {
-            _newState11.phrases.push(p);
-          });
-
-          if (phases/* phases */.k[_newState11.phase].story) {
-            _newState11.story = true;
-            _newState11.phrase = phases/* phases */.k[_newState11.phase].story[0];
-          }
-        } else if (_newState11.paintings[1].length >= 1 && _newState11.units[0].level == 0 && phase == 'study') {
-          _newState11.units[0].isActive = true;
-          _newState11.phase = Object.keys(phases/* phases */.k)[2];
-
-          phases/* phases */.k[_newState11.phase].text.forEach(function (p, i) {
-            _newState11.phrases.push(p);
-          });
-
-          if (phases/* phases */.k[_newState11.phase].story) {
-            _newState11.story = true;
-            _newState11.phrase = phases/* phases */.k[_newState11.phase].story[0];
-          }
-        } else if (statistics.totalSales > 450 && _newState11.units[1].level == 0 && phase == 'students') {
-          _newState11.units[1].isActive = true;
-          _newState11.phase = Object.keys(phases/* phases */.k)[3];
-
-          phases/* phases */.k[_newState11.phase].text.forEach(function (p, i) {
-            _newState11.phrases.push(p);
-          });
-
-          if (phases/* phases */.k[_newState11.phase].story) {
-            _newState11.story = true;
-            _newState11.phrase = phases/* phases */.k[_newState11.phase].story[0];
-          }
-        } else if (_newState11.units[1].level > 0 && phase == 'dealers') {
-          _newState11.phase = Object.keys(phases/* phases */.k)[4];
-
-          phases/* phases */.k[_newState11.phase].text.forEach(function (p, i) {
-            _newState11.phrases.push(p);
-          });
-
-          if (phases/* phases */.k[_newState11.phase].story) {
-            _newState11.story = true;
-            _newState11.phrase = phases/* phases */.k[_newState11.phase].story[0];
-          }
-        } else if (statistics.totalOriginals > 0 && !_newState11.galleriesIsActive && phase == 'predG') {
-          _newState11.galleriesIsActive = true;
-          _newState11.phase = Object.keys(phases/* phases */.k)[5];
-
-          phases/* phases */.k[_newState11.phase].text.forEach(function (p, i) {
-            _newState11.phrases.push(p);
-          });
-
-          if (phases/* phases */.k[_newState11.phase].story) {
-            _newState11.story = true;
-            _newState11.phrase = phases/* phases */.k[_newState11.phase].story[0];
-          }
+        if (action.page_id == _newState11.pageid) {
+          _newState11.pageid = 0;
+        } else {
+          _newState11.pageid = action.page_id;
+          _newState11.openGalleryId = action.page_id ? action.galleryId : null;
         }
 
         return _newState11;
       }
 
-    case ActionTypes/* GETPHRASE */.Sy:
+    case ActionTypes/* CHANGEPHASE */.Bb:
       {
         var _newState12 = Object.assign({}, state);
 
-        var st = phases/* phases */.k[_newState12.phase].story;
+        var phase = _newState12.phase;
+        var statistics = _newState12.statistics;
+        var skill = _newState12.study.skill;
 
-        if (_newState12.story && st) {
+        if (statistics.totalPainting > 20 && skill == 0.01 && phase == 'start') {
+          _newState12.phase = Object.keys(phases/* phases */.k)[1];
+
+          phases/* phases */.k[_newState12.phase].text.forEach(function (p, i) {
+            _newState12.phrases.push(p);
+          });
+
+          if (phases/* phases */.k[_newState12.phase].story) {
+            _newState12.story = true;
+            _newState12.phrase = phases/* phases */.k[_newState12.phase].story[0];
+          }
+        } else if (_newState12.paintings[1].length >= 1 && _newState12.units[0].level == 0 && phase == 'study') {
+          _newState12.units[0].isActive = true;
+          _newState12.phase = Object.keys(phases/* phases */.k)[2];
+
+          phases/* phases */.k[_newState12.phase].text.forEach(function (p, i) {
+            _newState12.phrases.push(p);
+          });
+
+          if (phases/* phases */.k[_newState12.phase].story) {
+            _newState12.story = true;
+            _newState12.phrase = phases/* phases */.k[_newState12.phase].story[0];
+          }
+        } else if (statistics.totalSales > 450 && _newState12.units[1].level == 0 && phase == 'students') {
+          _newState12.units[1].isActive = true;
+          _newState12.phase = Object.keys(phases/* phases */.k)[3];
+
+          phases/* phases */.k[_newState12.phase].text.forEach(function (p, i) {
+            _newState12.phrases.push(p);
+          });
+
+          if (phases/* phases */.k[_newState12.phase].story) {
+            _newState12.story = true;
+            _newState12.phrase = phases/* phases */.k[_newState12.phase].story[0];
+          }
+        } else if (_newState12.units[1].level > 0 && phase == 'dealers') {
+          _newState12.phase = Object.keys(phases/* phases */.k)[4];
+
+          phases/* phases */.k[_newState12.phase].text.forEach(function (p, i) {
+            _newState12.phrases.push(p);
+          });
+
+          if (phases/* phases */.k[_newState12.phase].story) {
+            _newState12.story = true;
+            _newState12.phrase = phases/* phases */.k[_newState12.phase].story[0];
+          }
+        } else if (statistics.totalOriginals > 0 && !_newState12.galleriesIsActive && phase == 'predG') {
+          _newState12.galleriesIsActive = true;
+          _newState12.phase = Object.keys(phases/* phases */.k)[5];
+
+          phases/* phases */.k[_newState12.phase].text.forEach(function (p, i) {
+            _newState12.phrases.push(p);
+          });
+
+          if (phases/* phases */.k[_newState12.phase].story) {
+            _newState12.story = true;
+            _newState12.phrase = phases/* phases */.k[_newState12.phase].story[0];
+          }
+        }
+
+        return _newState12;
+      }
+
+    case ActionTypes/* GETPHRASE */.Sy:
+      {
+        var _newState13 = Object.assign({}, state);
+
+        var st = phases/* phases */.k[_newState13.phase].story;
+
+        if (_newState13.story && st) {
           if (action.sourse) {
             if (st) {
               for (var _i = 0; st.length > _i; _i++) {
-                if (_newState12.phrase == st[_i]) {
+                if (_newState13.phrase == st[_i]) {
                   if (st[_i + 1]) {
-                    _newState12.phrase = st[_i + 1];
+                    _newState13.phrase = st[_i + 1];
                   } else {
-                    _newState12.story = false;
-                    _newState12.phrase = _newState12.phrases[Math.floor(Math.random() * _newState12.phrases.length)];
-                    _newState12.phraseCounter = 0;
+                    _newState13.story = false;
+                    _newState13.phrase = _newState13.phrases[Math.floor(Math.random() * _newState13.phrases.length)];
+                    _newState13.phraseCounter = 0;
                   }
 
                   break;
@@ -965,30 +984,30 @@ function general() {
               }
             }
           }
-        } else if (_newState12.phraseCounter < 10 && !action.sourse) {
-          _newState12.phraseCounter += 1;
-          _newState12.story = false;
+        } else if (_newState13.phraseCounter < 10 && !action.sourse) {
+          _newState13.phraseCounter += 1;
+          _newState13.story = false;
         } else {
-          _newState12.phrase = _newState12.phrases[Math.floor(Math.random() * _newState12.phrases.length)];
-          _newState12.phraseCounter = 0;
-          _newState12.story = false;
+          _newState13.phrase = _newState13.phrases[Math.floor(Math.random() * _newState13.phrases.length)];
+          _newState13.phraseCounter = 0;
+          _newState13.story = false;
         }
 
-        return _newState12;
+        return _newState13;
       }
 
     case ActionTypes/* SAVE */.LE:
       {
-        var _newState13 = Object.assign({}, state);
+        var _newState14 = Object.assign({}, state);
 
         var f = function f() {
-          _newState13.saveCounter = 0;
-          _newState13.saveTime = new Date().getTime();
-          localStorage.setItem('save', JSON.stringify(_newState13));
-          _newState13.phraseCounter = 8;
+          _newState14.saveCounter = 0;
+          _newState14.saveTime = new Date().getTime();
+          localStorage.setItem('save', JSON.stringify(_newState14));
+          _newState14.phraseCounter = 8;
 
-          if (!_newState13.story) {
-            _newState13.phrase = {
+          if (!_newState14.story) {
+            _newState14.phrase = {
               character: phases/* characters.2 */.R[2],
               text: 'Сохранение'
             };
@@ -997,33 +1016,33 @@ function general() {
 
         if (action.isHandle) {
           f();
-        } else if (_newState13.saveCounter == 60) {
+        } else if (_newState14.saveCounter == 60) {
           f();
         } else {
-          _newState13.saveCounter += 1;
-          general(_newState13, {
+          _newState14.saveCounter += 1;
+          general(_newState14, {
             type: ActionTypes/* GETPHRASE */.Sy
           });
         }
 
-        var statistic = _newState13.statistics;
+        var statistic = _newState14.statistics;
 
-        _newState13.upgrade.forEach(function (upg, i) {
+        _newState14.upgrade.forEach(function (upg, i) {
           if (statistic[upg.requirement[0]] >= upg.requirement[1]) {
             upg.isOpen = true;
           }
         });
 
-        return _newState13;
+        return _newState14;
       }
 
     case ActionTypes/* LOAD */.VX:
       {
-        var _newState14 = Object.assign({}, state);
+        var _newState15 = Object.assign({}, state);
 
         if (localStorage.save) {
-          _newState14 = JSON.parse(localStorage.save);
-          _newState14.clientId = state.clientId;
+          _newState15 = JSON.parse(localStorage.save);
+          _newState15.clientId = state.clientId;
         }
 
         var _colors = ['green', 'yellow', 'ping', 'blue'];
@@ -1032,22 +1051,22 @@ function general() {
 
         var game = document.getElementsByClassName('Game')[0];
         game.classList.add(color);
-        var offlineSpeed = _newState14.offlineSpeed; // const offlineSpeed = 1
+        var offlineSpeed = _newState15.offlineSpeed; // const offlineSpeed = 1
 
         console.log('...');
-        var seconds = Math.floor((new Date().getTime() - _newState14.saveTime) * 0.001 * offlineSpeed);
+        var seconds = Math.floor((new Date().getTime() - _newState15.saveTime) * 0.001 * offlineSpeed);
 
         if (seconds > 0) {
-          var _ref2 = _newState14.originals[0]; // ref.referense = ref
+          var _ref2 = _newState15.originals[0]; // ref.referense = ref
           // ref.quality = 1
 
-          var salesSpped = _newState14.units[1].speed * _newState14.units[1].level;
+          var salesSpped = _newState15.units[1].speed * _newState15.units[1].level;
           var paintinsSales = salesSpped > 0 ? Math.floor(seconds / salesSpped) : 0;
           var secondsForNewSale = seconds - paintinsSales * salesSpped;
-          var paintSpeed = _newState14.units[0].level * _newState14.units[0].pps;
+          var paintSpeed = _newState15.units[0].level * _newState15.units[0].pps;
           var clicks = paintSpeed > 0 ? Math.floor(seconds / paintSpeed) : 0;
           var picCkick = 0;
-          var _references = _newState14.paintings[1];
+          var _references = _newState15.paintings[1];
 
           _references.map(function (paint) {
             picCkick += Math.floor(1 * paint.quality * 100);
@@ -1061,77 +1080,77 @@ function general() {
 
           for (var _i2 = 0; _i2 < paintinsSales && paintinsSales > 0; _i2++) {
             _ref2 = _references.length > 0 ? _references[Math.floor(Math.random() * _references.length)] : _ref2;
-            var pic = paint(_ref2, _newState14.study.skill, _newState14.luck);
-            _money += Math.floor(getPictureCost(_newState14, pic.quality, pic.referense.cost, _newState14.study.skill));
+            var pic = paint(_ref2, _newState15.study.skill, _newState15.luck);
+            _money += Math.floor(getPictureCost(_newState15, pic.quality, pic.referense.cost, _newState15.study.skill));
           }
 
-          if (_newState14.clicksDone + clickNewPicture >= _newState14.clicksToPainting && _newState14.paintings[0].length < studioSize) {
-            for (var _i3 = 0; _newState14.paintings[0][_i3].status == 11; _i3++) {
-              _newState14.paintings[0][_i3].status = 0;
+          if (_newState15.clicksDone + clickNewPicture >= _newState15.clicksToPainting && _newState15.paintings[0].length < studioSize) {
+            for (var _i3 = 0; _newState15.paintings[0][_i3].status == 11; _i3++) {
+              _newState15.paintings[0][_i3].status = 0;
             }
 
-            _newState14.clicksDone = _newState14.clicksDone + clickNewPicture - _newState14.clicksToPainting;
+            _newState15.clicksDone = _newState15.clicksDone + clickNewPicture - _newState15.clicksToPainting;
             _ref2 = _references.length > 0 ? _references[Math.floor(Math.random() * _references.length)] : _ref2;
 
-            _newState14.paintings[0].unshift(paint(_ref2, _newState14.study.skill, _newState14.luck));
+            _newState15.paintings[0].unshift(paint(_ref2, _newState15.study.skill, _newState15.luck));
 
-            _newState14.statistics.totalPainting += 1;
-          } else if (_newState14.clicksDone + clickNewPicture <= _newState14.clicksToPainting) {
-            _newState14.clicksDone = _newState14.clicksDone + clickNewPicture;
+            _newState15.statistics.totalPainting += 1;
+          } else if (_newState15.clicksDone + clickNewPicture <= _newState15.clicksToPainting) {
+            _newState15.clicksDone = _newState15.clicksDone + clickNewPicture;
           }
 
           var paints = [];
 
-          for (var _i4 = 0; _i4 < painting - paintinsSales && _newState14.paintings[0].length + paints.length < studioSize; _i4++) {
+          for (var _i4 = 0; _i4 < painting - paintinsSales && _newState15.paintings[0].length + paints.length < studioSize; _i4++) {
             _ref2 = _references.length > 0 ? _references[Math.floor(Math.random() * _references.length)] : _ref2;
-            paints.push(paint(_ref2, _newState14.study.skill, _newState14.luck));
+            paints.push(paint(_ref2, _newState15.study.skill, _newState15.luck));
           }
 
           paints = paints.map(function (p) {
             p.status = 0;
 
-            _newState14.paintings[0].unshift(p);
+            _newState15.paintings[0].unshift(p);
           }); //галерея
 
-          if (clicks > 0 && !_newState14.story) {
-            _newState14.phrase = {
+          if (clicks > 0 && !_newState15.story) {
+            _newState15.phrase = {
               character: phases/* characters.2 */.R[2],
               text: 'Вы отсудствовали ' + seconds / offlineSpeed + 'мин. Пока вас не было ученики нариосвали ' + painting + ' картин, а диллеры заработали F$' + _money
             };
           }
 
-          _newState14.phraseCounter = 5;
-          _newState14.moneyGained += _money;
-          _newState14.statistics.totalClick += clicks;
-          _newState14.statistics.totalMoneys += _money;
-          _newState14.statistics.totalSales += paintinsSales;
-          _newState14.statistics.totalPainting += paints.length;
+          _newState15.phraseCounter = 5;
+          _newState15.moneyGained += _money;
+          _newState15.statistics.totalClick += clicks;
+          _newState15.statistics.totalMoneys += _money;
+          _newState15.statistics.totalSales += paintinsSales;
+          _newState15.statistics.totalPainting += paints.length;
         }
 
-        if (!_newState14.phase) {
-          _newState14.phase = Object.keys(phases/* phases */.k)[0];
+        if (!_newState15.phase) {
+          _newState15.phase = Object.keys(phases/* phases */.k)[0];
           console.log('...');
 
-          phases/* phases */.k[_newState14.phase].text.forEach(function (p, i) {
-            _newState14.phrases.push(p);
+          phases/* phases */.k[_newState15.phase].text.forEach(function (p, i) {
+            _newState15.phrases.push(p);
           });
 
-          _newState14.phrase = phases/* phases */.k[_newState14.phase].story[0];
-          _newState14.story = true;
-          _newState14.phraseCounter = 0;
+          _newState15.phrase = phases/* phases */.k[_newState15.phase].story[0];
+          _newState15.story = true;
+          _newState15.phraseCounter = 0;
         }
 
-        _newState14.loading = false;
-        return _newState14;
+        _newState15.loading = false;
+        return _newState15;
       }
 
     case ActionTypes/* RESET */.td:
       {
-        var _newState15 = Object.assign({}, initialState/* baseState */.a);
+        var _newState16 = Object.assign({}, initialState/* baseState */.a);
 
         localStorage.clear();
-        localStorage.setItem('save', JSON.stringify(_newState15));
-        return _newState15;
+        localStorage.setItem('save', JSON.stringify(_newState16));
+        return _newState16;
       }
 
     default:
@@ -4000,6 +4019,11 @@ var chandePage = function chandePage(pageId) {
     galleryId: gId
   };
 };
+var autoSalesSwitch = function autoSalesSwitch() {
+  return {
+    type: ActionTypes/* AUTOSALESSWITCH */.QT
+  };
+};
 var chandePhase = function chandePhase() {
   return {
     type: ActionTypes/* CHANGEPHASE */.Bb
@@ -4953,10 +4977,19 @@ var Block = /*#__PURE__*/function (_Component) {
   Block_createClass(Block, [{
     key: "render",
     value: function render() {
+      var autoSell = '';
+
+      if (this.props.area == 's' && this.props.isOpen) {
+        autoSell = /*#__PURE__*/react.createElement("div", {
+          className: 'but ' + this.props.autoSell,
+          onClick: this.props.autoSalesSwitch
+        }, "\u0410\u0432\u0442\u043E");
+      }
+
       return /*#__PURE__*/react.createElement("div", {
         id: this.props.area,
         className: "Block"
-      }, /*#__PURE__*/react.createElement("h1", null, this.props.title), /*#__PURE__*/react.createElement(PicturesCollection, {
+      }, /*#__PURE__*/react.createElement("h1", null, this.props.title), autoSell, /*#__PURE__*/react.createElement(PicturesCollection, {
         pictures: this.props.pictures,
         changeblock: this.props.changeblock,
         onPress: this.props.onPress,
@@ -5634,6 +5667,9 @@ var Studio = /*#__PURE__*/function (_Component) {
         title: "\u041F\u0440\u043E\u0434\u0443\u043A\u0446\u0438\u044F",
         area: "s",
         pictures: props.paintings[0],
+        isOpen: props.units[1].level != 0,
+        autoSell: props.autoSale,
+        autoSalesSwitch: actions.autoSalesSwitch,
         changeblock: actions.changeblock,
         onPress: actions.sell
       }), /*#__PURE__*/react.createElement(GalleriesCollection, {
@@ -5673,7 +5709,8 @@ var Studio_mapDispatchToProps = function mapDispatchToProps(dispatch) {
       hiring: hiring,
       buyUpgrade: buyUpgrade,
       changeblock: changeblock,
-      chandePage: chandePage
+      chandePage: chandePage,
+      autoSalesSwitch: autoSalesSwitch
     }, dispatch)
   };
 };
@@ -6842,7 +6879,7 @@ var Game = /*#__PURE__*/function (_React$Component) {
             actions.paint(1);
           }
 
-          if (dealers.level > 0) {
+          if (dealers.level > 0 && props.autoSale) {
             actions.autoSell();
           }
 
