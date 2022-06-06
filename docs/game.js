@@ -1163,7 +1163,7 @@ function general() {
           if (clicks > 0 && !_newState15.story) {
             _newState15.phrase = {
               character: phases/* characters.2 */.R[2],
-              text: 'Вы отсудствовали ' + (0,intFormat/* intFormat */.O)(seconds / offlineSpeed) + 'мин. Пока вас не было ученики нариосвали ' + painting + ' картин, а диллеры заработали F$' + (0,intFormat/* intFormat */.O)(_money)
+              text: 'Вы отсутствовали ' + (0,intFormat/* intFormat */.O)(seconds / offlineSpeed) + 'сек. Пока вас не было ученики нарисовали ' + painting + ' картин, а диллеры заработали F$' + (0,intFormat/* intFormat */.O)(_money)
             };
           }
 
@@ -6004,7 +6004,9 @@ var Statistic = /*#__PURE__*/function (_Component) {
         className: "block"
       }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043E \u0433\u0430\u043B\u0435\u0440\u0435\u0435\u0439:"), /*#__PURE__*/react.createElement("span", null, "$", (0,intFormat/* intFormat */.O)(props.statistics.totalGalleryEarned))), /*#__PURE__*/react.createElement("div", {
         className: "block"
-      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043E:"), /*#__PURE__*/react.createElement("span", null, "$", (0,intFormat/* intFormat */.O)(props.statistics.totalMoneys))))));
+      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043E:"), /*#__PURE__*/react.createElement("span", null, "$", (0,intFormat/* intFormat */.O)(props.statistics.totalMoneys))), /*#__PURE__*/react.createElement("br", null), /*#__PURE__*/react.createElement("div", {
+        className: "block"
+      }, /*#__PURE__*/react.createElement("p", null, "\u041C\u0430\u0441\u0442\u0435\u0440\u0441\u0442\u0432\u043E:"), /*#__PURE__*/react.createElement("span", null, (0,intFormat/* intFormat */.O)(props.study.skill))))));
     }
   }]);
 
