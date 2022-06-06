@@ -21,10 +21,15 @@ export const intFormat = (v) => {
         style: 'decimal',
         maximumFractionDigits: prec_digits
       }).format(rem) + cur_unit
-  } else {
+  } else if (v < 10000) {
     fin = new Intl.NumberFormat('en', {
       style: 'decimal',
       maximumFractionDigits: 2
+    }).format(v)
+  } else {
+    fin = new Intl.NumberFormat('en', {
+      style: 'decimal',
+      maximumFractionDigits: 0
     }).format(v)
   }
 

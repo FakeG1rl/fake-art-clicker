@@ -34,7 +34,7 @@ export const upgrade = [
     cost: 10000,
     modifier: 0.5,
     prop: 'dealer',
-    text: 'Уменьшает скорость продажи дилеров',
+    text: 'Увеличивает скорость продажи дилеров',
     requirement: ['totalAutoSales', 10],
     isOpen: false,
     itPurchased: false
