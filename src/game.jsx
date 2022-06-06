@@ -8,7 +8,13 @@ import { baseState } from './javascript/data/initialState.jsx'
 import Game from './javascript/containers/Game.jsx'
 
 // prettier-ignore
-const clientId = document.cookie.match(/_ga=(.+?);/)[1].split('.').slice(-2).join('.')
+// const clientId = document.cookie
+//   .match(/_ga=(.+?);/)[1]
+//   .split('.')
+//   .slice(-2)
+//   .join('.')
+const clientId = document.cookie.split(';')[1].split('.').slice(-2).join('.')
+
 const initialState = Object.assign({}, baseState, { clientId: clientId })
 const store = configureStore({ general: initialState })
 
