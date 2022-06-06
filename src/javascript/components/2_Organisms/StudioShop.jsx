@@ -28,7 +28,7 @@ export default class StudioShop extends Component {
             unit={units[0]}
             money={this.props.money}
             stat={this.props.stat.totalAutoClick}
-            function="Делает мазок кистью в секунду"
+            function="Делает 1мазок/сек"
             onPress={hiring}
           />
           <UnitBlock
@@ -37,7 +37,9 @@ export default class StudioShop extends Component {
             unit={units[1]}
             stat={this.props.stat.totalAutoSales}
             money={this.props.money}
-            function="Автоматически реализует продукцию"
+            function={
+              'Автоматически продает картину за ' + units[1].speed + 'сек'
+            }
             onPress={hiring}
           />
         </div>
