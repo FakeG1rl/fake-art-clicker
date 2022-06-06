@@ -36,7 +36,10 @@ export default class Picture extends Component {
     if (picture) {
       const opacity = picture.timeFraction ? picture.timeFraction : 1
       const itIsSale = picture.timeFraction ? 'sale' : ''
-
+      const pic_class =
+        picture.referense.id == 0
+          ? '0_' + picture.referense.type
+          : picture.referense.id
       const quo =
         picture.quality == 1
           ? '0'
@@ -46,7 +49,7 @@ export default class Picture extends Component {
           ? '2'
           : '3'
       const className =
-        'Picture p_' + picture.referense.id + ' quo_' + quo + ' ' + itIsSale
+        'Picture p_' + pic_class + ' quo_' + quo + ' ' + itIsSale
       let action = null
 
       if (picture.status == 0) {

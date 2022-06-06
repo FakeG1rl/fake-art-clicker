@@ -47,8 +47,6 @@ class Game extends React.Component {
         actions.chandePhase()
         actions.getPhrase()
         actions.save()
-
-        console.log('___________')
       }
     }, 1000)
   }

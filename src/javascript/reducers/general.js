@@ -118,7 +118,8 @@ export default function general(state = initialState, action) {
         if (!ref) {
           //картина при обычнойм рисовании
           if (references.length == 0) {
-            ref = newState.originals[0]
+            ref = Object.assign({}, newState.originals[0])
+            ref.type = Math.floor(Math.random() * 3 + 1)
             newState.clicksToPainting = 1
           } else {
             const ref_id = Math.floor(Math.random() * references.length)
@@ -153,6 +154,12 @@ export default function general(state = initialState, action) {
 
         picture = paintings[0]
         picture.status = 0
+
+        newState.paintings[0].forEach((pic, i) => {
+          if (pic.status == 11) {
+            newState.paintings[0].splice(i, 1)
+          }
+        })
 
         track('painting_created', newState.clientId)
       }
