@@ -1,6 +1,42 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 255:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "O": () => (/* binding */ intFormat)
+/* harmony export */ });
+/* harmony import */ var _data_unitNames_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(697);
+
+var intFormat = function intFormat(v) {
+  var fin = '';
+
+  if (v > 10000) {
+    var total_digits = 3;
+    var base = Math.log10(v);
+    var unit_power = Math.floor(base / 3);
+    var cur_unit = _data_unitNames_jsx__WEBPACK_IMPORTED_MODULE_0__/* .unit_names */ .w[unit_power] ? _data_unitNames_jsx__WEBPACK_IMPORTED_MODULE_0__/* .unit_names */ .w[unit_power] : _data_unitNames_jsx__WEBPACK_IMPORTED_MODULE_0__/* .unit_names[11] */ .w[11];
+    var rem = v / Math.pow(10, unit_power * 3);
+    var dec_digits = Math.min(total_digits, Math.ceil(Math.log10(rem) + 1e-4));
+    var prec_digits = total_digits - dec_digits;
+    fin = new Intl.NumberFormat('en', {
+      style: 'decimal',
+      maximumFractionDigits: prec_digits
+    }).format(rem) + cur_unit;
+  } else {
+    fin = new Intl.NumberFormat('en', {
+      style: 'decimal',
+      maximumFractionDigits: 2
+    }).format(v);
+  }
+
+  return fin;
+};
+
+/***/ }),
+
 /***/ 9:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -382,6 +418,17 @@ var phases = {
 
 /***/ }),
 
+/***/ 697:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "w": () => (/* binding */ unit_names)
+/* harmony export */ });
+var unit_names = [' ', 'K', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'WTF'];
+
+/***/ }),
+
 /***/ 925:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -405,11 +452,14 @@ __webpack_require__.d(__webpack_exports__, {
 var redux = __webpack_require__(890);
 // EXTERNAL MODULE: ./src/javascript/constants/ActionTypes.js
 var ActionTypes = __webpack_require__(9);
+// EXTERNAL MODULE: ./src/javascript/actions/intFormat.jsx
+var intFormat = __webpack_require__(255);
 // EXTERNAL MODULE: ./src/javascript/data/phases.jsx
 var phases = __webpack_require__(834);
 // EXTERNAL MODULE: ./src/javascript/data/initialState.jsx + 2 modules
 var initialState = __webpack_require__(995);
 ;// CONCATENATED MODULE: ./src/javascript/reducers/general.js
+
 
 
 
@@ -521,7 +571,7 @@ function general() {
             } else {
               var ref_id = Math.floor(Math.random() * references.length);
               ref = references[ref_id];
-              newState.clicksToPainting = Math.floor(ref.quality * 1000);
+              newState.clicksToPainting = Math.floor(ref.quality * 200);
             }
           } else {
             //картина при обучении
@@ -746,7 +796,7 @@ function general() {
         var _newState8 = Object.assign({}, state);
 
         var study = _newState8.study;
-        var cost = action.picture.cost * Math.pow(1.15, study.studyCount) / 100;
+        var cost = action.picture.cost * Math.pow(1.5, study.studyCount) / 200;
 
         if (_newState8.moneyGained >= cost) {
           _newState8.moneyGained -= cost;
@@ -786,7 +836,7 @@ function general() {
 
         var original = _newState9.originals[action.id + 1];
 
-        if (_newState9.moneyGained >= original.cost) {
+        if (_newState9.moneyGained >= original.cost * 100) {
           var _picture2 = {
             status: 1,
             quality: 1,
@@ -920,7 +970,7 @@ function general() {
             _newState12.story = true;
             _newState12.phrase = phases/* phases */.k[_newState12.phase].story[0];
           }
-        } else if (statistics.totalSales > 450 && _newState12.units[1].level == 0 && phase == 'students') {
+        } else if (statistics.totalSales > 250 && _newState12.units[1].level == 0 && phase == 'students') {
           _newState12.units[1].isActive = true;
           _newState12.phase = Object.keys(phases/* phases */.k)[3];
 
@@ -1115,7 +1165,7 @@ function general() {
           if (clicks > 0 && !_newState15.story) {
             _newState15.phrase = {
               character: phases/* characters.2 */.R[2],
-              text: 'Вы отсудствовали ' + seconds / offlineSpeed + 'мин. Пока вас не было ученики нариосвали ' + painting + ' картин, а диллеры заработали F$' + _money
+              text: 'Вы отсудствовали ' + (0,intFormat/* intFormat */.O)(seconds / offlineSpeed) + 'мин. Пока вас не было ученики нариосвали ' + painting + ' картин, а диллеры заработали F$' + (0,intFormat/* intFormat */.O)(_money)
             };
           }
 
@@ -4104,34 +4154,8 @@ var Dillers = /*#__PURE__*/function (_Component) {
 }(react.Component);
 
 
-;// CONCATENATED MODULE: ./src/javascript/data/unitNames.jsx
-var unit_names = [' ', 'K', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'WTF'];
-;// CONCATENATED MODULE: ./src/javascript/actions/intFormat.jsx
-
-var intFormat = function intFormat(v) {
-  var fin = '';
-
-  if (v > 10000) {
-    var total_digits = 3;
-    var base = Math.log10(v);
-    var unit_power = Math.floor(base / 3);
-    var cur_unit = unit_names[unit_power] ? unit_names[unit_power] : unit_names[11];
-    var rem = v / Math.pow(10, unit_power * 3);
-    var dec_digits = Math.min(total_digits, Math.ceil(Math.log10(rem) + 1e-4));
-    var prec_digits = total_digits - dec_digits;
-    fin = new Intl.NumberFormat('en', {
-      style: 'decimal',
-      maximumFractionDigits: prec_digits
-    }).format(rem) + cur_unit;
-  } else {
-    fin = new Intl.NumberFormat('en', {
-      style: 'decimal',
-      maximumFractionDigits: 2
-    }).format(v);
-  }
-
-  return fin;
-};
+// EXTERNAL MODULE: ./src/javascript/actions/intFormat.jsx
+var intFormat = __webpack_require__(255);
 ;// CONCATENATED MODULE: ./src/javascript/components/0_Atoms/Cash.jsx
 function Cash_typeof(obj) { "@babel/helpers - typeof"; return Cash_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, Cash_typeof(obj); }
 
@@ -4172,10 +4196,10 @@ var Cash = /*#__PURE__*/function (_Component) {
   Cash_createClass(Cash, [{
     key: "render",
     value: function render() {
-      var cash = intFormat(this.props.cash);
+      var cash = (0,intFormat/* intFormat */.O)(this.props.cash);
       return /*#__PURE__*/react.createElement("div", {
         className: "Cash"
-      }, /*#__PURE__*/react.createElement("h2", null, "$", cash), /*#__PURE__*/react.createElement("p", null, intFormat(this.props.clicks), " \u043C\u0430\u0437\u043A\u043E\u0432 \u0434\u043B\u044F \u043A\u0430\u0440\u0442\u0438\u043D\u044B"));
+      }, /*#__PURE__*/react.createElement("h2", null, "$", cash), /*#__PURE__*/react.createElement("p", null, (0,intFormat/* intFormat */.O)(this.props.clicks), " \u043C\u0430\u0437\u043A\u043E\u0432 \u0434\u043B\u044F \u043A\u0430\u0440\u0442\u0438\u043D\u044B"));
     }
   }]);
 
@@ -4777,8 +4801,9 @@ var Picture = /*#__PURE__*/function (_Component) {
 
       if (picture) {
         var opacity = picture.timeFraction ? picture.timeFraction : 1;
+        var itIsSale = picture.timeFraction ? 'sale' : '';
         var quo = picture.quality == 1 ? '0' : picture.quality > 0.7 ? '1' : picture.quality > 0.3 ? '2' : '3';
-        var className = 'Picture p_' + picture.referense.id + ' quo_' + quo;
+        var className = 'Picture p_' + picture.referense.id + ' quo_' + quo + ' ' + itIsSale;
         var action = null;
 
         if (picture.status == 0) {
@@ -5108,7 +5133,7 @@ var AltShopBlock = /*#__PURE__*/function (_Component) {
       var block;
 
       if (stat) {
-        var text = _this.props.name == 'Ученик' ? /*#__PURE__*/react.createElement("p", null, "\u2022 \u0421\u0434\u0435\u043B\u0430\u043D\u043E ", intFormat(stat.st), " \u043C\u0430\u0437\u043A\u043E\u0432") : /*#__PURE__*/react.createElement("p", null, "\u2022 \u041F\u0440\u043E\u0434\u0430\u043D\u043E ", intFormat(stat.st), " \u043A\u0430\u0440\u0442\u0438\u043D");
+        var text = _this.props.name == 'Ученик' ? /*#__PURE__*/react.createElement("p", null, "\u2022 \u0421\u0434\u0435\u043B\u0430\u043D\u043E ", (0,intFormat/* intFormat */.O)(stat.st), " \u043C\u0430\u0437\u043A\u043E\u0432") : /*#__PURE__*/react.createElement("p", null, "\u2022 \u041F\u0440\u043E\u0434\u0430\u043D\u043E ", (0,intFormat/* intFormat */.O)(stat.st), " \u043A\u0430\u0440\u0442\u0438\u043D");
         block = /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("div", {
           className: "line"
         }), /*#__PURE__*/react.createElement("div", {
@@ -5132,7 +5157,7 @@ var AltShopBlock = /*#__PURE__*/function (_Component) {
         className: "title"
       }, /*#__PURE__*/react.createElement("div", {
         className: "main"
-      }, /*#__PURE__*/react.createElement("h3", null, this.props.name), inStudio), /*#__PURE__*/react.createElement("h4", null, "$", intFormat(this.props.cost))), /*#__PURE__*/react.createElement("div", {
+      }, /*#__PURE__*/react.createElement("h3", null, this.props.name), inStudio), /*#__PURE__*/react.createElement("h4", null, "$", (0,intFormat/* intFormat */.O)(this.props.cost))), /*#__PURE__*/react.createElement("div", {
         className: "line"
       }), /*#__PURE__*/react.createElement("div", {
         className: "altContent"
@@ -5210,7 +5235,7 @@ var UnitBlock = /*#__PURE__*/function (_Component) {
           className: "im"
         }), /*#__PURE__*/react.createElement("div", {
           className: "content"
-        }, span, /*#__PURE__*/react.createElement("h3", null, "\u041D\u0430\u043D\u044F\u0442\u044C ", props.title, "\u0430"), /*#__PURE__*/react.createElement("p", null, "$", intFormat(props.unit.cost))), /*#__PURE__*/react.createElement(AltShopBlock, {
+        }, span, /*#__PURE__*/react.createElement("h3", null, "\u041D\u0430\u043D\u044F\u0442\u044C ", props.title, "\u0430"), /*#__PURE__*/react.createElement("p", null, "$", (0,intFormat/* intFormat */.O)(props.unit.cost))), /*#__PURE__*/react.createElement(AltShopBlock, {
           name: props.title.charAt(0).toUpperCase() + props.title.slice(1),
           cost: props.unit.cost,
           content: props.unit.text,
@@ -5432,6 +5457,8 @@ var StudioShop = /*#__PURE__*/function (_Component) {
 
 
 
+// EXTERNAL MODULE: ./src/javascript/data/unitNames.jsx
+var unitNames = __webpack_require__(697);
 ;// CONCATENATED MODULE: ./src/javascript/components/1_Molecules/GalleryBlock.jsx
 function GalleryBlock_typeof(obj) { "@babel/helpers - typeof"; return GalleryBlock_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, GalleryBlock_typeof(obj); }
 
@@ -5482,7 +5509,7 @@ var GalleryBlock = /*#__PURE__*/function (_Component) {
         var total_digits = 3;
         var base = Math.log10(cash);
         var unit_power = Math.floor(base / 3);
-        var cur_unit = unit_names[unit_power] ? unit_names[unit_power] : unit_names[11];
+        var cur_unit = unitNames/* unit_names */.w[unit_power] ? unitNames/* unit_names */.w[unit_power] : unitNames/* unit_names.11 */.w[11];
         var rem = cash / Math.pow(10, unit_power * 3);
         var dec_digits = Math.min(total_digits, Math.ceil(Math.log10(rem) + 1e-4));
         var prec_digits = total_digits - dec_digits;
@@ -5756,7 +5783,7 @@ var PictureCard = /*#__PURE__*/function (_Component) {
   PictureCard_createClass(PictureCard, [{
     key: "render",
     value: function render() {
-      var cost = this.props.cost ? /*#__PURE__*/react.createElement("h3", null, "$", intFormat(this.props.cost)) : '';
+      var cost = this.props.cost ? /*#__PURE__*/react.createElement("h3", null, "$", (0,intFormat/* intFormat */.O)(this.props.cost)) : '';
       var copy = this.props.copy ? /*#__PURE__*/react.createElement("span", null, "[\u043A\u043E\u043F\u0438\u044F]") : '';
       return /*#__PURE__*/react.createElement("div", {
         className: "PictureCard"
@@ -5848,7 +5875,7 @@ var Shop = /*#__PURE__*/function (_Component) {
             title: picture.title,
             author: picture.author,
             year: picture.year,
-            cost: picture.cost,
+            cost: picture.cost * 100,
             key: i
           })));
         }
@@ -5971,15 +5998,15 @@ var Statistic = /*#__PURE__*/function (_Component) {
         className: "line"
       }), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("div", {
         className: "block"
-      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u0441\u0434\u0435\u043B\u0430\u043D\u043E \u043A\u043B\u0438\u043A\u043E\u0432:"), /*#__PURE__*/react.createElement("span", null, intFormat(props.statistics.totalClick))), /*#__PURE__*/react.createElement("div", {
+      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u0441\u0434\u0435\u043B\u0430\u043D\u043E \u043A\u043B\u0438\u043A\u043E\u0432:"), /*#__PURE__*/react.createElement("span", null, (0,intFormat/* intFormat */.O)(props.statistics.totalClick))), /*#__PURE__*/react.createElement("div", {
         className: "block"
-      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u043D\u0430\u0440\u0438\u0441\u043E\u0432\u0430\u043D\u043E \u043A\u0430\u0440\u0442\u0438\u043D:"), /*#__PURE__*/react.createElement("span", null, intFormat(props.statistics.totalPainting))), /*#__PURE__*/react.createElement("div", {
+      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u043D\u0430\u0440\u0438\u0441\u043E\u0432\u0430\u043D\u043E \u043A\u0430\u0440\u0442\u0438\u043D:"), /*#__PURE__*/react.createElement("span", null, (0,intFormat/* intFormat */.O)(props.statistics.totalPainting))), /*#__PURE__*/react.createElement("div", {
         className: "block"
-      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u043F\u0440\u043E\u0434\u0430\u043D\u043E \u043A\u0430\u0440\u0442\u0438\u043D:"), /*#__PURE__*/react.createElement("span", null, intFormat(props.statistics.totalSales))), /*#__PURE__*/react.createElement("div", {
+      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u043F\u0440\u043E\u0434\u0430\u043D\u043E \u043A\u0430\u0440\u0442\u0438\u043D:"), /*#__PURE__*/react.createElement("span", null, (0,intFormat/* intFormat */.O)(props.statistics.totalSales))), /*#__PURE__*/react.createElement("div", {
         className: "block"
-      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043E \u0433\u0430\u043B\u0435\u0440\u0435\u0435\u0439:"), /*#__PURE__*/react.createElement("span", null, "$", intFormat(props.statistics.totalGalleryEarned))), /*#__PURE__*/react.createElement("div", {
+      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043E \u0433\u0430\u043B\u0435\u0440\u0435\u0435\u0439:"), /*#__PURE__*/react.createElement("span", null, "$", (0,intFormat/* intFormat */.O)(props.statistics.totalGalleryEarned))), /*#__PURE__*/react.createElement("div", {
         className: "block"
-      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043E:"), /*#__PURE__*/react.createElement("span", null, "$", intFormat(props.statistics.totalMoneys))))));
+      }, /*#__PURE__*/react.createElement("p", null, "\u0412\u0441\u0435\u0433\u043E \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u043E:"), /*#__PURE__*/react.createElement("span", null, "$", (0,intFormat/* intFormat */.O)(props.statistics.totalMoneys))))));
     }
   }]);
 
@@ -6054,8 +6081,7 @@ var Study = /*#__PURE__*/function (_Component) {
         }
       });
       autPictures.forEach(function (pic, i) {
-        var cost = pic.cost * Math.pow(1.15, _this.props.general.study.studyCount) / 100;
-        console.log();
+        var cost = pic.cost * Math.pow(1.5, _this.props.general.study.studyCount) / 200;
         var inactive = cost <= _this.props.general.moneyGained ? '' : 'inactive';
         pictureItems.push( /*#__PURE__*/react.createElement("div", {
           className: 'picture ' + inactive,
