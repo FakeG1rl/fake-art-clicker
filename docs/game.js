@@ -25,10 +25,15 @@ var intFormat = function intFormat(v) {
       style: 'decimal',
       maximumFractionDigits: prec_digits
     }).format(rem) + cur_unit;
-  } else {
+  } else if (v < 10000) {
     fin = new Intl.NumberFormat('en', {
       style: 'decimal',
       maximumFractionDigits: 2
+    }).format(v);
+  } else {
+    fin = new Intl.NumberFormat('en', {
+      style: 'decimal',
+      maximumFractionDigits: 0
     }).format(v);
   }
 
@@ -179,7 +184,7 @@ var upgrade = [{
   cost: 10000,
   modifier: 0.5,
   prop: 'dealer',
-  text: 'Уменьшает скорость продажи дилеров',
+  text: 'Увеличивает скорость продажи дилеров',
   requirement: ['totalAutoSales', 10],
   isOpen: false,
   itPurchased: false
@@ -5410,7 +5415,7 @@ var StudioShop = /*#__PURE__*/function (_Component) {
         unit: units[0],
         money: this.props.money,
         stat: this.props.stat.totalAutoClick,
-        "function": "\u0414\u0435\u043B\u0430\u0435\u0442 \u043C\u0430\u0437\u043E\u043A \u043A\u0438\u0441\u0442\u044C\u044E \u0432 \u0441\u0435\u043A\u0443\u043D\u0434\u0443",
+        "function": "\u0414\u0435\u043B\u0430\u0435\u0442 1\u043C\u0430\u0437\u043E\u043A/\u0441\u0435\u043A",
         onPress: hiring
       }), /*#__PURE__*/react.createElement(UnitBlock, {
         id: 1,
@@ -5418,7 +5423,7 @@ var StudioShop = /*#__PURE__*/function (_Component) {
         unit: units[1],
         stat: this.props.stat.totalAutoSales,
         money: this.props.money,
-        "function": "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0440\u0435\u0430\u043B\u0438\u0437\u0443\u0435\u0442 \u043F\u0440\u043E\u0434\u0443\u043A\u0446\u0438\u044E",
+        "function": 'Автоматически продает картину за ' + units[1].speed + 'сек',
         onPress: hiring
       })), /*#__PURE__*/react.createElement(UpgradesCollection, {
         money: this.props.money,
