@@ -46,7 +46,7 @@ class Shop extends Component {
               title={picture.title}
               author={picture.author}
               year={picture.year}
-              cost={picture.cost}
+              cost={picture.cost * 100}
               key={i}
             />
           </div>

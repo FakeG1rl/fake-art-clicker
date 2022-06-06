@@ -92,7 +92,11 @@
       display: block;
     }
   }
-  &:active {
+  &.sale {
+    border: 0.5vh solid $ligth-gray;
+  }
+  &:active,
+  &.sale {
     .AltPictureBlock {
       display: none;
     }
