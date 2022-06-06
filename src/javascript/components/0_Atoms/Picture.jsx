@@ -35,6 +35,7 @@ export default class Picture extends Component {
     const picture = this.props.data
     if (picture) {
       const opacity = picture.timeFraction ? picture.timeFraction : 1
+      const itIsSale = picture.timeFraction ? 'sale' : ''
 
       const quo =
         picture.quality == 1
@@ -44,7 +45,8 @@ export default class Picture extends Component {
           : picture.quality > 0.3
           ? '2'
           : '3'
-      const className = 'Picture p_' + picture.referense.id + ' quo_' + quo
+      const className =
+        'Picture p_' + picture.referense.id + ' quo_' + quo + ' ' + itIsSale
       let action = null
 
       if (picture.status == 0) {

@@ -31,9 +31,7 @@ class Study extends Component {
     })
 
     autPictures.forEach((pic, i) => {
-      const cost =
-        (pic.cost * 1.15 ** this.props.general.study.studyCount) / 100
-      console.log()
+      const cost = (pic.cost * 1.5 ** this.props.general.study.studyCount) / 200
       const inactive = cost <= this.props.general.moneyGained ? '' : 'inactive'
       pictureItems.push(
         <div

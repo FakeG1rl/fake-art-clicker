@@ -17,6 +17,7 @@ import {
   BUYUPGRADE,
   AUTOSALESSWITCH
 } from '../constants/ActionTypes'
+import { intFormat } from '../actions/intFormat.jsx'
 
 import { characters, phases } from '../data/phases.jsx'
 import { baseState } from '../data/initialState.jsx'
@@ -122,7 +123,7 @@ export default function general(state = initialState, action) {
           } else {
             const ref_id = Math.floor(Math.random() * references.length)
             ref = references[ref_id]
-            newState.clicksToPainting = Math.floor(ref.quality * 1000)
+            newState.clicksToPainting = Math.floor(ref.quality * 200)
           }
         } else {
           //картина при обучении
@@ -329,7 +330,7 @@ export default function general(state = initialState, action) {
     case STUDY: {
       let newState = Object.assign({}, state)
       let study = newState.study
-      const cost = (action.picture.cost * 1.15 ** study.studyCount) / 100
+      const cost = (action.picture.cost * 1.5 ** study.studyCount) / 200
 
       if (newState.moneyGained >= cost) {
         newState.moneyGained -= cost
@@ -362,7 +363,7 @@ export default function general(state = initialState, action) {
     case GETORIGINAL: {
       let newState = Object.assign({}, state)
       const original = newState.originals[action.id + 1]
-      if (newState.moneyGained >= original.cost) {
+      if (newState.moneyGained >= original.cost * 100) {
         const picture = { status: 1, quality: 1, referense: original }
         newState.paintings[1].unshift(picture)
         newState.originals[action.id + 1].isSoldOut = true
@@ -492,7 +493,7 @@ export default function general(state = initialState, action) {
           newState.phrase = phases[newState.phase].story[0]
         }
       } else if (
-        statistics.totalSales > 450 &&
+        statistics.totalSales > 250 &&
         newState.units[1].level == 0 &&
         phase == 'students'
       ) {
@@ -722,11 +723,11 @@ export default function general(state = initialState, action) {
             character: characters[2],
             text:
               'Вы отсудствовали ' +
-              seconds / offlineSpeed +
+              intFormat(seconds / offlineSpeed) +
               'мин. Пока вас не было ученики нариосвали ' +
               painting +
               ' картин, а диллеры заработали F$' +
-              money
+              intFormat(money)
           }
         }
 
