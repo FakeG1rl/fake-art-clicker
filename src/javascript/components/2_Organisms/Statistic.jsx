@@ -60,6 +60,11 @@ class Statistic extends Component {
               <p>Всего заработано:</p>
               <span>${intFormat(props.statistics.totalMoneys)}</span>
             </div>
+            <br />
+            <div className="block">
+              <p>Мастерство:</p>
+              <span>{intFormat(props.study.skill)}</span>
+            </div>
           </div>
         </div>
       </div>

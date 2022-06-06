@@ -720,9 +720,9 @@ export default function general(state = initialState, action) {
           newState.phrase = {
             character: characters[2],
             text:
-              'Вы отсудствовали ' +
+              'Вы отсутствовали ' +
               intFormat(seconds / offlineSpeed) +
-              'мин. Пока вас не было ученики нариосвали ' +
+              'сек. Пока вас не было ученики нарисовали ' +
               painting +
               ' картин, а диллеры заработали F$' +
               intFormat(money)
