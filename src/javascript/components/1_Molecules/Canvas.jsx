@@ -8,15 +8,23 @@ export default class Canvas extends Component {
 
   render() {
     const sourse = { sourse: 0 }
-    const quo =
-      this.props.pictureQ == 1
-        ? '0'
+    const quo = this.props.pictureQ
+      ? this.props.pictureQ == 1
+        ? ' quo_0'
         : this.props.pictureQ > 0.7
-        ? '1'
+        ? ' quo_1'
         : this.props.pictureQ > 0.3
-        ? '2'
-        : '3'
-    const className = 'canvas pc_' + this.props.pictureId + ' quo_' + quo
+        ? ' quo_2'
+        : ' quo_3'
+      : ''
+
+    const pic_class =
+      this.props.pictureId || this.props.pictureId == 0
+        ? this.props.pictureType
+          ? 'pc_0_' + this.props.pictureType
+          : 'pc_' + this.props.pictureId
+        : ''
+    const className = 'canvas ' + pic_class + quo
     return (
       <div className="CAN">
         <Students students={this.props.students} />

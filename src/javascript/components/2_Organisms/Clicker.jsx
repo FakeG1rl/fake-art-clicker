@@ -16,12 +16,15 @@ class Clicker extends Component {
     const pictures = this.props.general.paintings[0]
     let picture_id = null
     let picture_q = null
+    let picture_type = null
     for (var i = 0; i < pictures.length; i++) {
       if (pictures[i].status == 11) {
         picture_id = pictures[i].referense.id
         picture_q = pictures[i].quality
+        picture_type = pictures[i].referense.type
       }
     }
+
     return (
       <div className="Clicker">
         <Header
@@ -32,6 +35,7 @@ class Clicker extends Component {
         <Canvas
           students={this.props.general.units[0].level}
           pictureId={picture_id}
+          pictureType={picture_type}
           pictureQ={picture_q}
           press={this.props.actions.paint}
         />
