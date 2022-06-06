@@ -258,7 +258,6 @@ export default function general(state = initialState, action) {
         for (let i = 0; i < pictures.length; i++) {
           const j = pictures.length - i - 1
           if (pictures[j].status == 0) {
-            console.log('SELL START')
             dealers.working += 1
             pictures[j].status = 10
             pictures[j].timeToSale = dealers.speed
@@ -345,7 +344,6 @@ export default function general(state = initialState, action) {
           }
         })
         newState.clicksDone = 0
-        console.log(study.skill)
         const ref = {
           status: 11,
           quality: Math.min(1, Math.random() * study.skill),
