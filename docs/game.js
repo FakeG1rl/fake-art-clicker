@@ -719,7 +719,6 @@ function general() {
             var j = pictures.length - i - 1;
 
             if (pictures[j].status == 0) {
-              console.log('SELL START');
               _dealers.working += 1;
               pictures[j].status = 10;
               pictures[j].timeToSale = _dealers.speed;
@@ -814,7 +813,6 @@ function general() {
           });
 
           _newState8.clicksDone = 0;
-          console.log(study.skill);
           var _ref = {
             status: 11,
             quality: Math.min(1, Math.random() * study.skill),
@@ -6983,8 +6981,13 @@ var Game_mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 
  // prettier-ignore
+// const clientId = document.cookie
+//   .match(/_ga=(.+?);/)[1]
+//   .split('.')
+//   .slice(-2)
+//   .join('.')
 
-var clientId = document.cookie.match(/_ga=(.+?);/)[1].split('.').slice(-2).join('.');
+var clientId = document.cookie.split(';')[1].split('.').slice(-2).join('.');
 var game_initialState = Object.assign({}, initialState/* baseState */.a, {
   clientId: clientId
 });
