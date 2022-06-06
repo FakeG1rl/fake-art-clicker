@@ -571,7 +571,8 @@ function general() {
           if (!ref) {
             //картина при обычнойм рисовании
             if (references.length == 0) {
-              ref = newState.originals[0];
+              ref = Object.assign({}, newState.originals[0]);
+              ref.type = Math.floor(Math.random() * 3 + 1);
               newState.clicksToPainting = 1;
             } else {
               var ref_id = Math.floor(Math.random() * references.length);
@@ -602,6 +603,11 @@ function general() {
           newState.clicksDone = 0;
           picture = paintings[0];
           picture.status = 0;
+          newState.paintings[0].forEach(function (pic, i) {
+            if (pic.status == 11) {
+              newState.paintings[0].splice(i, 1);
+            }
+          });
           track('painting_created', newState.clientId);
         }
 
@@ -4549,8 +4555,9 @@ var Canvas = /*#__PURE__*/function (_Component) {
       var sourse = {
         sourse: 0
       };
-      var quo = this.props.pictureQ == 1 ? '0' : this.props.pictureQ > 0.7 ? '1' : this.props.pictureQ > 0.3 ? '2' : '3';
-      var className = 'canvas pc_' + this.props.pictureId + ' quo_' + quo;
+      var quo = this.props.pictureQ ? this.props.pictureQ == 1 ? ' quo_0' : this.props.pictureQ > 0.7 ? ' quo_1' : this.props.pictureQ > 0.3 ? ' quo_2' : ' quo_3' : '';
+      var pic_class = this.props.pictureId || this.props.pictureId == 0 ? this.props.pictureType ? 'pc_0_' + this.props.pictureType : 'pc_' + this.props.pictureId : '';
+      var className = 'canvas ' + pic_class + quo;
       return /*#__PURE__*/react.createElement("div", {
         className: "CAN"
       }, /*#__PURE__*/react.createElement(Students, {
@@ -4615,11 +4622,13 @@ var Clicker = /*#__PURE__*/function (_Component) {
       var pictures = this.props.general.paintings[0];
       var picture_id = null;
       var picture_q = null;
+      var picture_type = null;
 
       for (var i = 0; i < pictures.length; i++) {
         if (pictures[i].status == 11) {
           picture_id = pictures[i].referense.id;
           picture_q = pictures[i].quality;
+          picture_type = pictures[i].referense.type;
         }
       }
 
@@ -4632,6 +4641,7 @@ var Clicker = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react.createElement(Canvas, {
         students: this.props.general.units[0].level,
         pictureId: picture_id,
+        pictureType: picture_type,
         pictureQ: picture_q,
         press: this.props.actions.paint
       }));
@@ -4805,8 +4815,9 @@ var Picture = /*#__PURE__*/function (_Component) {
       if (picture) {
         var opacity = picture.timeFraction ? picture.timeFraction : 1;
         var itIsSale = picture.timeFraction ? 'sale' : '';
+        var pic_class = picture.referense.id == 0 ? '0_' + picture.referense.type : picture.referense.id;
         var quo = picture.quality == 1 ? '0' : picture.quality > 0.7 ? '1' : picture.quality > 0.3 ? '2' : '3';
-        var className = 'Picture p_' + picture.referense.id + ' quo_' + quo + ' ' + itIsSale;
+        var className = 'Picture p_' + pic_class + ' quo_' + quo + ' ' + itIsSale;
         var action = null;
 
         if (picture.status == 0) {
@@ -6923,7 +6934,6 @@ var Game = /*#__PURE__*/function (_React$Component) {
           actions.chandePhase();
           actions.getPhrase();
           actions.save();
-          console.log('___________');
         }
       }, 1000);
     }
